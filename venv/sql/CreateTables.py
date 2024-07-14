@@ -9,7 +9,7 @@ class CreateAllTabels():
 
         self.userTable = '''
             CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY  AUTOINCREMENT UNIQUE,
                 name TEXT NOT NULL,
                 email TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL ,

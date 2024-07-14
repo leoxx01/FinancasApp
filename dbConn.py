@@ -13,26 +13,17 @@ class Connect:
         #Criação das tabelas caso não existam
         CreateTables.CreateAllTabels().createTables()
 
-    def conBd(self) -> object:
-        conn = sqlite3.connect('my_database.db')
-        cursor = conn.cursor()
-        return cursor
 
-    def selectTable(self,tabela,cursor):
+Connect()
 
-        querry = f"SELECT * FROM {tabela}"
-        cursor.execute(querry)
-        rows = cursor.fetchall()
-
-        
+conn = sqlite3.connect('my_database.db')
+cursor = conn.cursor()
+teste = cursor.execute("SELECT * FROM entries").fetchall()
+rows = teste
+print(teste)
+for row in rows:
+    print(row)
 
 
-    
+# cursor.execute("DROP TABLE users").fetchall()
 
-novoCon = Connect().conBd()
-
-
-
-# Execute the SQL statement
-
-# select  = Connect().selectTable('user',novoCon)
