@@ -17,6 +17,7 @@ class Entries:
             sql = f"INSERT INTO entries (nameEntries,value,id_user) VALUES (?, ?, ?)"
             self.cursor.execute(sql,(self.nome_entrada,self.valor,self.id_user))
             self.conn.commit()
+            return "OK"
             
 
         except err:

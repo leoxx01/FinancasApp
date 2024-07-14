@@ -17,7 +17,7 @@ class Entrie():
 
         createdEntrie = EntriesModel.Entries(self.params).createEntriesDB()
         if(createdEntrie):
-            print('Entrada Criado!!!')
+            print('Entrada Criada!!!')
         
         
 
