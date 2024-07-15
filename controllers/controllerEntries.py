@@ -14,7 +14,7 @@ class Entrie():
        self.params = params
     
     def createEntries(self) -> None:
-
+        
         createdEntrie = EntriesModel.Entries(self.params).createEntriesDB()
         if(createdEntrie):
             print('Entrada Criada!!!')

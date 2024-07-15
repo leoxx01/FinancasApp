@@ -24,7 +24,7 @@ class Investments:
             return "OK"
             
 
-        except err:
+        except sqlite3.OperationalError as err:
             print(err)
             self.conn.rollback()    
         finally:

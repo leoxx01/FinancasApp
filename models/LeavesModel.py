@@ -19,12 +19,13 @@ class Leaves:
         try:
             
             sql = f"INSERT INTO leaves (nameLeave,value,installments,pays_installments,pays_finish,id_user) VALUES (?, ?, ?, ?, ?, ?)"
-            self.cursor.execute(sql,(self.nameLeave,self.value,self.installments,self.pays_installments,self.pays_finish,self.id_user))
+            self.cursor.execute(sql , (self.nameLeave, self.value, self.installments, self.pays_installments, self.pays_finish, self.id_user))
             self.conn.commit()
+
             return "OK"
             
 
-        except err:
+        except sqlite3.OperationalError as err:
             print(err)
             self.conn.rollback()    
         finally:
