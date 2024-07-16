@@ -17,7 +17,7 @@ class Investment():
 
         createdLeaves = InvestmentsModel.Investments(self.params).createInvestmentsDB()
         if(createdLeaves):
-            print('Investimento Criada!!!')
+            print('Investimento Criado!!!')
         
         
 
