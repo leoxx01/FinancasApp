@@ -15,18 +15,23 @@ class Entrie():
     
     def createEntries(self) -> None:
         
-        createdEntrie = EntriesModel.Entries(self.params).createEntriesDB()
-        if(createdEntrie):
+        created_Entrie = EntriesModel.Entries(self.params).createEntriesDB()
+        if(created_Entrie):
             print('Entrada Criada!!!')
         
-        
+    def updateEntries(self) -> None:
+        update_Entrie = EntriesModel.Entries(self.params).updateEntriesBD()
+        if(update_Entrie):
+            print("Entrada Alterada!!")    
 
 
 
 params = {
-    "nome_entrada": "salario",
-    "valor": "100",
-    "id_user": "2"
+    "nome_entrada": "Salario",
+    "valor": "1000",
+    "id_user": "2",
+    "id_entries":"1"
 }
 
-Entrie(params).createEntries()
+# Entrie(params).createEntries()
+Entrie(params).updateEntries()

@@ -18,7 +18,7 @@ Connect()
 
 conn = sqlite3.connect('my_database.db')
 cursor = conn.cursor()
-teste = cursor.execute("SELECT * FROM leaves").fetchall()
+teste = cursor.execute("SELECT * FROM entries").fetchall()
 rows = teste
 print(teste)
 for row in rows:
