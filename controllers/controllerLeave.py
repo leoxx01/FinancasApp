@@ -19,10 +19,6 @@ class Leave():
         if(createdLeaves):
             print('Saida Criada!!!')
         
-        
-
-
-
 params = {
     "nameLeave": "salario",
     "value": "100",

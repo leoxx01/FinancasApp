@@ -26,7 +26,7 @@ class Entrie():
 params = {
     "nome_entrada": "salario",
     "valor": "100",
-    "id_user": "1"
+    "id_user": "2"
 }
 
 Entrie(params).createEntries()

@@ -6,6 +6,7 @@ class Entries:
     def __init__(self, params) -> None:
         self.conn = sqlite3.connect('my_database.db')
         self.cursor = self.conn.cursor()
+
         self.nome_entrada = str(params['nome_entrada'])
         self.valor = float(params['valor'])  
         self.id_user = int(params['id_user'])
@@ -27,14 +28,14 @@ class Entries:
                 else:
                     print(f"An operational error occurred: {err}")
                     self.conn.rollback()
-                    return "Error"
+                    
             except sqlite3.Error as err:
                 print(f"An error occurred while inserting data: {err}")
                 self.conn.rollback()
-                return "Error"
+                
             finally:
                 self.conn.close()
-        self.conn.close()
+        
         
 
 

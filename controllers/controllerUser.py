@@ -25,7 +25,7 @@ class User():
 
 params = {
     "nome": "leo2",
-    "email": "leocarminhot1aaa1o@gmail.com",
+    "email": "leocarminhot1aaa11o@gmail.com",
     "senha": "leozinho"
 }
 
