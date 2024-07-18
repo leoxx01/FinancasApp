@@ -14,6 +14,7 @@ class Leaves:
         self.pays_installments = str(params['pays_installments'])
         self.pays_finish = str(params['pays_finish'])
         self.id_user = str(params['id_user'])
+        self.id_leave = str(params['id_leave'])
 
 
     def createLeavesDB(self) -> str:
@@ -39,5 +40,51 @@ class Leaves:
             finally:
                 self.conn.close()
             
+    def updateLeavesBD(self) ->str:
+        retries = 5
+        while retries > 0:
+            try:
+                sql = f" UPDATE leaves SET nameLeave = ?,value = ?,installments = ?,pays_installments = ?,pays_finish = ? WHERE id = ?"
+                self.cursor.execute(sql,(self.nameLeave, self.value, self.installments, self.pays_installments, self.pays_finish,self.id_leave ))
+                self.conn.commit()
+                return "OK"
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)  
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    return "Error" 
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                return "Error"
+            finally:
+                self.conn.close()
 
+    def deleteLeavesBD(self) -> str :
+        retries = 5
+        while retries >0:
+            try:
+                sql = f" DELETE FROM leaves WHERE id = ?"
+                self.cursor.execute(sql,(self.id_leave))
+                self.conn.commit()
+                return "OK"
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)  
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    return "Error" 
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                return "Error"
+            finally:
+                self.conn.close()
     

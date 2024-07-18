@@ -8,9 +8,9 @@ class Entries:
         self.cursor = self.conn.cursor()
 
         self.nome_entrada = str(params['nome_entrada'])
-        self.valor = float(params['valor'])  
-        self.id_user = int(params['id_user'])
-        self.id_entries = int(params['id_entries'])
+        self.valor = str(params['valor'])  
+        self.id_user = str(params['id_user'])
+        self.id_entries = str(params['id_entries'])
 
  
     def createEntriesDB(self) -> str:
@@ -60,7 +60,30 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
-        
+
+    def deleteEntriesBD(self) -> str :
+        retries = 5
+        while retries >0:
+            try:
+                sql = f" DELETE FROM entries WHERE id = ?"
+                self.cursor.execute(sql,(self.id_entries))
+                self.conn.commit()
+                return "OK"
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)  
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    return "Error" 
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                return "Error"
+            finally:
+                self.conn.close()
         
 
 

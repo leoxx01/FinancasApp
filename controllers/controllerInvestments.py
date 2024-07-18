@@ -19,17 +19,29 @@ class Investment():
         if(createdLeaves):
             print('Investimento Criado!!!')
         
-        
+    def updateInvestments(self) -> None:
+        update_Leaves = InvestmentsModel.Investments(self.params).updateInvestmentsDB()
+        if(update_Leaves):
+            print("Investimento Alterado!!")    
+
+    def deleteInvestments(self) -> None:
+        delete_Leaves = InvestmentsModel.Investments(self.params).deleteInvestmentsBD()
+        if(delete_Leaves):
+            print("Investimento Deletado!!")
+            
 
 
 
 params = {
-    "name_Investiments": "salario",
-    "type_investments": "100",
+    "name_Investiments": "CDB",
+    "type_investments": "100000",
     "value": "1",
     "profitability": "1",
-    "id_user": "1"
+    "id_user": "1",
+    "id_investimentos": "1"
     
 }
 
-Investment(params).createInvestments()
+# Investment(params).createInvestments()
+# Investment(params).updateInvestments()
+Investment(params).deleteInvestments()

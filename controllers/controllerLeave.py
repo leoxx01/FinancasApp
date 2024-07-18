@@ -15,18 +15,31 @@ class Leave():
     
     def createLeaves(self) -> None:
 
-        createdLeaves = LeavesModel.Leaves(self.params).createLeavesDB()
-        if(createdLeaves):
+        created_Leaves = LeavesModel.Leaves(self.params).createLeavesDB()
+        if(created_Leaves):
             print('Saida Criada!!!')
+
+    def updateLeaves(self) -> None:
+        update_Leaves = LeavesModel.Leaves(self.params).updateLeavesBD()
+        if(update_Leaves):
+            print("Saida Alterada!!")    
+
+    def deleteLeaves(self) -> None:
+        delete_Leaves = LeavesModel.Leaves(self.params).deleteLeavesBD()
+        if(delete_Leaves):
+            print("Saida Deletada!!")
         
 params = {
-    "nameLeave": "salario",
-    "value": "100",
+    "nameLeave": "carro",
+    "value": "10000",
     "installments": "1",
     "pays_installments": "1",
     "pays_finish": "1",
-    "id_user": "1"
+    "id_user": "1",
+    "id_leave": "1"
     
 }
 
-Leave(params).createLeaves()
+# Leave(params).createLeaves()
+# Leave(params).updateLeaves()
+# Leave(params).deleteLeaves()

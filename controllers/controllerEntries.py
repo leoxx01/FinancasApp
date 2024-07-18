@@ -24,7 +24,10 @@ class Entrie():
         if(update_Entrie):
             print("Entrada Alterada!!")    
 
-
+    def deleteEntries(self) -> None:
+        delete_Entrie = EntriesModel.Entries(self.params).deleteEntriesBD()
+        if(delete_Entrie):
+            print("Entrada Deletada!!")
 
 params = {
     "nome_entrada": "Salario",
@@ -34,4 +37,5 @@ params = {
 }
 
 # Entrie(params).createEntries()
-Entrie(params).updateEntries()
+# Entrie(params).updateEntries()
+Entrie(params).deleteEntries()
