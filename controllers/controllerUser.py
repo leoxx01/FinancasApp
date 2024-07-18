@@ -1,5 +1,6 @@
 import sys
 import os
+from hashlib import sha256
 
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models'))
 sys.path.append(module_path)
@@ -12,6 +13,7 @@ class User():
     def __init__(self,params) -> None:
         
        self.params = params
+       self.params['senha'] = sha256(params['senha'].encode()).digest()
     
     def createUser(self) -> None:
         created_User = UserModel.Users(self.params).createUserDB()
@@ -38,6 +40,6 @@ params = {
     "id": "1"
 }
 
-# User(params).createUser()
+User(params).createUser()
 # User(params).updateUser()
-User(params).deleteUser()
+# User(params).deleteUser()
