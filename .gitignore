@@ -1,6 +1,3 @@
-
-#Ignora Banco de dados 
-*.my_database.bd
 #  ignora caches
 *.pyc
 # ignora banco de dados
