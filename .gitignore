@@ -1,5 +1,5 @@
 #  ignora caches
 *.pyc
+
 # ignora banco de dados
 *.db
-
