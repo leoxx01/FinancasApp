@@ -6,6 +6,6 @@ Este é um MVP inicial, apenas com intuito de introdução a um futuro sistema f
 
 ## Tecnologias 
 
--   PyQt
+-   Tkinter
 -   Venv
 -   SQLite
