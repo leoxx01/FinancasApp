@@ -1,7 +1,8 @@
-import tkinter
+from tkinter import *
 from tkinter import ttk
 
 class login:
     def __init__(self) -> None:
-        pass
+        self.root = Tk()
+        
     
