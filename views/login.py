@@ -49,14 +49,44 @@ class MinhaInterface:
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
-        modal.transient(parent)
+        modal.transient()
         modal.grab_set()
 
         # Adiciona widgets ao modal
-        label = tk.Label(modal, text="Este é um modal.")
-        label.pack(pady=10)
+                      
+        self.labelUser = customtkinter.CTkLabel(modal, text="Digite seu Usuário!",fg_color="transparent")
+        self.entryUser = customtkinter.CTkEntry(modal, placeholder_text="Usuario")
+        self.labelUser.pack(pady=(5))
+        self.entryUser.pack(pady=(5))
 
-        close_button = tk.Button(modal, text="Fechar", command=modal.destroy)
+        self.labelEmail = customtkinter.CTkLabel(modal, text="Digite seu Email!",fg_color="transparent")
+        self.entryEmail = customtkinter.CTkEntry(modal, placeholder_text="Email")
+        self.labelEmail.pack(pady=(5))
+        self.entryEmail.pack(pady=(5))
+
+        self.labelPass = customtkinter.CTkLabel(modal, text="Digite sua Senha!",fg_color="transparent")
+        self.entryPass = customtkinter.CTkEntry(modal, placeholder_text="Senha")
+        self.labelPass.pack(pady=(5))
+        self.entryPass.pack(pady=(5))
+        
+        self.labelPassConfirm = customtkinter.CTkLabel(modal, text="Digite Novamente sua Senha!",fg_color="transparent")
+        self.entryPassConfirm = customtkinter.CTkEntry(modal, placeholder_text="Senha")
+        self.labelPassConfirm.pack(pady=(5))
+        self.entryPassConfirm.pack(pady=(5))
+
+        self.check_var = customtkinter.StringVar(value="on")
+        self.checkbox = customtkinter.CTkCheckBox(modal, text="Li e estou de acordo com os termos de uso!",
+                                     variable=self.check_var, onvalue="on", offvalue="off")
+
+        
+        self.checkbox.pack(pady=5)
+
+        
+
+        self.buttonRegister = customtkinter.CTkButton(modal, text="Cadastrar", command=self.RegisterButton)
+        self.buttonRegister.pack(pady=(5))
+
+        close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
 
         return modal
