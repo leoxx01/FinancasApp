@@ -6,7 +6,8 @@ class Users:
     def __init__(self,params) -> None:
         self.conn =  sqlite3.connect('my_database.db')
         self.cursor = self.conn.cursor()
-        self.nome = str(params['nome'])
+        
+        self.nome = params['nome']
         self.email = params['email']
         self.senha = params['senha']
         self.id_user = params['id']

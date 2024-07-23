@@ -1,6 +1,6 @@
 import sys
 import os
-
+import json
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models'))
 sys.path.append(module_path)
 import UserModel
@@ -31,13 +31,13 @@ class User():
 
 
 
-params = {
-    "nome": "leo",
-    "email": "leocarminhoto@gmail.com",
-    "senha": "leozinho",
-    "id": "1"
-}
-
+# params = {
+#     "nome": "leo",
+#     "email": "leocarminhoto@gmail.com",
+#     "senha": "leozinho",
+#     "id": 1
+# }
+# print(type(params))
 # User(params).createUser()
 # User(params).updateUser()
-User(params).deleteUser()
+# User(params).deleteUser()
