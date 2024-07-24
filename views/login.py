@@ -55,7 +55,7 @@ class MinhaInterface:
             messagebox.showinfo("Usuario" , "Criado com sucesso!!")
         else:
             messagebox.showinfo("Erro", "Erro na criação de usuario")
-        modal.destroy
+        modal.destroy()
     
     def userLogin(self,params):
         pass
