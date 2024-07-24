@@ -48,7 +48,14 @@ class MinhaInterface:
         
         self.buttonRegister.pack(pady=5,padx=20,anchor="center")
 
-
+    def register(self,params):
+        
+        registerOk = controllerUser.User(params).createUser()
+        if(registerOk == 'OK'):
+            messagebox.showinfo("Usuario" , "Criado com sucesso!!")
+        else:
+            messagebox.showinfo("Erro", "Erro na criação de usuario")
+    
         
     def RegisterButton(self):
         modal = tk.Toplevel()
@@ -93,7 +100,12 @@ class MinhaInterface:
         
         self.checkbox.pack(pady=5)
         userCreatedOk = ''
-        self.buttonRegister = customtkinter.CTkButton(modal, text="Cadastrar", command=lambda :controllerUser.User({"nome": userName.get(),"email": userEmail.get(),"senha": userPass.get(),"id":""}).createUser())
+
+        self.buttonRegister = customtkinter.CTkButton(modal, text="Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPass.get(),"id":""}))
+        
+      
+        print(self.buttonRegister)
+
         self.buttonRegister.pack(pady=(5))
         if userCreatedOk != '':
             messagebox.showinfo("Alerta", "Este é um alerta!")
@@ -105,8 +117,7 @@ class MinhaInterface:
         
 
         return modal
-        
-    
+  
     def loginButton(self):
         pass
 

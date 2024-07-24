@@ -17,6 +17,7 @@ class User():
         created_User = UserModel.Users(self.params).createUserDB()
         if(created_User):
             print('User Criado!!!')
+            return 'OK'
     def updateUser(self) -> None:
         update_User = UserModel.Users(self.params).updateUserBD()
         if(update_User):
