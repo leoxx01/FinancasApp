@@ -26,6 +26,7 @@ class User():
         delete_User = UserModel.Users(self.params).deleteUserBD()
         if(delete_User):
             print("User Deletado!!")
+    
         
         
         
