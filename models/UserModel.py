@@ -82,7 +82,7 @@ class Users:
                 return "Error"
             finally:
                 self.conn.close()
-    def selectUserForLogin(self,params):
+    def selectUserForLogin(self):
         retries = 5 
         while retries > 0 :
             try:

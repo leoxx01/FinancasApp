@@ -16,16 +16,21 @@ class User():
     def createUser(self) -> None:
         created_User = UserModel.Users(self.params).createUserDB()
         if(created_User):
-            print('User Criado!!!')
             return 'OK'
     def updateUser(self) -> None:
         update_User = UserModel.Users(self.params).updateUserBD()
         if(update_User):
-            print("User Alterado!!")
+            return 'OK'
     def deleteUser(self) -> None:
         delete_User = UserModel.Users(self.params).deleteUserBD()
         if(delete_User):
-            print("User Deletado!!")
+            return 'OK'
+    def loginUser(self)-> None:
+        login_User = UserModel.Users(self.params).selectUserForLogin()
+        if(login_User):
+            print('OK')
+            return 'OK'
+        
     
         
         

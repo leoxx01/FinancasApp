@@ -29,11 +29,13 @@ class MinhaInterface:
         self.frameLogin = customtkinter.CTkFrame(master = self.janela, width=100, height=100)
         self.frameLogin.pack(padx=120, pady=120, fill=tk.BOTH, expand=True)
 
+        loginUserVar = tk.StringVar()
         self.labelUser = customtkinter.CTkLabel(self.frameLogin, text="Digite seu User!",fg_color="transparent")
-        self.entryUser = customtkinter.CTkEntry(self.frameLogin, placeholder_text="Usuario")
+        self.entryUser = customtkinter.CTkEntry(self.frameLogin,textvariable=loginUserVar,placeholder_text="Usuario")
 
+        loginPassVar = tk.StringVar()
         self.labelPass = customtkinter.CTkLabel(self.frameLogin, text="Digite sua Senha!",fg_color="transparent")
-        self.entryPass = customtkinter.CTkEntry(self.frameLogin, placeholder_text="Senha")
+        self.entryPass = customtkinter.CTkEntry(self.frameLogin,textvariable=loginPassVar, placeholder_text="Senha")
         
         self.textLabel = tk.Text(self.frameLogin, padx=10, pady=50)
         self.labelUser.pack(pady=(75,3))
@@ -41,7 +43,7 @@ class MinhaInterface:
         self.labelPass.pack(pady=3)
         self.entryPass.pack(pady=1)
         # Criar um botão
-        self.buttonLogin = customtkinter.CTkButton(self.frameLogin, text="Login", command=self.loginButton)
+        self.buttonLogin = customtkinter.CTkButton(self.frameLogin, text="Login", command=self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
         self.buttonRegister = customtkinter.CTkButton(self.frameLogin, text="Cadastrar", command=self.RegisterButton)
 
         self.buttonLogin.pack(pady=5,padx=20,anchor="center")
@@ -56,10 +58,10 @@ class MinhaInterface:
         else:
             messagebox.showinfo("Erro", "Erro na criação de usuario")
         modal.destroy()
-    
-    def userLogin(self,params):
-        pass
-        
+      
+    def loginButton(self,params):
+        LoginOk = controllerUser.User(params).loginUser()
+       
     def RegisterButton(self):
         modal = tk.Toplevel()
         modal.title("Registro de Usuário")
@@ -121,8 +123,7 @@ class MinhaInterface:
 
         return modal
   
-    def loginButton(self):
-        pass
+  
 
 if __name__ == '__main__':
     root = customtkinter.CTk()
