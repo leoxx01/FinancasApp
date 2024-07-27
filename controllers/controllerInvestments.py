@@ -11,8 +11,8 @@ class Investment():
     
     def __init__(self,params) -> None:
         
+       self.params = {}
        self.params = params
-    
     def createInvestments(self) -> None:
 
         createdLeaves = InvestmentsModel.Investments(self.params).createInvestmentsDB()
