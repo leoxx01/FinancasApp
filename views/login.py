@@ -43,7 +43,7 @@ class MinhaInterface:
         self.labelPass.pack(pady=3)
         self.entryPass.pack(pady=1)
         # Criar um botão
-        self.buttonLogin = customtkinter.CTkButton(self.frameLogin, text="Login", command=self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
+        self.buttonLogin = customtkinter.CTkButton(self.frameLogin, text="Login", command=lambda : self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
         self.buttonRegister = customtkinter.CTkButton(self.frameLogin, text="Cadastrar", command=self.RegisterButton)
 
         self.buttonLogin.pack(pady=5,padx=20,anchor="center")
@@ -59,9 +59,17 @@ class MinhaInterface:
             messagebox.showinfo("Erro", "Erro na criação de usuario")
         modal.destroy()
       
+      
     def loginButton(self,params):
+        
         LoginOk = controllerUser.User(params).loginUser()
-       
+        if(LoginOk == 'OK'):
+            messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
+        else:
+            messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
+      
+        print(LoginOk)
+
     def RegisterButton(self):
         modal = tk.Toplevel()
         modal.title("Registro de Usuário")

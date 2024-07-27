@@ -27,8 +27,8 @@ class User():
             return 'OK'
     def loginUser(self)-> None:
         login_User = UserModel.Users(self.params).selectUserForLogin()
-        if(login_User):
-            print('OK')
+        
+        if(login_User != []):
             return 'OK'
         
     

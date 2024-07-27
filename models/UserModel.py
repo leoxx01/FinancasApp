@@ -87,11 +87,14 @@ class Users:
         while retries > 0 :
             try:
                 sql = f"SELECT * FROM users where  name = ? and password = ?"
-                if self.cursor.execute(sql,(self.nome,self.senha)):
+                querryExecute = self.cursor.execute(sql,(self.nome,self.senha))
+                
+                if querryExecute:
                     self.conn.commit()
+                    return querryExecute.fetchall() 
                 else:
                     return "NOK"
-                return "OK"
+
             except sqlite3.OperationalError as err:
                 if 'database is locked' in str(err):
                     print("Database is locked, retrying...")
