@@ -17,6 +17,11 @@ class User():
         created_User = UserModel.Users(self.params).createUserDB()
         if(created_User):
             return 'OK'
+
+    def readUser(self) -> None:
+        read_User = UserModel.Users(self.params).readUserDB()
+        if(read_User):
+            return 'OK'
     def updateUser(self) -> None:
         update_User = UserModel.Users(self.params).updateUserBD()
         if(update_User):

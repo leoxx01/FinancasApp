@@ -5,8 +5,6 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models
 sys.path.append(module_path)
 import EntriesModel
 
-
-
 class Entrie():
     
     def __init__(self,params) -> None:

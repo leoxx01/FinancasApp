@@ -36,6 +36,27 @@ class Users:
             finally:
                 self.conn.close()
 
+    def readUserDB(self) -> None:
+        retries = 5
+        while retries > 0:
+            try:
+                sql = f"SELECT FROM users WHERE email = ? AND senha = ?"
+                self.cursor.execute(sql, (self.email, self.senha))
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    return "Error"
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                return "Error"
+            finally:
+                self.conn.close()
     def updateUserBD(self) ->str:
         retries = 5
         while retries >0:
