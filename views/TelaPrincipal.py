@@ -28,7 +28,7 @@ class TelaPrincipal:
         
         
         self.saidaMenu = tk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="Saida", menu=self.saidaMenu)
+        self.menu_bar.add_cascade(label="Gastos", menu=self.saidaMenu)
         self.saidaMenu.add_command(label="Cadastrar" ,command=print('oi'))
         self.saidaMenu.add_separator()
         self.saidaMenu.add_command(label="Editar" ,command=print('oi'))
@@ -36,7 +36,7 @@ class TelaPrincipal:
         self.saidaMenu.add_command(label="Excluir" ,command=print('oi'))
 
         self.financaMenu = tk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="Finanças", menu=self.financaMenu)
+        self.menu_bar.add_cascade(label="Investimentos", menu=self.financaMenu)
         self.financaMenu.add_command(label="Cadastrar" ,command=print('oi'))
         self.financaMenu.add_separator()
         self.financaMenu.add_command(label="Editar" ,command=print('oi'))
@@ -45,6 +45,6 @@ class TelaPrincipal:
 
         self.janela.config(menu=self.menu_bar)
 if __name__ == '__main__':
-    root = tk.Tk()
+    root = customtkinter.CTk()
     app = TelaPrincipal(root)
     root.mainloop()
