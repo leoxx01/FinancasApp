@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 class TelaPrincipal:
-    def __init__(self) -> None:
+    def __init__(self,root) -> None:
         # criando janela
         self.janela = root
         self.janela.title("Minha Interface Tkinter")
