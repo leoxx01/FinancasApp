@@ -5,6 +5,7 @@ import sys
 import os
 from tkinter import messagebox
 import customtkinter
+import TelaPrincipal
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
 sys.path.append(module_path)
 import controllerUser
@@ -20,6 +21,7 @@ class MinhaInterface:
         y_offset = 50  
         # self.janela.geometry("400x440")
         self.janela.geometry(f"{largura}x{altura}+{x_offset}+{y_offset}")
+        self.logged_in = ""
         
         
         self.createLogin()
@@ -65,10 +67,19 @@ class MinhaInterface:
         LoginOk = controllerUser.User(params).loginUser()
         if(LoginOk == 'OK'):
             messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
+            self.janela.destroy()
+            
+            root = customtkinter.CTk()
+            TelaPrincipal.TelaPrincipal(root)
+            root.mainloop()
+            
+            self.logged_in = "OK"
+
+            return [self.janela,self.logged_in]
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
       
-        print(LoginOk)
+        
 
     def RegisterButton(self):
         modal = tk.Toplevel()
@@ -136,5 +147,5 @@ class MinhaInterface:
 if __name__ == '__main__':
     root = customtkinter.CTk()
     app = MinhaInterface(root)
-    root.mainloop()
+    loginWindown = root.mainloop()
     
