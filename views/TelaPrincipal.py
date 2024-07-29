@@ -49,17 +49,34 @@ class TelaPrincipal:
         modal = tk.Toplevel()
         modal.title("Inserção de Entrada/Lucro")
         modal.geometry("800x600")
+        
+        optionmenu_var = customtkinter.StringVar()
+        optionmenu = customtkinter.CTkOptionMenu(modal,values=["Salario", "Aluguel","Outros"],
+                                         variable=optionmenu_var)
+        optionmenu.pack(pady=5)
 
+        valueSlider = customtkinter.IntVar()
+        slider = customtkinter.CTkSlider(modal, from_=0, to=50000, variable=valueSlider)
+
+        slider.pack(pady=5)
+        
+        entry = customtkinter.CTkEntry(modal, placeholder_text="CTkEntry",state="disabled")
+
+        entry.pack(pady=5)
+
+        add_button = customtkinter.CTkButton(modal, text="Inserir" )
+        add_button.pack(pady=5)
         # Desabilita interação com a janela principal
         modal.transient()
         modal.grab_set()
         
-        close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
-        close_button.pack(pady=10)
+
+        close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy )
+        close_button.pack(pady=5)
 
     def EditEntrada(self):
         modal = tk.Toplevel()
-        modal.title("Inserção de Entrada/Lucro")
+        modal.title("Edição de Entrada/Lucro")
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
@@ -71,7 +88,7 @@ class TelaPrincipal:
 
     def DeleteEntrada(self):
         modal = tk.Toplevel()
-        modal.title("Inserção de Entrada/Lucro")
+        modal.title("Exclusão de Entrada/Lucro")
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
@@ -93,7 +110,7 @@ class TelaPrincipal:
     
     def editSaida(self):
         modal = tk.Toplevel()
-        modal.title("Inserção de Saida/Gastos")
+        modal.title("Edição de Saida/Gastos")
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
@@ -105,7 +122,7 @@ class TelaPrincipal:
 
     def deleteSaida(self):
         modal = tk.Toplevel()
-        modal.title("Inserção de Saida/Gastos")
+        modal.title("Exclusão de Saida/Gastos")
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
@@ -126,7 +143,7 @@ class TelaPrincipal:
     
     def editInvestimentos(self):
         modal = tk.Toplevel()
-        modal.title("Inserção de Investimento")
+        modal.title("Edição de Investimento")
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
@@ -138,7 +155,7 @@ class TelaPrincipal:
     
     def deleteInvestimentos(self):
         modal = tk.Toplevel()
-        modal.title("Inserção de Investimento")
+        modal.title("Exclusão de Investimento")
         modal.geometry("800x600")
 
         # Desabilita interação com a janela principal
