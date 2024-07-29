@@ -189,10 +189,36 @@ class TelaPrincipal:
         modal.title("Inserção de Investimento")
         modal.geometry("800x600")
 
+        labelTitle = customtkinter.CTkLabel(modal, text="Inserção de Investimentos", fg_color="transparent",font=("",23))
+        labelTitle.pack(pady=5)
+
+        labelNomeInvestmento = customtkinter.CTkLabel(modal,text="Nome do Investimento:")
+        labelNomeInvestmento.pack(pady = 5 )
+        entryNomeInvestimento = customtkinter.CTkEntry(modal,placeholder_text="Nome Investimento")
+        entryNomeInvestimento.pack(pady=5)
+
+        labelTipoInvestmento = customtkinter.CTkLabel(modal,text="Tipo do Investimento:")
+        labelTipoInvestmento.pack(pady = 5 )
+        entryTipoInvestimento = customtkinter.CTkEntry(modal,placeholder_text="Tipo Investimento")
+        entryTipoInvestimento.pack(pady=5)
+        
+        labelValorInvestmento = customtkinter.CTkLabel(modal,text="Valor do Investimento:")
+        labelValorInvestmento.pack(pady = 5 )
+        entryValorInvestimento = customtkinter.CTkEntry(modal,placeholder_text="Valor Investimento")
+        entryValorInvestimento.pack(pady=5)
+
+        labelRentabilidadeInvestmento = customtkinter.CTkLabel(modal,text="Rentabilidade do Investimento:")
+        labelRentabilidadeInvestmento.pack(pady = 5 )
+        entryRentabilidadeInvestimento = customtkinter.CTkEntry(modal,placeholder_text="Rentabilidade Investimento")
+        entryRentabilidadeInvestimento.pack(pady=5)
+
         # Desabilita interação com a janela principal
         modal.transient()
         modal.grab_set()
         
+        add_button = customtkinter.CTkButton(modal, text="Inserir" )
+        add_button.pack(pady=5)
+
         close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
     
