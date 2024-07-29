@@ -49,11 +49,21 @@ class TelaPrincipal:
         modal = tk.Toplevel()
         modal.title("Inserção de Entrada/Lucro")
         modal.geometry("800x600")
-        
+
+        labelTitle = customtkinter.CTkLabel(modal, text="Inserção de Entrada ou Lucros", fg_color="transparent",font=("",23))
+        labelTitle.pack(pady=5)
+
+
+        labelOpcaoEntrada = customtkinter.CTkLabel(modal, text="Tipo de Entrada:", fg_color="transparent")
+        labelOpcaoEntrada.pack(pady=2)
         optionmenu_var = customtkinter.StringVar()
         optionmenu = customtkinter.CTkOptionMenu(modal,values=["Salario", "Aluguel","Outros"],
                                          variable=optionmenu_var)
         optionmenu.pack(pady=5)
+
+        
+        labelOpcaoValor = customtkinter.CTkLabel(modal, text="Valor da Entrada:", fg_color="transparent")
+        labelOpcaoValor.pack(pady=2)
 
         valueSlider = customtkinter.IntVar()
         slider = customtkinter.CTkSlider(modal, from_=0, to=50000, variable=valueSlider)
