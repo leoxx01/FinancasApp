@@ -10,7 +10,13 @@ import CreateTables
 
 class Connect:
     def __init__(self) -> None:
+<<<<<<< HEAD
         pass
+=======
+
+        pass
+
+>>>>>>> developer2.0
         #Criação das tabelas caso não existam
         CreateTables.CreateAllTabels().createTables()
 
@@ -19,7 +25,7 @@ Connect()
 
 conn = sqlite3.connect('my_database.db')
 cursor = conn.cursor()
-teste = cursor.execute("SELECT * FROM investments").fetchall()
+teste = cursor.execute("SELECT * FROM users").fetchall()
 rows = teste
 print(teste)
 for row in rows:
@@ -28,3 +34,7 @@ for row in rows:
 
 # cursor.execute("DROP TABLE users").fetchall()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> developer2.0
