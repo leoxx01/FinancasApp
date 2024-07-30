@@ -2,12 +2,13 @@ import tkinter as tk
 from tkinter import messagebox
 import customtkinter
 class TelaPrincipal:
-    def __init__(self,root) -> None:
+    def __init__(self,root,user) -> None:
         # criando janela
         self.janela = root
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("300x200")
 
+        self.userAtual = user
 
 
         self.createMenu()
@@ -57,23 +58,24 @@ class TelaPrincipal:
         labelOpcaoEntrada = customtkinter.CTkLabel(modal, text="Tipo de Entrada:", fg_color="transparent")
         labelOpcaoEntrada.pack(pady=2)
 
-        optionmenu_var = customtkinter.StringVar()
+        self.optionmenu_var = customtkinter.StringVar()
         optionmenu = customtkinter.CTkOptionMenu(modal,values=["Salario", "Aluguel","Outros"],
-                                         variable=optionmenu_var)
+                                         variable=self.optionmenu_var
+                                         )
         optionmenu.pack(pady=5)
 
         
         labelOpcaoValor = customtkinter.CTkLabel(modal, text="Valor da Entrada:", fg_color="transparent")
         labelOpcaoValor.pack(pady=2)
 
-        valueSlider = customtkinter.IntVar()
-        slider = customtkinter.CTkSlider(modal, from_=0, to=50000, variable=valueSlider)
+        self.valueSlider = customtkinter.IntVar()
+        slider = customtkinter.CTkSlider(modal, from_=0, to=50000, variable=self.valueSlider, command = self.catchValue)
 
         slider.pack(pady=5)
         
-        entry = customtkinter.CTkEntry(modal, placeholder_text=valueSlider,state="disabled")
+        self.entryValue = customtkinter.CTkEntry(modal, placeholder_text=self.valueSlider)
 
-        entry.pack(pady=5)
+        self.entryValue.pack(pady=5)
 
         add_button = customtkinter.CTkButton(modal, text="Inserir" )
         add_button.pack(pady=5)
@@ -84,6 +86,15 @@ class TelaPrincipal:
 
         close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy )
         close_button.pack(pady=5)
+    
+    def catchValue(self,value):
+        
+        self.entryValue.delete(0, customtkinter.END)  # Primeiro, limpa o conteúdo atual
+        self.entryValue.insert(0,str(self.valueSlider.get() )) 
+        
+        
+        
+        
 
     def EditEntrada(self):
         modal = tk.Toplevel()
@@ -248,5 +259,6 @@ class TelaPrincipal:
 
 if __name__ == '__main__':
     root = customtkinter.CTk()
-    app = TelaPrincipal(root)
+    user = ''
+    app = TelaPrincipal(root,user)
     root.mainloop()

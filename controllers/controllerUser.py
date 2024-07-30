@@ -34,7 +34,7 @@ class User():
         login_User = UserModel.Users(self.params).selectUserForLogin()
         
         if(login_User != []):
-            return 'OK'
+            return ['OK',login_User]
         
     
         
