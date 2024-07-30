@@ -37,7 +37,7 @@ class MinhaInterface:
 
         loginPassVar = tk.StringVar()
         self.labelPass = customtkinter.CTkLabel(self.frameLogin, text="Digite sua Senha!",fg_color="transparent")
-        self.entryPass = customtkinter.CTkEntry(self.frameLogin,textvariable=loginPassVar, placeholder_text="Senha")
+        self.entryPass = customtkinter.CTkEntry(self.frameLogin,textvariable=loginPassVar, placeholder_text="Senha",show='*')
         
         self.textLabel = tk.Text(self.frameLogin, padx=10, pady=50)
         self.labelUser.pack(pady=(75,3))
@@ -65,12 +65,12 @@ class MinhaInterface:
     def loginButton(self,params):
         
         LoginOk = controllerUser.User(params).loginUser()
-        if(LoginOk == 'OK'):
+        if(LoginOk[0] == 'OK'):
             messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
             self.janela.destroy()
-            
+            userAtual = LoginOk[1]
             root = customtkinter.CTk()
-            TelaPrincipal.TelaPrincipal(root)
+            TelaPrincipal.TelaPrincipal(root,userAtual)
             root.mainloop()
             
             self.logged_in = "OK"
@@ -108,13 +108,13 @@ class MinhaInterface:
 
         userPass = customtkinter.StringVar()
         self.labelPass = customtkinter.CTkLabel(modal, text="Digite sua Senha!",fg_color="transparent")
-        self.entryPass = customtkinter.CTkEntry(modal, textvariable=userPass,placeholder_text="Senha")
+        self.entryPass = customtkinter.CTkEntry(modal,show='*', textvariable=userPass,placeholder_text="Senha")
         self.labelPass.pack(pady=(5))
         self.entryPass.pack(pady=(5))
         
         userPassConfirm = customtkinter.StringVar()
         self.labelPassConfirm = customtkinter.CTkLabel(modal, text="Digite Novamente sua Senha!",fg_color="transparent")
-        self.entryPassConfirm = customtkinter.CTkEntry(modal, textvariable=userPassConfirm, placeholder_text="Senha")
+        self.entryPassConfirm = customtkinter.CTkEntry(modal,show='*', textvariable=userPassConfirm, placeholder_text="Senha")
         self.labelPassConfirm.pack(pady=(5))
         self.entryPassConfirm.pack(pady=(5))
 
