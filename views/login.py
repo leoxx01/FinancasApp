@@ -21,7 +21,6 @@ class MinhaInterface:
         y_offset = 50  
         # self.janela.geometry("400x440")
         self.janela.geometry(f"{largura}x{altura}+{x_offset}+{y_offset}")
-        self.logged_in = ""
         
         
         self.createLogin()
@@ -80,9 +79,9 @@ class MinhaInterface:
             TelaPrincipal.TelaPrincipal(root,userAtual)
             root.mainloop()
             
-            self.logged_in = "OK"
+            
 
-            return [self.janela,self.logged_in]
+            
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
       

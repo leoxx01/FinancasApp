@@ -1,6 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
 import customtkinter
+import os
+import sys
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
+sys.path.append(module_path)
+import controllerEntries
+
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
         # criando janela
@@ -15,7 +21,11 @@ class TelaPrincipal:
         self.createMain()
 
     def createMain(self):
-       pass
+        # labelTitle = customtkinter.CTkLabel(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", fg_color="transparent",font=("",23))
+        # labelTitle.pack(pady=5)
+        pass
+        
+       
     def createMenu(self):
         self.menu_bar = tk.Menu(self.janela)
 
@@ -73,11 +83,12 @@ class TelaPrincipal:
 
         slider.pack(pady=5)
         
-        self.entryValue = customtkinter.CTkEntry(modal, placeholder_text=self.valueSlider)
+
+        self.entryValue = customtkinter.CTkEntry(modal, placeholder_text=0)
 
         self.entryValue.pack(pady=5)
 
-        add_button = customtkinter.CTkButton(modal, text="Inserir" )
+        add_button = customtkinter.CTkButton(modal, text="Inserir" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual[0][0],"id_entries":"0"},modal))
         add_button.pack(pady=5)
         # Desabilita interação com a janela principal
         modal.transient()
@@ -87,14 +98,13 @@ class TelaPrincipal:
         close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy )
         close_button.pack(pady=5)
     
-    def catchValue(self,value):
-        
-        self.entryValue.delete(0, customtkinter.END)  # Primeiro, limpa o conteúdo atual
-        self.entryValue.insert(0,str(self.valueSlider.get() )) 
-        
-        
-        
-        
+    def insertEntrace(self,params,modal):
+        cadastroEntradaOK = controllerEntries.Entrie(params).createEntries()
+        if(cadastroEntradaOK=="OK"):
+            messagebox.showinfo("Ganhos" , "Entrada de ganhos criada com sucesso!!")
+            modal.destroy()
+        else:
+            messagebox.showinfo("Ganhos" , "Algo deu Errado no cadastro!!")
 
     def EditEntrada(self):
         modal = tk.Toplevel()
@@ -256,6 +266,10 @@ class TelaPrincipal:
         
         close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
+
+    def catchValue(self,value):
+        self.entryValue.delete(0, customtkinter.END)  # Primeiro, limpa o conteúdo atual
+        self.entryValue.insert(0,str(self.valueSlider.get() )) 
 
 if __name__ == '__main__':
     root = customtkinter.CTk()
