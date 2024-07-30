@@ -52,14 +52,21 @@ class MinhaInterface:
         
         self.buttonRegister.pack(pady=5,padx=20,anchor="center")
     
-    def register(self,params,modal):
+    def register(self,params,modal,senhaConfirm):
+        registerOk = "NOKSE"
+        if(params['senha'] == senhaConfirm):
+            registerOk = controllerUser.User(params).createUser()
         
-        registerOk = controllerUser.User(params).createUser()
+
+
         if(registerOk == 'OK'):
             messagebox.showinfo("Usuario" , "Criado com sucesso!!")
+            modal.destroy()
+        elif(registerOk == "NOKSE"):
+            messagebox.showinfo("Usuario" , "Senhas estão divergentes!!")
         else:
             messagebox.showinfo("Erro", "Erro na criação de usuario")
-        modal.destroy()
+        
       
       
     def loginButton(self,params):
@@ -106,11 +113,11 @@ class MinhaInterface:
         self.labelEmail.pack(pady=(5))
         self.entryEmail.pack(pady=(5))
 
-        userPass = customtkinter.StringVar()
-        self.labelPass = customtkinter.CTkLabel(modal, text="Digite sua Senha!",fg_color="transparent")
-        self.entryPass = customtkinter.CTkEntry(modal,show='*', textvariable=userPass,placeholder_text="Senha")
-        self.labelPass.pack(pady=(5))
-        self.entryPass.pack(pady=(5))
+        userPassCadastro = customtkinter.StringVar()
+        self.labelPassCadastro = customtkinter.CTkLabel(modal, text="Digite sua Senha!",fg_color="transparent")
+        self.entryPassCadastro = customtkinter.CTkEntry(modal,show='*', textvariable=userPassCadastro,placeholder_text="Senha")
+        self.labelPassCadastro.pack(pady=(5))
+        self.entryPassCadastro.pack(pady=(5))
         
         userPassConfirm = customtkinter.StringVar()
         self.labelPassConfirm = customtkinter.CTkLabel(modal, text="Digite Novamente sua Senha!",fg_color="transparent")
@@ -125,7 +132,7 @@ class MinhaInterface:
         self.checkbox.pack(pady=5)
         userCreatedOk = ''
 
-        self.buttonRegister = customtkinter.CTkButton(modal, text="Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPass.get(),"id":""},modal))
+        self.buttonRegister = customtkinter.CTkButton(modal, text="Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPassCadastro.get(),"id":""},modal,userPassConfirm.get()))
         
       
         print(self.buttonRegister)
