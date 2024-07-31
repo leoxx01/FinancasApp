@@ -52,9 +52,14 @@ class Entrada:
         add_button.pack(pady=5)
         # Desabilita interação com a janela principal
     
-        close_button = customtkinter.CTkButton(self.janela, text="Fechar", command=self.janela.destroy )
+        close_button = customtkinter.CTkButton(self.janela, text="Fechar", command= self.leaveCadastro)
+
         close_button.pack(pady=5)
-    
+    def leaveCadastro(self):
+        self.janela.destroy()
+        root = customtkinter.CTk()
+        TP.TelaPrincipal(root,self.userAtual)
+        root.mainloop()
     def EditEntrada(self):
         modal = tk.Toplevel()
         modal.title("Edição de Entrada/Lucro")
