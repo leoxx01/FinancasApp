@@ -60,11 +60,18 @@ class Entrada:
         root = customtkinter.CTk()
         TP.TelaPrincipal(root,self.userAtual)
         root.mainloop()
+
     def EditEntrada(self):
         modal = tk.Toplevel()
         modal.title("Edição de Entrada/Lucro")
         modal.geometry("800x600")
+        
+        tabview = customtkinter.CTkTabview(master=modal)
+        tabview.pack(padx=20, pady=20)
 
+        tabview.add("tab 1")  # add tab at the end
+        tabview.add("tab 2")  # add tab at the end
+        tabview.set("tab 2")
         # Desabilita interação com a janela principal
         modal.transient()
         modal.grab_set()
