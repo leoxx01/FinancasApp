@@ -78,11 +78,11 @@ class MinhaInterface:
         if(valitationAll == "OK"):
             registerOk = controllerUser.User(params).createUser()
         else:
-            messagebox.showinfo("Usuario" , valitationAll[1])
+            messagebox.showinfo("Cadastro" , valitationAll[1])
 
 
         if(registerOk == 'OK'):
-            messagebox.showinfo("Usuario" , "Criado com sucesso!!")
+            messagebox.showinfo("Cadastro" , "Criado com sucesso!!")
             modal.destroy()
         
         
@@ -96,7 +96,9 @@ class MinhaInterface:
               senhaConfirm == ""
             ):
             return ["CZ","Verifique os Campos preenchidos"]
-        
+        elif("@" not in params['email']):
+            return ["EI","Email Invalido"]
+
         return "OK"
 
       
