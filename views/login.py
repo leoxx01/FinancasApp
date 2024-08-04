@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter.ttk import *
 import tkinter as tk
 import ttkbootstrap as tkk
-
+from ttkbootstrap.constants import *
 import sys
 import os
 from tkinter import messagebox
@@ -107,17 +107,24 @@ class MinhaInterface:
 
         return "OK"
 
-      
+    def on_closing(self):
+        self.janela.destroy()
+
     def loginButton(self,params):
         
         LoginOk = controllerUser.User(params).loginUser()
         if(LoginOk[0] == 'OK'):
             messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
-            self.janela.destroy()
             userAtual = LoginOk[1]
-            root = tk.Tk()
+            
+            self.janela.protocol("WM_DELETE_WINDOW", self.on_closing)
+            
+            root = tkk.Window()
+
+            
             TelaPrincipal.TelaPrincipal(root,userAtual)
             root.mainloop()
+            
             
             
 
@@ -175,7 +182,7 @@ class MinhaInterface:
         self.buttonRegister = tkk.Button(modal, text="💾 Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPassCadastro.get(),"id":""},modal,userPassConfirm.get()))
         
       
-        print(self.buttonRegister)
+        
 
         self.buttonRegister.pack(pady=(5))
         if userCreatedOk != '':

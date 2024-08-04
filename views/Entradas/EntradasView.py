@@ -17,17 +17,17 @@ class Entrada:
         self.userAtual = user
         
         
-        
     def cadastroEntrada(self):
+        modal = tkk.Toplevel()
+        modal.title("Inserção de Entrada/Lucro")
         
-        self.janela.title("Inserção de Entrada/Lucro")
-        self.janela.geometry("800x600")
+        modal.geometry("800x600")
 
-        labelTitle = tkk.Label(self.janela, text="Inserção de Entrada ou Lucros",font=("",23))
+        labelTitle = tkk.Label(modal, text="Inserção de Entrada ou Lucros",font=("",23))
         labelTitle.pack(pady=5)
-        tkk.Separator(bootstyle="info",master=self.janela).pack(fill=X,padx=100,pady=2)
+        tkk.Separator(bootstyle="info",master=modal).pack(fill=X,padx=100,pady=2)
 
-        labelOpcaoEntrada = tkk.Label(self.janela, text="Tipo de Entrada:")
+        labelOpcaoEntrada = tkk.Label(modal, text="Tipo de Entrada:")
         labelOpcaoEntrada.pack(pady=2)
 
         
@@ -35,7 +35,7 @@ class Entrada:
         self.optionmenu_var = tkk.StringVar()
         
         optionmenu = tkk.OptionMenu(
-                                    self.janela,
+                                    modal,
                                     self.optionmenu_var,
                                     *opcaoes,
                                     bootstyle="primary"
@@ -44,37 +44,37 @@ class Entrada:
         optionmenu.pack(pady=5)
     
         
-        labelOpcaoValor = tkk.Label(self.janela, text="Valor da Entrada:")
+        labelOpcaoValor = tkk.Label(modal, text="Valor da Entrada:")
         labelOpcaoValor.pack(pady=2)
 
         self.valueSlider = tkk.IntVar()
-        slider = tkk.Scale(self.janela,from_=0,to=50000,variable=self.valueSlider,command=self.catchValue)
+        slider = tkk.Scale(modal,from_=0,to=50000,variable=self.valueSlider,command=self.catchValue)
         
 
         slider.pack(pady=5)
         
 
-        self.entryValue = tkk.Entry(self.janela)
+        self.entryValue = tkk.Entry(modal)
 
         self.entryValue.pack(pady=5)
 
 
         self.check_varRecorrencia = "Não"                             
-        self.checkButtonEntradaRecorrente = tkk.Checkbutton(self.janela,bootstyle="square-toggle",text="Recorrente",variable=self.check_varRecorrencia , onvalue="Sim", offvalue="Não")
+        self.checkButtonEntradaRecorrente = tkk.Checkbutton(modal,bootstyle="square-toggle",text="Recorrente",variable=self.check_varRecorrencia , onvalue="Sim", offvalue="Não")
         self.checkButtonEntradaRecorrente.pack(pady=5)
 
-        add_button = tkk.Button(self.janela, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual[0][0],"id_entries":"0"}))
+        modal.transient()
+        modal.grab_set()
+        
+
+        add_button = tkk.Button(modal, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual[0][0],"id_entries":"0"}))
         add_button.pack(pady=5)
         # Desabilita interação com a janela principal
     
-        close_button = tkk.Button(self.janela, text="Fechar",bootstyle="danger", command= self.leaveCadastro)
+        close_button = tkk.Button(modal, text="Fechar",bootstyle="danger", command= modal.destroy)
 
         close_button.pack(pady=5)
-    def leaveCadastro(self):
-        self.janela.destroy()
-        root = tkk.Window()
-        TP.TelaPrincipal(root,self.userAtual)
-        root.mainloop()
+
 
     def EditEntrada(self):
         modal = tkk.Toplevel()
@@ -107,7 +107,7 @@ class Entrada:
             messagebox.showinfo("Ganhos" , "Algo deu Errado no cadastro!!")
 
     def DeleteEntrada(self):
-        modal = tk.Toplevel()
+        modal = tkk.Toplevel()
         modal.title("Exclusão de Entrada/Lucro")
         modal.geometry("800x600")
 

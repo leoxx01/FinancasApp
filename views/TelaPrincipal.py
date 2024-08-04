@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from ttkbootstrap.constants import *
 import customtkinter
 import os
 import sys
@@ -16,7 +17,10 @@ import SaidasView
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
         # criando janela
+        
+        
         self.janela = root
+        
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("300x200")
 
@@ -25,9 +29,12 @@ class TelaPrincipal:
 
         self.createMenu()
         self.createMain()
+        
+
+
 
     def createMain(self):
-        # labelTitle = customtkkinter.CtkkLabel(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", font=("",23))
+        # labelTitle = tkk.Label(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", font=("",23))
         # labelTitle.pack(pady=5)
         pass
         
@@ -67,37 +74,37 @@ class TelaPrincipal:
         modal.title("Inserção de Investimento")
         modal.geometry("800x600")
 
-        labelTitle = customtkkinter.CtkkLabel(modal, text="Inserção de Investimentos", font=("",23))
+        labelTitle = tkk.Label(modal, text="Inserção de Investimentos", font=("",23))
         labelTitle.pack(pady=5)
 
-        labelNomeInvestmento = customtkkinter.CtkkLabel(modal,text="Nome do Investimento:")
+        labelNomeInvestmento = tkk.Label(modal,text="Nome do Investimento:")
         labelNomeInvestmento.pack(pady = 5 )
-        entryNomeInvestimento = customtkkinter.CtkkEntry(modal,placeholder_text="Nome Investimento")
+        entryNomeInvestimento = tkk.Entry(modal,placeholder_text="Nome Investimento")
         entryNomeInvestimento.pack(pady=5)
 
-        labelTipoInvestmento = customtkkinter.CtkkLabel(modal,text="Tipo do Investimento:")
+        labelTipoInvestmento = tkk.Label(modal,text="Tipo do Investimento:")
         labelTipoInvestmento.pack(pady = 5 )
-        entryTipoInvestimento = customtkkinter.CtkkEntry(modal,placeholder_text="Tipo Investimento")
+        entryTipoInvestimento = tkk.Entry(modal,placeholder_text="Tipo Investimento")
         entryTipoInvestimento.pack(pady=5)
         
-        labelValorInvestmento = customtkkinter.CtkkLabel(modal,text="Valor do Investimento:")
+        labelValorInvestmento = tkk.Label(modal,text="Valor do Investimento:")
         labelValorInvestmento.pack(pady = 5 )
-        entryValorInvestimento = customtkkinter.CtkkEntry(modal,placeholder_text="Valor Investimento")
+        entryValorInvestimento = tkk.Entry(modal,placeholder_text="Valor Investimento")
         entryValorInvestimento.pack(pady=5)
 
-        labelRentabilidadeInvestmento = customtkkinter.CtkkLabel(modal,text="Rentabilidade do Investimento:")
+        labelRentabilidadeInvestmento = tkk.Label(modal,text="Rentabilidade do Investimento:")
         labelRentabilidadeInvestmento.pack(pady = 5 )
-        entryRentabilidadeInvestimento = customtkkinter.CtkkEntry(modal,placeholder_text="Rentabilidade Investimento")
+        entryRentabilidadeInvestimento = tkk.Entry(modal,placeholder_text="Rentabilidade Investimento")
         entryRentabilidadeInvestimento.pack(pady=5)
 
         # Desabilita interação com a janela principal
         modal.transient()
         modal.grab_set()
         
-        add_button = customtkkinter.CtkkButton(modal, text="Inserir" )
+        add_button = tkk.Button(modal, text="Inserir" )
         add_button.pack(pady=5)
 
-        close_button = customtkkinter.CtkkButton(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
     
     def editInvestimentos(self):
@@ -109,7 +116,7 @@ class TelaPrincipal:
         modal.transient()
         modal.grab_set()
         
-        close_button = customtkkinter.CtkkButton(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
     
     def deleteInvestimentos(self):
@@ -121,11 +128,12 @@ class TelaPrincipal:
         modal.transient()
         modal.grab_set()
         
-        close_button = customtkkinter.CtkkButton(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
 
     
 if __name__ == '__main__':
+    
     root = tkk.Window()
     user = ''
     app = TelaPrincipal(root,user)
