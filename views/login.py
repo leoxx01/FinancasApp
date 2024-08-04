@@ -119,16 +119,8 @@ class MinhaInterface:
             
             self.janela.protocol("WM_DELETE_WINDOW", self.on_closing)
             
-            root = tkk.Window()
+            TelaPrincipal.TelaPrincipal(self.janela,userAtual)
 
-            
-            TelaPrincipal.TelaPrincipal(root,userAtual)
-            root.mainloop()
-            
-            
-            
-
-            
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
       

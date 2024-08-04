@@ -40,34 +40,45 @@ class TelaPrincipal:
         
        
     def createMenu(self):
-        self.menu_bar = tkk.Menu(self.janela)
+        buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
+        buttonbar.pack(fill=X, pady=1, side=TOP)
 
-        self.entradaMenu = tkk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="Entrada", menu=self.entradaMenu)
-        self.entradaMenu.add_command(label="Cadastrar" ,command=EntradasView.Entrada(self.janela,self.userAtual).cadastroEntrada)
-        self.entradaMenu.add_separator()
-        self.entradaMenu.add_command(label="Editar" ,command=EntradasView.Entrada(self.janela,self.userAtual).EditEntrada)
-        self.entradaMenu.add_separator()
-        self.entradaMenu.add_command(label="Excluir" ,command=EntradasView.Entrada(self.janela,self.userAtual).DeleteEntrada)
+        btnReceita = tkk.Button(master=buttonbar, text='Receita')
+        btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+
+        btnGastos = tkk.Button(master=buttonbar, text='Gastos')
+        btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+
+        btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
+        btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+        # self.menu_bar = tkk.Menu(self.janela)
+
+        # self.entradaMenu = tkk.Menu(self.menu_bar, tearoff=0)
+        # self.menu_bar.add_cascade(label="Entrada", menu=self.entradaMenu)
+        # self.entradaMenu.add_command(label="Cadastrar" ,command=EntradasView.Entrada(self.janela,self.userAtual).cadastroEntrada)
+        # self.entradaMenu.add_separator()
+        # self.entradaMenu.add_command(label="Editar" ,command=EntradasView.Entrada(self.janela,self.userAtual).EditEntrada)
+        # self.entradaMenu.add_separator()
+        # self.entradaMenu.add_command(label="Excluir" ,command=EntradasView.Entrada(self.janela,self.userAtual).DeleteEntrada)
         
         
-        self.saidaMenu = tkk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="Gastos", menu=self.saidaMenu)
-        self.saidaMenu.add_command(label="Cadastrar" ,command=SaidasView.Saida(self.janela,self.userAtual).cadastroSaida)
-        self.saidaMenu.add_separator()
-        self.saidaMenu.add_command(label="Editar" ,command=SaidasView.Saida(self.janela,self.userAtual).editSaida)
-        self.saidaMenu.add_separator()
-        self.saidaMenu.add_command(label="Excluir" ,command=SaidasView.Saida(self.janela,self.userAtual).deleteSaida)
+        # self.saidaMenu = tkk.Menu(self.menu_bar, tearoff=0)
+        # self.menu_bar.add_cascade(label="Gastos", menu=self.saidaMenu)
+        # self.saidaMenu.add_command(label="Cadastrar" ,command=SaidasView.Saida(self.janela,self.userAtual).cadastroSaida)
+        # self.saidaMenu.add_separator()
+        # self.saidaMenu.add_command(label="Editar" ,command=SaidasView.Saida(self.janela,self.userAtual).editSaida)
+        # self.saidaMenu.add_separator()
+        # self.saidaMenu.add_command(label="Excluir" ,command=SaidasView.Saida(self.janela,self.userAtual).deleteSaida)
 
-        self.financaMenu = tkk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="Investimentos", menu=self.financaMenu)
-        self.financaMenu.add_command(label="Cadastrar" ,command=self.cadastroInvestimentos)
-        self.financaMenu.add_separator()
-        self.financaMenu.add_command(label="Editar" ,command=self.editInvestimentos)
-        self.financaMenu.add_separator()
-        self.financaMenu.add_command(label="Excluir" ,command=self.deleteInvestimentos)
+        # self.financaMenu = tkk.Menu(self.menu_bar, tearoff=0)
+        # self.menu_bar.add_cascade(label="Investimentos", menu=self.financaMenu)
+        # self.financaMenu.add_command(label="Cadastrar" ,command=self.cadastroInvestimentos)
+        # self.financaMenu.add_separator()
+        # self.financaMenu.add_command(label="Editar" ,command=self.editInvestimentos)
+        # self.financaMenu.add_separator()
+        # self.financaMenu.add_command(label="Excluir" ,command=self.deleteInvestimentos)
 
-        self.janela.config(menu=self.menu_bar)
+        # self.janela.config(menu=self.menu_bar)
 
     def cadastroInvestimentos(self):
         modal = tkk.Toplevel()
