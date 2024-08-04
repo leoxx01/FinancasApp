@@ -8,7 +8,7 @@ class Entries:
         self.cursor = self.conn.cursor()
 
         self.nome_entrada = str(params['nome_entrada'])
-        self.valor = str(params['valor'])  
+        self.valor = str(params['valor'])
         self.id_user = str(params['id_user'])
         self.id_entries = str(params['id_entries'])
 
@@ -84,9 +84,3 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
-        
-
-
-
-
-

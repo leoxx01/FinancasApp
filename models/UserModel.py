@@ -57,6 +57,7 @@ class Users:
                 return "Error"
             finally:
                 self.conn.close()
+                
     def updateUserBD(self) ->str:
         retries = 5
         while retries >0:
@@ -80,6 +81,7 @@ class Users:
                 return "Error"
             finally:
                 self.conn.close()
+
     def deleteUserBD(self) -> str :
         retries = 5
         while retries >0:
@@ -103,6 +105,7 @@ class Users:
                 return "Error"
             finally:
                 self.conn.close()
+
     def selectUserForLogin(self):
         retries = 5 
         while retries > 0 :
