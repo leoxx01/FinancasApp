@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter.ttk import *
 import tkinter as tk
 import ttkbootstrap as tkk
+
 import sys
 import os
 from tkinter import messagebox
@@ -77,6 +78,7 @@ class MinhaInterface:
         valitationAll = self.validation(params,senhaConfirm)
         if(valitationAll == "OK"):
             registerOk = controllerUser.User(params).createUser()
+           
         else:
             messagebox.showinfo("Cadastro" , valitationAll[1])
 
@@ -84,6 +86,10 @@ class MinhaInterface:
         if(registerOk == 'OK'):
             messagebox.showinfo("Cadastro" , "Criado com sucesso!!")
             modal.destroy()
+        else:
+            print('o')
+            messagebox.showinfo("Cadastro" , "Email já cadastrado")
+
         
         
     def validation(self,params,senhaConfirm):
@@ -141,18 +147,21 @@ class MinhaInterface:
         userEmail = tkk.StringVar()
         self.labelEmail = tkk.Label(modal,text="📧Email")
         self.entryEmail = tkk.Entry(modal, textvariable=userEmail)
+        ToolTip(self.entryEmail,text = 'Insira seu email')     
         self.labelEmail.pack(pady=(5))
         self.entryEmail.pack(pady=(5))
 
         userPassCadastro = tkk.StringVar()
         self.labelPassCadastro = tkk.Label(modal, text="🔑Senha")
         self.entryPassCadastro = tkk.Entry(modal,show='*', textvariable=userPassCadastro)
+        ToolTip(self.entryPassCadastro,text = 'Insira sua senha')     
         self.labelPassCadastro.pack(pady=(5))
         self.entryPassCadastro.pack(pady=(5))
         
         userPassConfirm = tkk.StringVar()
         self.labelPassConfirm = tkk.Label(modal, text="🔑Cofirme a Senha")
         self.entryPassConfirm = tkk.Entry(modal,show='*', textvariable=userPassConfirm)
+        ToolTip(self.entryPassConfirm,text = 'Insira sua senha novamente')  
         self.labelPassConfirm.pack(pady=(5))
         self.entryPassConfirm.pack(pady=(5))
 
@@ -187,7 +196,7 @@ def hide_tooltip(tooltip):
     tooltip.place_forget()
 
 if __name__ == '__main__':
-    root = tk.Tk()
+    root = tkk.Window()
     app = MinhaInterface(root)
     loginWindown = root.mainloop()
     
