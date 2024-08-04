@@ -15,7 +15,7 @@ class Entrada:
     def __init__(self,root,user) -> None:
         self.janela = root
         self.userAtual = user
-        self.cadastroEntrada()
+        
         
         
     def cadastroEntrada(self):
