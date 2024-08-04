@@ -28,11 +28,11 @@ class Users:
                 else:
                     print(f"An operational error occurred: {err}")
                     self.conn.rollback()
-                    return "Error" 
+                    return err
             except sqlite3.Error as err:
                 print(f"An error occurred while inserting data: {err}")
                 self.conn.rollback()
-                return "Error"
+                return err
             finally:
                 self.conn.close()
 

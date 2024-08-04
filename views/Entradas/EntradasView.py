@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-import customtkinter
+from ttkbootstrap.constants import *
 import os
+import ttkbootstrap as tkk
 import sys
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../controllers'))
 sys.path.append(module_path)
@@ -17,59 +18,80 @@ class Entrada:
         
         
     def cadastroEntrada(self):
+        modal = tkk.Toplevel()
+        modal.title("Inserção de Entrada/Lucro")
         
-        self.janela.title("Inserção de Entrada/Lucro")
-        self.janela.geometry("800x600")
+        modal.geometry("800x600")
 
-        labelTitle = customtkinter.CTkLabel(self.janela, text="Inserção de Entrada ou Lucros", fg_color="transparent",font=("",23))
+        labelTitle = tkk.Label(modal, text="Inserção de Entrada ou Lucros",font=("",23))
         labelTitle.pack(pady=5)
+        tkk.Separator(bootstyle="info",master=modal).pack(fill=X,padx=100,pady=2)
 
-
-        labelOpcaoEntrada = customtkinter.CTkLabel(self.janela, text="Tipo de Entrada:", fg_color="transparent")
+        labelOpcaoEntrada = tkk.Label(modal, text="Tipo de Entrada:")
         labelOpcaoEntrada.pack(pady=2)
 
-        self.optionmenu_var = customtkinter.StringVar()
-        optionmenu = customtkinter.CTkOptionMenu(self.janela,values=["Salario", "Aluguel","Outros"],
-                                         variable=self.optionmenu_var
+        
+        opcaoes = ["Salario","Salario","Aluguel","Outros"]
+        self.optionmenu_var = tkk.StringVar()
+        
+        optionmenu = tkk.OptionMenu(
+                                    modal,
+                                    self.optionmenu_var,
+                                    *opcaoes,
+                                    bootstyle="primary"
+                                    
                                          )
         optionmenu.pack(pady=5)
-
+    
         
-        labelOpcaoValor = customtkinter.CTkLabel(self.janela, text="Valor da Entrada:", fg_color="transparent")
+        labelOpcaoValor = tkk.Label(modal, text="Valor da Entrada:")
         labelOpcaoValor.pack(pady=2)
 
-        self.valueSlider = customtkinter.IntVar()
-        slider = customtkinter.CTkSlider(self.janela, from_=0, to=50000, variable=self.valueSlider, command = self.catchValue)
+        self.valueSlider = tkk.IntVar()
+        slider = tkk.Scale(modal,from_=0,to=50000,variable=self.valueSlider,command=self.catchValue)
+        
 
         slider.pack(pady=5)
         
 
-        self.entryValue = customtkinter.CTkEntry(self.janela, placeholder_text=0)
+        self.entryValue = tkk.Entry(modal)
 
         self.entryValue.pack(pady=5)
 
-        add_button = customtkinter.CTkButton(self.janela, text="Inserir" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual[0][0],"id_entries":"0"}))
+
+        self.check_varRecorrencia = "Não"                             
+        self.checkButtonEntradaRecorrente = tkk.Checkbutton(modal,bootstyle="square-toggle",text="Recorrente",variable=self.check_varRecorrencia , onvalue="Sim", offvalue="Não")
+        self.checkButtonEntradaRecorrente.pack(pady=5)
+
+        modal.transient()
+        modal.grab_set()
+        
+
+        add_button = tkk.Button(modal, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual[0][0],"id_entries":"0"}))
         add_button.pack(pady=5)
         # Desabilita interação com a janela principal
     
-        close_button = customtkinter.CTkButton(self.janela, text="Fechar", command= self.leaveCadastro)
+        close_button = tkk.Button(modal, text="Fechar",bootstyle="danger", command= modal.destroy)
 
         close_button.pack(pady=5)
-    def leaveCadastro(self):
-        self.janela.destroy()
-        root = customtkinter.CTk()
-        TP.TelaPrincipal(root,self.userAtual)
-        root.mainloop()
+
+
     def EditEntrada(self):
-        modal = tk.Toplevel()
+        modal = tkk.Toplevel()
         modal.title("Edição de Entrada/Lucro")
         modal.geometry("800x600")
+        
+        tabview = tkk.Tabview(master=modal)
+        tabview.pack(padx=20, pady=20)
 
+        tabview.add("tab 1")  # add tab at the end
+        tabview.add("tab 2")  # add tab at the end
+        tabview.set("tab 2")
         # Desabilita interação com a janela principal
         modal.transient()
         modal.grab_set()
         
-        close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
 
     def insertEntrace(self,params):
@@ -77,7 +99,7 @@ class Entrada:
         if(cadastroEntradaOK=="OK"):
             messagebox.showinfo("Ganhos" , "Entrada de ganhos criada com sucesso!!")
             self.janela.destroy()
-            root = customtkinter.CTk()
+            root = tkk.Window()
             TP.TelaPrincipal(root,self.userAtual)
             root.mainloop()
             
@@ -85,7 +107,7 @@ class Entrada:
             messagebox.showinfo("Ganhos" , "Algo deu Errado no cadastro!!")
 
     def DeleteEntrada(self):
-        modal = tk.Toplevel()
+        modal = tkk.Toplevel()
         modal.title("Exclusão de Entrada/Lucro")
         modal.geometry("800x600")
 
@@ -93,15 +115,15 @@ class Entrada:
         modal.transient()
         modal.grab_set()
         
-        close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
         
     def catchValue(self,value):
-        self.entryValue.delete(0, customtkinter.END)  # Primeiro, limpa o conteúdo atual
+        self.entryValue.delete(0, tkk.END)  # Primeiro, limpa o conteúdo atual
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
 
 if __name__ == '__main__':
-    root = customtkinter.CTk()
+    root = tkk.Window()
     user = ''
     app = Entrada(root,user)
     root.mainloop()

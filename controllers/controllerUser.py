@@ -16,7 +16,7 @@ class User():
     def createUser(self) -> None:
         created_User = UserModel.Users(self.params).createUserDB()
         if(created_User):
-            return 'OK'
+            return created_User
 
     def readUser(self) -> None:
         read_User = UserModel.Users(self.params).readUserDB()

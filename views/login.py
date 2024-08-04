@@ -1,14 +1,23 @@
 import TelaPrincipal as Tp
-import json
+from tkinter import * 
+from tkinter.ttk import *
 import tkinter as tk
+import ttkbootstrap as tkk
+from ttkbootstrap.constants import *
 import sys
 import os
 from tkinter import messagebox
-import customtkinter
+from ttkbootstrap.tooltip import ToolTip
 import TelaPrincipal
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
 sys.path.append(module_path)
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views'))
+sys.path.append(module_path)
 import controllerUser
+
+
+
+
 
 class MinhaInterface:
     def __init__(self, root):
@@ -20,32 +29,44 @@ class MinhaInterface:
         x_offset = 100  
         y_offset = 50  
         # self.janela.geometry("400x440")
+
         self.janela.geometry(f"{largura}x{altura}+{x_offset}+{y_offset}")
-        
+
         
         self.createLogin()
 
+    def foc_in(self, *args):
+        self.delete('0', 'end')
+        
     def createLogin(self):
         # Criar um rótulo
-        self.frameLogin = customtkinter.CTkFrame(master = self.janela, width=100, height=100)
+        
+        
+        self.frameLogin = tkk.Labelframe(master = self.janela, width=100, height=100 , bootstyle="dark", text="Login")
         self.frameLogin.pack(padx=120, pady=120, fill=tk.BOTH, expand=True)
 
-        loginUserVar = tk.StringVar()
-        self.labelUser = customtkinter.CTkLabel(self.frameLogin, text="Digite seu User!",fg_color="transparent")
-        self.entryUser = customtkinter.CTkEntry(self.frameLogin,textvariable=loginUserVar,placeholder_text="Usuario")
-
-        loginPassVar = tk.StringVar()
-        self.labelPass = customtkinter.CTkLabel(self.frameLogin, text="Digite sua Senha!",fg_color="transparent")
-        self.entryPass = customtkinter.CTkEntry(self.frameLogin,textvariable=loginPassVar, placeholder_text="Senha",show='*')
+        loginUserVar = tkk.StringVar()
         
-        self.textLabel = tk.Text(self.frameLogin, padx=10, pady=50)
+        
+
+        self.labelUser = tkk.Label(self.frameLogin, text="👤 Usuario")
+        self.entryUser = tkk.Entry(self.frameLogin,textvariable=loginUserVar)
+        ToolTip(self.entryUser,text = 'Insira seu Usuário')        
+
+        loginPassVar = tkk.StringVar()
+        self.labelPass = tkk.Label(self.frameLogin, text="🔑 Senha")
+        self.entryPass = tkk.Entry(self.frameLogin,textvariable=loginPassVar , show='*')
+        ToolTip(self.entryPass,text = 'Insira sua senha')     
+        
+        
+        self.textLabel = tkk.Text(self.frameLogin, padx=10, pady=50)
         self.labelUser.pack(pady=(75,3))
         self.entryUser.pack(pady=1)
         self.labelPass.pack(pady=3)
         self.entryPass.pack(pady=1)
         # Criar um botão
-        self.buttonLogin = customtkinter.CTkButton(self.frameLogin, text="Login", command=lambda : self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
-        self.buttonRegister = customtkinter.CTkButton(self.frameLogin, text="Cadastrar", command=self.RegisterButton)
+        self.buttonLogin = tkk.Button(self.frameLogin, text=   "   Login   ", command=lambda : self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
+        self.buttonRegister = tkk.Button(self.frameLogin, text="Cadastrar", command=self.RegisterButton)
 
         self.buttonLogin.pack(pady=5,padx=20,anchor="center")
         
@@ -53,42 +74,60 @@ class MinhaInterface:
     
     def register(self,params,modal,senhaConfirm):
         registerOk = "NOKSE"
-        if(params['senha'] == senhaConfirm):
+
+        valitationAll = self.validation(params,senhaConfirm)
+        if(valitationAll == "OK"):
             registerOk = controllerUser.User(params).createUser()
-        
+           
+        else:
+            messagebox.showinfo("Cadastro" , valitationAll[1])
 
 
         if(registerOk == 'OK'):
-            messagebox.showinfo("Usuario" , "Criado com sucesso!!")
+            messagebox.showinfo("Cadastro" , "Criado com sucesso!!")
             modal.destroy()
-        elif(registerOk == "NOKSE"):
-            messagebox.showinfo("Usuario" , "Senhas estão divergentes!!")
         else:
-            messagebox.showinfo("Erro", "Erro na criação de usuario")
+            print('o')
+            messagebox.showinfo("Cadastro" , "Email já cadastrado")
+
         
-      
-      
+        
+    def validation(self,params,senhaConfirm):
+
+        if(params['senha'] != senhaConfirm):
+            return ["SE","Senha estão divergente"]
+        elif( params['senha'] == "" or 
+              params['email'] == "" or
+              params['nome'] == "" or
+              senhaConfirm == ""
+            ):
+            return ["CZ","Verifique os Campos preenchidos"]
+        elif("@" not in params['email']):
+            return ["EI","Email Invalido"]
+
+        return "OK"
+
+    def on_closing(self):
+        self.janela.destroy()
+
     def loginButton(self,params):
         
         LoginOk = controllerUser.User(params).loginUser()
         if(LoginOk[0] == 'OK'):
             messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
-            self.janela.destroy()
             userAtual = LoginOk[1]
-            root = customtkinter.CTk()
-            TelaPrincipal.TelaPrincipal(root,userAtual)
-            root.mainloop()
             
+            self.janela.protocol("WM_DELETE_WINDOW", self.on_closing)
             
+            TelaPrincipal.TelaPrincipal(self.janela,userAtual)
 
-            
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
       
         
 
     def RegisterButton(self):
-        modal = tk.Toplevel()
+        modal = tkk.Toplevel()
         modal.title("Registro de Usuário")
         modal.geometry("800x600")
 
@@ -96,62 +135,67 @@ class MinhaInterface:
         modal.transient()
         modal.grab_set()
         
-       
-        
-        
         # Adiciona widgets ao modal
-        userName = customtkinter.StringVar()        
-        self.labelUser = customtkinter.CTkLabel(modal, text="Digite seu Usuário!",fg_color="transparent")
-        self.entryUser = customtkinter.CTkEntry(modal, textvariable=userName,placeholder_text="Usuario")
+        userName = tkk.StringVar()        
+        self.labelUser = tkk.Label(modal, text="👤Usuário")
+        self.entryUser = tkk.Entry(modal, textvariable=userName)
+        ToolTip(self.entryUser,text = 'Insira o nome de usuário desejado')     
         self.labelUser.pack(pady=(5))
         self.entryUser.pack(pady=(5))
 
-        userEmail = customtkinter.StringVar()
-        self.labelEmail = customtkinter.CTkLabel(modal,text="Digite seu Email!",fg_color="transparent")
-        self.entryEmail = customtkinter.CTkEntry(modal, textvariable=userEmail ,placeholder_text="Email")
+        userEmail = tkk.StringVar()
+        self.labelEmail = tkk.Label(modal,text="📧Email")
+        self.entryEmail = tkk.Entry(modal, textvariable=userEmail)
+        ToolTip(self.entryEmail,text = 'Insira seu email')     
         self.labelEmail.pack(pady=(5))
         self.entryEmail.pack(pady=(5))
 
-        userPassCadastro = customtkinter.StringVar()
-        self.labelPassCadastro = customtkinter.CTkLabel(modal, text="Digite sua Senha!",fg_color="transparent")
-        self.entryPassCadastro = customtkinter.CTkEntry(modal,show='*', textvariable=userPassCadastro,placeholder_text="Senha")
+        userPassCadastro = tkk.StringVar()
+        self.labelPassCadastro = tkk.Label(modal, text="🔑Senha")
+        self.entryPassCadastro = tkk.Entry(modal,show='*', textvariable=userPassCadastro)
+        ToolTip(self.entryPassCadastro,text = 'Insira sua senha')     
         self.labelPassCadastro.pack(pady=(5))
         self.entryPassCadastro.pack(pady=(5))
         
-        userPassConfirm = customtkinter.StringVar()
-        self.labelPassConfirm = customtkinter.CTkLabel(modal, text="Digite Novamente sua Senha!",fg_color="transparent")
-        self.entryPassConfirm = customtkinter.CTkEntry(modal,show='*', textvariable=userPassConfirm, placeholder_text="Senha")
+        userPassConfirm = tkk.StringVar()
+        self.labelPassConfirm = tkk.Label(modal, text="🔑Cofirme a Senha")
+        self.entryPassConfirm = tkk.Entry(modal,show='*', textvariable=userPassConfirm)
+        ToolTip(self.entryPassConfirm,text = 'Insira sua senha novamente')  
         self.labelPassConfirm.pack(pady=(5))
         self.entryPassConfirm.pack(pady=(5))
 
-        self.check_var = customtkinter.StringVar(value="on")
-        self.checkbox = customtkinter.CTkCheckBox(modal, text="Li e estou de acordo com os termos de uso!!",
+        self.check_var = tkk.StringVar(value="on")
+        self.checkbox = tkk.Checkbutton(modal, text="Li e estou de acordo com os termos de uso!!",
                                      variable=self.check_var, onvalue="on", offvalue="off")
         
         self.checkbox.pack(pady=5)
         userCreatedOk = ''
 
-        self.buttonRegister = customtkinter.CTkButton(modal, text="Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPassCadastro.get(),"id":""},modal,userPassConfirm.get()))
+        self.buttonRegister = tkk.Button(modal, text="💾 Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPassCadastro.get(),"id":""},modal,userPassConfirm.get()))
         
       
-        print(self.buttonRegister)
+        
 
         self.buttonRegister.pack(pady=(5))
         if userCreatedOk != '':
             messagebox.showinfo("Alerta", "Este é um alerta!")
 
         
-        close_button = customtkinter.CTkButton(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
 
         
 
         return modal
   
-  
+def show_tooltip(event, tooltip):
+    tooltip.place(x=event.x_root - event.widget.winfo_rootx(), y=event.y_root - event.widget.winfo_rooty())
+
+def hide_tooltip(tooltip):
+    tooltip.place_forget()
 
 if __name__ == '__main__':
-    root = customtkinter.CTk()
+    root = tkk.Window()
     app = MinhaInterface(root)
     loginWindown = root.mainloop()
     
