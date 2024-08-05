@@ -13,6 +13,7 @@ import TelaPrincipal as TP
 
 class Entrada:
     def __init__(self,root,user) -> None:
+
         self.janela = root
         self.userAtual = user
         
@@ -76,23 +77,40 @@ class Entrada:
         close_button.pack(pady=5)
 
 
-    def EditEntrada(self):
+    def EditEntrada(self,item_values):
         modal = tkk.Toplevel()
         modal.title("Edição de Entrada/Lucro")
         modal.geometry("800x600")
-        
-        tabview = tkk.Tabview(master=modal)
-        tabview.pack(padx=20, pady=20)
 
-        tabview.add("tab 1")  # add tab at the end
-        tabview.add("tab 2")  # add tab at the end
-        tabview.set("tab 2")
+        labelTitle = tkk.Label(modal, text="Edição | Exclusão de Receita",font=("",23))
+        labelTitle.pack(pady=5)
+        tkk.Separator(bootstyle="info",master=modal).pack(fill=X,padx=100,pady=2)
+
+        print(item_values)
+        
+        
+
         # Desabilita interação com a janela principal
         modal.transient()
         modal.grab_set()
         
-        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
-        close_button.pack(pady=10)
+        labelReceita = tkk.Label(modal,text="Tipo de Receita").pack()
+        self.tipoReceita = tkk.Entry(modal)
+        self.tipoReceita.pack()
+        labelValor = tkk.Label(modal,text="Valor").pack()
+        self.valorReceita = tkk.Entry(modal)
+        self.valorReceita.pack()
+        
+        self.tipoReceita.delete(0, tkk.END)  
+        self.tipoReceita.insert(0,str(item_values[1])) 
+        self.valorReceita.delete(0, tkk.END)  
+        self.valorReceita.insert(0,str(item_values[2])) 
+
+        editButton = tkk.Button(modal,text="Atualizar",bootstyle="info-outline").pack(pady=5)
+        deleteButton = tkk.Button(modal,text="Deletar",bootstyle="danger-outline").pack(pady=5)
+        
+   
+       
 
     def insertEntrace(self,params):
         cadastroEntradaOK = controllerEntries.Entrie(params).createEntries()
