@@ -9,11 +9,8 @@ sys.path.append(module_path)
 import controllerEntries
 
 class TelaPrincipal:
-<<<<<<< HEAD
-    def __init__(self, root) -> None:
-=======
     def __init__(self,root,user) -> None:
->>>>>>> developer2.0
+
         # criando janela
         self.janela = root
         self.janela.title("Gerenciador de finanças")
@@ -25,13 +22,12 @@ class TelaPrincipal:
         self.createMenu()
         self.createMain()
 
-    def createMain(self):
-<<<<<<< HEAD
+    def createMain(self):   
         self.label = tk.Label(self.janela, text="aaahhh", padx=10)
     
-=======
+
         # labelTitle = customtkinter.CTkLabel(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", fg_color="transparent",font=("",23))
-        # labelTitle.pack(pady=5)
+        # labelTitle.pack(pady=5)   
         pass
         
        
@@ -279,7 +275,7 @@ class TelaPrincipal:
     def catchValue(self,value):
         self.entryValue.delete(0, customtkinter.END)  # Primeiro, limpa o conteúdo atual
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
->>>>>>> developer2.0
+
 
 if __name__ == '__main__':
     root = customtkinter.CTk()

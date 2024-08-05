@@ -21,10 +21,13 @@ class Investment():
             print('Investimento Criado!!!')
 
     def readInvestments(self):
-        read__Investiments = InvestmentsModel.Investiments(self.params)readInvestimentsDB()
-        if(read__Investiments):
+        read_Investiments = InvestmentsModel.Investments(self.params.readInvestmentsDB())
+        for resultados in resultado:
+            print(resultados)
+            
+        if(read_Investiments):
             print("Leitura de investimento concedida !!")
-        
+
     def updateInvestments(self) -> None:
         update_Investiments = InvestmentsModel.Investments(self.params).updateInvestmentsDB()
         if(update_Investiments):
@@ -37,16 +40,10 @@ class Investment():
 
 
 params = {
-    "name_Investiments": "slaoq",
-    "type_investments": "2300",
-    "value": "10",
-    "profitability": "1",
-    "id_user": "2",
     "id_investimentos": "2"
-    
 }
 
 #Investment(params).createInvestments()
-#Investment(params).readInvestments()
+Investment(params).readInvestments()
 #Investment(params).updateInvestments()
 #Investment(params).deleteInvestments()

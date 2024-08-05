@@ -1,13 +1,12 @@
-
 import sqlite3
+import time
 
 class Investments:
-
     def __init__(self,params) -> None:
         self.conn =  sqlite3.connect('my_database.db')
         self.cursor = self.conn.cursor()
 
-        
+
         self.name_Investiments = params['name_Investiments']
         self.type_investments = params['type_investments']
         self.value = params['value']
@@ -43,14 +42,14 @@ class Investments:
                 
                 self.conn.close()
 
-    def readInvestmentsDB(self) -> str:
+    def readInvestmentsDB(self) -> dict:
         retries = 5
         while retries > 0:
             try:
-                sql = f"SELECT FROM users WHERE email = ? AND senha = ?"
-                self.cursor.execute(sql,(self.name_Investiments,self.type_investments,self.value,self.profitability,self.id_investimentos ))
-                self.conn.commit()
-                return "OK"
+                sql = f"SELECT * FROM Investments  WHERE id = ?"
+                self.cursor.execute(sql,(self.id_investimentos))
+                self.resultado = self.cursor.fetchall()
+                return self.resultado
             except sqlite3.OperationalError as err:
                 if 'database is locked' in str(err):
                     print("Database is locked, retrying...")
@@ -59,7 +58,7 @@ class Investments:
                 else:
                     print(f"An operational error occurred: {err}")
                     self.conn.rollback()
-                    return "Error" 
+                    return "Error"
             except sqlite3.Error as err:
                 print(f"An error occurred while inserting data: {err}")
                 self.conn.rollback()
@@ -67,7 +66,7 @@ class Investments:
             finally:
                 self.conn.close()
 
-    def updateInvestmentsDB(self) ->str:
+    def updateInvestmentsDB(self) -> str:
         retries = 5
         while retries > 0:
             try:
@@ -114,6 +113,3 @@ class Investments:
                 return "Error"
             finally:
                 self.conn.close()
-            
-
-    
