@@ -87,7 +87,6 @@ class MinhaInterface:
             messagebox.showinfo("Cadastro" , "Criado com sucesso!!")
             modal.destroy()
         else:
-            print('o')
             messagebox.showinfo("Cadastro" , "Email já cadastrado")
 
         

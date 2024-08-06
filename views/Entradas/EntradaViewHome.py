@@ -16,25 +16,14 @@ class EntradaHomeView():
 
     def __init__(self,root,user) -> None:
         self.janela = root
-        self.userAtual = user
+        self.userAtual = user[0][0]
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("300x200")
         
-        # self.loadInformations()
+        
     
     def loadInformations(self):
-        
-        # buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
-        # buttonbar.pack(fill=X,  side=TOP)
-
-        # btnReceita = tkk.Button(master=buttonbar, text='Receita')
-        # btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
-
-        # btnGastos = tkk.Button(master=buttonbar, text='Gastos')
-        # btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
-
-        # btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
-        # btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1) 
+    
 
         left_panel = tkk.Frame(self.janela, style='info.TFrame')
         left_panel.pack(side=LEFT, fill=Y)
@@ -64,11 +53,10 @@ class EntradaHomeView():
         buttonFiltrar.pack(side=LEFT)
 
 
-        data = [
-                ("1", "Salario", "10000"),
-                ("2", "Alugel", "500"),
-                ("3", "Outros", "150")
-            ]
+        
+        data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":self.userAtual,"id_entries":""}).getItemById()
+       
+
         self.tree = tkk.Treeview(self.janela, columns=("ID", "Tipo Receita", "Valor"), show="headings", height=10,bootstyle='info')
         self.tree.column("ID", width=50, anchor=tk.CENTER)
         self.tree.column("Tipo Receita", width=200, anchor=tk.CENTER)
@@ -81,8 +69,8 @@ class EntradaHomeView():
         self.tree.heading("Valor", text="Valor(R$)")
         
 
-        for item in data:
-            self.tree.insert("", "end", values=item)
+        for item in data2[1]:
+            self.tree.insert("", "end", values=(item[0],item[1],item[2]))
             
 
         self.tree.pack(fill=tk.BOTH,padx=10,pady=5)

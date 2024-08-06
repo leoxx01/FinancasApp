@@ -26,7 +26,7 @@ class TelaPrincipal:
 
         self.userAtual = user
 
-
+        
         self.createMenu()
         self.createMain()
         
