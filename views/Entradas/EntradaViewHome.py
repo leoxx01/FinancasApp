@@ -68,16 +68,25 @@ class EntradaHomeView():
         self.tree.heading("Tipo Receita", text="Tipo Receita")
         self.tree.heading("Valor", text="Valor(R$)")
         
+        mediaReceita = 0
+        maiorreceita = 0
 
         for item in data2[1]:
             self.tree.insert("", "end", values=(item[0],item[1],item[2]))
+            mediaReceita += int(item[2])
+            if(int(item[2]) > int(maiorreceita)):
+                maiorreceita = float(item[2])
             
 
         self.tree.pack(fill=tk.BOTH,padx=10,pady=5)
 
-
         self.tree.bind("<Double-1>",self.editItem)
 
+        selfMaiorReceita = tkk.Label(text=f"Sua Maior receita foi R$ {maiorreceita}")
+        selfMaiorReceita.pack()
+
+        selfMediaReceita = tkk.Label(text=f"Sua Receita Media foi R$ {mediaReceita/len(data2)}")
+        selfMediaReceita.pack()
     def editItem(self,event):
         selected_item = self.tree.focus()
         item_values = self.tree.item(selected_item, "values")
