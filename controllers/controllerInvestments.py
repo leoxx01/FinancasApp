@@ -21,8 +21,9 @@ class Investment():
             print('Investimento Criado!!!')
 
     def readInvestments(self):
-        read_Investiments = InvestmentsModel.Investments(self.params.readInvestmentsDB())
-        for resultados in resultado:
+        read_Investiments = InvestmentsModel.Investments(self.params).readInvestmentsDB()
+
+        for resultados in read_Investiments:
             print(resultados)
             
         if(read_Investiments):
@@ -40,7 +41,12 @@ class Investment():
 
 
 params = {
-    "id_investimentos": "2"
+    "name_Investiments": "arigato_gozarmais",
+    "type_investments":"BDR",
+    "value":"5400",
+    "profitability":"200",
+    "id_user":"5",
+    "id_investimentos":"4"
 }
 
 #Investment(params).createInvestments()

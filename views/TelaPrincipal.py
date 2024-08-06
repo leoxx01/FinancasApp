@@ -6,7 +6,7 @@ import os
 import sys
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
 sys.path.append(module_path)
-import controllerEntries
+import controllerEntriesx
 
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
@@ -29,8 +29,8 @@ class TelaPrincipal:
         # labelTitle = customtkinter.CTkLabel(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", fg_color="transparent",font=("",23))
         # labelTitle.pack(pady=5)   
         pass
-        
-       
+
+
     def createMenu(self):
         self.menu_bar = tk.Menu(self.janela)
 

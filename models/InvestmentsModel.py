@@ -42,14 +42,13 @@ class Investments:
                 
                 self.conn.close()
 
-    def readInvestmentsDB(self) -> dict:
+    def readInvestmentsDB(self):
         retries = 5
         while retries > 0:
             try:
                 sql = f"SELECT * FROM Investments  WHERE id = ?"
                 self.cursor.execute(sql,(self.id_investimentos))
-                self.resultado = self.cursor.fetchall()
-                return self.resultado
+                return self.cursor.fetchall()
             except sqlite3.OperationalError as err:
                 if 'database is locked' in str(err):
                     print("Database is locked, retrying...")
@@ -113,3 +112,15 @@ class Investments:
                 return "Error"
             finally:
                 self.conn.close()
+
+if __name__ == "__main__":
+    params = {
+        "name_Investiments": "arigato_gozarmais",
+        "type_investments":"BDR",
+        "value":"5400",
+        "profitability":"200",
+        "id_user":"5",
+        "id_investimentos":"4"
+    }
+
+    Investments.createInvestmentsDB(params)
