@@ -24,6 +24,28 @@ class EntradaHomeView():
     
     def loadInformations(self):
         
+        buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
+        buttonbar.pack(fill=X,  side=TOP)
+
+        btnReceita = tkk.Button(master=buttonbar, text='Receita')
+        btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+
+        btnGastos = tkk.Button(master=buttonbar, text='Gastos')
+        btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+
+        btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
+        btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1) 
+
+        left_panel = tkk.Frame(self.janela, style='info.TFrame')
+        left_panel.pack(side=LEFT, fill=Y)
+        
+        
+        
+        selfAddReceita = tkk.Button(left_panel,bootstyle="info",text="Adcionar Receita",command=EntradasView.Entrada(self.janela,"").cadastroEntrada)
+        selfAddReceita.pack(pady=5)
+
+        selfAddCategoria = tkk.Button(left_panel,bootstyle="info",text="Adcionar Categotia",command=EntradasView.Entrada(self.janela,"").cadastroEntrada)
+        selfAddCategoria.pack(pady=5)
 
         data = [
                 ("1", "Salario", "10000"),
@@ -46,10 +68,8 @@ class EntradaHomeView():
             self.tree.insert("", "end", values=item)
             
 
-        self.tree.pack(fill=tk.BOTH)
+        self.tree.pack(fill=tk.BOTH,padx=10,pady=5)
 
-        selfButton = tkk.Button(self.janela,bootstyle="success",text="Adcionar Receita",command=EntradasView.Entrada(self.janela,"").cadastroEntrada)
-        selfButton.pack(pady=5)
 
         self.tree.bind("<Double-1>",self.editItem)
 
