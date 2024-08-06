@@ -16,36 +16,53 @@ class EntradaHomeView():
 
     def __init__(self,root,user) -> None:
         self.janela = root
-        
+        self.userAtual = user
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("300x200")
         
-        self.loadInformations()
+        # self.loadInformations()
     
     def loadInformations(self):
         
-        buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
-        buttonbar.pack(fill=X,  side=TOP)
+        # buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
+        # buttonbar.pack(fill=X,  side=TOP)
 
-        btnReceita = tkk.Button(master=buttonbar, text='Receita')
-        btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+        # btnReceita = tkk.Button(master=buttonbar, text='Receita')
+        # btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnGastos = tkk.Button(master=buttonbar, text='Gastos')
-        btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+        # btnGastos = tkk.Button(master=buttonbar, text='Gastos')
+        # btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
-        btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1) 
+        # btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
+        # btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1) 
 
         left_panel = tkk.Frame(self.janela, style='info.TFrame')
         left_panel.pack(side=LEFT, fill=Y)
         
         
         
-        selfAddReceita = tkk.Button(left_panel,bootstyle="info",text="Adcionar Receita",command=EntradasView.Entrada(self.janela,"").cadastroEntrada)
+        selfAddReceita = tkk.Button(left_panel,bootstyle="info",text="Adcionar Receita",command= EntradasView.Entrada(self.janela,self.userAtual).cadastroEntrada)
         selfAddReceita.pack(pady=5)
 
         selfAddCategoria = tkk.Button(left_panel,bootstyle="info",text="Adcionar Categotia",command=EntradasView.Entrada(self.janela,"").cadastroEntrada)
         selfAddCategoria.pack(pady=5)
+
+        central_panel = tkk.Frame(self.janela, style='TFrame')
+        central_panel.pack(fill=Y,pady=5)
+
+        labelDataEntrada = tkk.Label(central_panel,text="Data Inicio :",bootstyle="info")
+        labelDataEntrada.pack(pady=5,side=LEFT)
+        filterDataEntrada = tkk.DateEntry(central_panel,bootstyle="info")
+        filterDataEntrada.pack(pady= 1,padx=10,side=LEFT)
+
+        labelDataFim = tkk.Label(central_panel,text="Data Inicio :",bootstyle="info")
+        labelDataFim.pack(pady=5,side=LEFT)
+        filterDataFim = tkk.DateEntry(central_panel,bootstyle="info")
+        filterDataFim.pack(pady= 1,padx=10,side=LEFT)
+
+        buttonFiltrar = tkk.Button(central_panel,bootstyle="info",text="Filtrar")
+        buttonFiltrar.pack(side=LEFT)
+
 
         data = [
                 ("1", "Salario", "10000"),
