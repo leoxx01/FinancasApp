@@ -15,6 +15,7 @@ class Entrada:
     def __init__(self,root,user) -> None:
 
         self.janela = root
+        
         self.userAtual = user
         
         
@@ -68,7 +69,7 @@ class Entrada:
         self.modal.grab_set()
         
 
-        add_button = tkk.Button(self.modal, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual[0][0],"id_entries":"0"}))
+        add_button = tkk.Button(self.modal, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual,"id_entries":"0"}))
         add_button.pack(pady=5)
         # Desabilita interação com a janela principal
     
@@ -114,6 +115,7 @@ class Entrada:
 
     def insertEntrace(self,params):
         cadastroEntradaOK = controllerEntries.Entrie(params).createEntries()
+        
         if(cadastroEntradaOK=="OK"):
             messagebox.showinfo("Ganhos" , "Entrada de ganhos criada com sucesso!!")
             self.modal.destroy()
