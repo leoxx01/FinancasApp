@@ -7,25 +7,21 @@ import os
 import sys
 import ttkbootstrap as tkk
 
+
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
 sys.path.append(module_path)
-<<<<<<< HEAD
-import controllerEntriesx
-=======
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Entradas'))
 sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Saidas'))
 sys.path.append(module_path)
-import EntradasView 
+import controllerEntriesx
+import EntradasView
 import SaidasView
->>>>>>> developer2.0
 
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
 
         # criando janela
-        
-        
         self.janela = root
         
         self.janela.title("Gerenciador de finanças")
@@ -33,25 +29,21 @@ class TelaPrincipal:
 
         self.userAtual = user
 
-
         self.createMenu()
         self.createMain()
         
 
 
 
-<<<<<<< HEAD
     def createMain(self):   
         self.label = tk.Label(self.janela, text="aaahhh", padx=10)
     
 
         # labelTitle = customtkinter.CTkLabel(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", fg_color="transparent",font=("",23))
-        # labelTitle.pack(pady=5)   
-=======
+        # labelTitle.pack(pady=5)
     def createMain(self):
         # labelTitle = tkk.Label(self.janela, text=f"Bem Vindo - {self.userAtual[0][1]}", font=("",23))
         # labelTitle.pack(pady=5)
->>>>>>> developer2.0
         pass
 
 
@@ -158,15 +150,11 @@ class TelaPrincipal:
         close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
         close_button.pack(pady=10)
 
-<<<<<<< HEAD
     def catchValue(self,value):
         self.entryValue.delete(0, customtkinter.END)  # Primeiro, limpa o conteúdo atual
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
 
 
-=======
-    
->>>>>>> developer2.0
 if __name__ == '__main__':
     
     root = tkk.Window()
