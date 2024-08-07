@@ -21,7 +21,7 @@ Connect()
 
 conn = sqlite3.connect('my_database.db')
 cursor = conn.cursor()
-teste = cursor.execute("SELECT * FROM users").fetchall()
+teste = cursor.execute("SELECT * FROM entries WHERE id_user = '17' ").fetchall()
 rows = teste
 print(teste)
 for row in rows:

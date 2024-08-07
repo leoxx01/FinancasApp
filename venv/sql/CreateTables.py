@@ -22,7 +22,7 @@ class CreateAllTabels():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nameEntries TEXT NOT NULL,
                 value TEXT NOT NULL ,
-                id_user TEXT NOT NULL ,
+                id_user INTEGER NOT NULL ,
                 date_created TEXT DEFAULT CURRENT_TIMESTAMP
                 
             )'''
@@ -35,7 +35,7 @@ class CreateAllTabels():
                 installments TEXT NOT NULL ,
                 pays_installments TEXT NOT NUll,
                 pays_finish TEXT NOT NULL,
-                id_user TEXT NOT NULL ,
+                id_user INTEGER NOT NULL ,
                 date_created TEXT DEFAULT CURRENT_TIMESTAMP
                 
             )'''
@@ -47,7 +47,7 @@ class CreateAllTabels():
                 type_investments TEXT NOT NULL, 
                 value TEXT NOT NULL,
                 profitability text NOT NULL,
-                id_user TEXT NOT NULL ,
+                id_user INTEGER NOT NULL ,
                 date_created TEXT DEFAULT CURRENT_TIMESTAMP
                 
             )'''
