@@ -50,6 +50,6 @@ params = {
 }
 
 #Investment(params).createInvestments()
-Investment(params).readInvestments()
+#Investment(params).readInvestments()
 #Investment(params).updateInvestments()
 #Investment(params).deleteInvestments()

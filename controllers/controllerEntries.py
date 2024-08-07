@@ -13,10 +13,19 @@ class Entrie():
     
     def createEntries(self) -> None:
         
-        created_Entrie = EntriesModel.Entries(self.params).createEntriesDB()
+        created_Entrie = EntriesModel.Entries(self.params).createEntriesBD()
         if(created_Entrie):
             return 'OK'
         
+    def readEntries(self):
+        read_Entrie = EntriesModel.Entries(self.params).readEntriesBD()
+
+        for resultados in read_Entrie:
+            print(resultados)
+
+        if (read_Entrie):
+            print("Leitura de entrada concedida !!")
+
     def updateEntries(self) -> None:
         update_Entrie = EntriesModel.Entries(self.params).updateEntriesBD()
         if(update_Entrie):
@@ -27,13 +36,14 @@ class Entrie():
         if(delete_Entrie):
             print("Entrada Deletada!!")
 
-# params = {
-#     "nome_entrada": "Salario",
-#     "valor": "1000",
-#     "id_user": "2",
-#     "id_entries":"1"
-# }
+params = {
+     "nome_entrada": "Salario",
+     "valor": "1000",
+     "id_user": "2",
+     "id_entries":"2"
+}
 
 # Entrie(params).createEntries()
+# Entrie(params).readEntries()
 # Entrie(params).updateEntries()
 # Entrie(params).deleteEntries()

@@ -13,7 +13,7 @@ class Entries:
         self.id_entries = str(params['id_entries'])
 
  
-    def createEntriesDB(self) -> str:
+    def createEntriesBD(self) -> str:
         retries = 5
         while retries > 0:
             try:
@@ -21,6 +21,29 @@ class Entries:
                 self.cursor.execute(sql, (self.nome_entrada, self.valor, self.id_user))
                 self.conn.commit()
                 return "OK"
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)  
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                
+            finally:
+                self.conn.close()
+
+    def readEntriesBD(self):
+        retries = 5
+        while retries > 0:
+            try:
+                sql = "SELECT * FROM entries  WHERE id = ?"
+                self.cursor.execute(sql, self.id_entries)
+                return self.cursor.fetchall()
             except sqlite3.OperationalError as err:
                 if 'database is locked' in str(err):
                     print("Database is locked, retrying...")

@@ -46,7 +46,7 @@ class Investments:
         retries = 5
         while retries > 0:
             try:
-                sql = f"SELECT * FROM Investments  WHERE id = ?"
+                sql = "SELECT * FROM Investments  WHERE id = ?"
                 self.cursor.execute(sql,(self.id_investimentos))
                 return self.cursor.fetchall()
             except sqlite3.OperationalError as err:
@@ -112,15 +112,3 @@ class Investments:
                 return "Error"
             finally:
                 self.conn.close()
-
-if __name__ == "__main__":
-    params = {
-        "name_Investiments": "arigato_gozarmais",
-        "type_investments":"BDR",
-        "value":"5400",
-        "profitability":"200",
-        "id_user":"5",
-        "id_investimentos":"4"
-    }
-
-    Investments.createInvestmentsDB(params)

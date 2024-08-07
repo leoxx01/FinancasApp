@@ -40,6 +40,29 @@ class Leaves:
             finally:
                 self.conn.close()
             
+    def readLeavesDB(self):
+        retries = 5
+        while retries > 0:
+            try:
+                sql = "SELECT * FROM leaves  WHERE id = ?"
+                self.cursor.execute(sql,(self.id_leave))
+                return self.cursor.fetchall()
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)  
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    return "Error" 
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                return "Error"
+            finally:
+                self.conn.close()
+
     def updateLeavesBD(self) ->str:
         retries = 5
         while retries > 0:
