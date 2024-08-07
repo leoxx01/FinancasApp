@@ -87,7 +87,6 @@ class MinhaInterface:
             messagebox.showinfo("Cadastro" , "Criado com sucesso!!")
             modal.destroy()
         else:
-            print('o')
             messagebox.showinfo("Cadastro" , "Email já cadastrado")
 
         
@@ -107,8 +106,6 @@ class MinhaInterface:
 
         return "OK"
 
-    def on_closing(self):
-        self.janela.destroy()
 
     def loginButton(self,params):
         
@@ -117,7 +114,8 @@ class MinhaInterface:
             messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
             userAtual = LoginOk[1]
             
-            self.janela.protocol("WM_DELETE_WINDOW", self.on_closing)
+            self.frameLogin.destroy()
+
             
             TelaPrincipal.TelaPrincipal(self.janela,userAtual)
 

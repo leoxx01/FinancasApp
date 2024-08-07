@@ -36,14 +36,31 @@ class Entrie():
         if(delete_Entrie):
             print("Entrada Deletada!!")
 
+<<<<<<< HEAD
 params = {
      "nome_entrada": "Salario",
      "valor": "1000",
      "id_user": "2",
      "id_entries":"2"
 }
+=======
+    def getItemById(self)-> None:
+        getItem = EntriesModel.Entries(self.params).getItemById()
+        
+        if(getItem != '[]'):
+            return ["Ok",getItem]
+            
+        
+# params = {
+#     "nome_entrada": "Salario",
+#     "valor": "1000",
+#     "id_user": "17",
+#     "id_entries":"1"
+# }
+>>>>>>> beta
 
 # Entrie(params).createEntries()
 # Entrie(params).readEntries()
 # Entrie(params).updateEntries()
 # Entrie(params).deleteEntries()
+# Entrie(params).getItemById()
