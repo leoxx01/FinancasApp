@@ -12,12 +12,13 @@ import controllerEntries
 import TelaPrincipal as TP
 
 class Entrada:
-    def __init__(self,root,user) -> None:
+    def __init__(self,root,user,tree) -> None:
 
         self.janela = root
-        
+        self.tree = tree
         self.userAtual = user
-        
+        self.cadastroEntradaFinsh = ""
+        print(tree)
         
     def cadastroEntrada(self):
         self.modal = tkk.Toplevel()
@@ -76,7 +77,11 @@ class Entrada:
         close_button = tkk.Button(self.modal, text="Fechar",bootstyle="danger", command= self.modal.destroy)
 
         close_button.pack(pady=5)
-
+        
+        
+        if(self.cadastroEntradaFinsh == "OK"):
+            print('ainnn')
+            
 
     def EditEntrada(self,item_values):
         modal = tkk.Toplevel()
@@ -117,12 +122,17 @@ class Entrada:
         cadastroEntradaOK = controllerEntries.Entrie(params).createEntries()
         
         if(cadastroEntradaOK=="OK"):
+            self.cadastroEntradaFinsh = "OK"
             messagebox.showinfo("Ganhos" , "Entrada de ganhos criada com sucesso!!")
             self.modal.destroy()
+        
             
+            for item in self.tree.get_children():
+                self.tree.delete(item)
             
-            
-            
+            data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
+            for dado in data2[1]:
+                self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
         else:
             messagebox.showinfo("Ganhos" , "Algo deu Errado no cadastro!!")
 

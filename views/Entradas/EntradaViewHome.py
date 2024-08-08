@@ -22,11 +22,7 @@ class EntradaHomeView():
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("300x200")
         
-    def casdastroEntradaButton(self):
-        statusEntrada = EntradasView.Entrada(self.janela,self.userAtual).cadastroEntrada()
-
-        if(statusEntrada):
-            pass
+   
 
     def loadInformations(self):
     
@@ -37,7 +33,7 @@ class EntradaHomeView():
         selfAddReceita = tkk.Button(left_panel,bootstyle="info",text="Adcionar Receita",command= self.casdastroEntradaButton)
         selfAddReceita.pack(pady=5)
 
-        selfAddCategoria = tkk.Button(left_panel,bootstyle="info",text="Adcionar Categotia",command=EntradasView.Entrada(self.janela,"").cadastroEntrada)
+        selfAddCategoria = tkk.Button(left_panel,bootstyle="info",text="Adcionar Categotia",command=EntradasView.Entrada(self.janela,"","").cadastroEntrada)
         selfAddCategoria.pack(pady=5)
 
         #Fim Menu Lateral
@@ -82,13 +78,15 @@ class EntradaHomeView():
         #Inicia Vars de informações 
         mediaReceita = 0
         maiorreceita = 0
-        menorReceita = 0
+        menorReceita = -1
 
         #Monta tree com dados pegos do banco de dados
         for item in data2[1]:
             self.tree.insert("", "end", values=(item[0],item[1],item[2]))
             mediaReceita += int(item[2])
-            menorReceita = int(item[2])
+            if(menorReceita == -1):
+                menorReceita = int(item[2])
+
             if(int(item[2]) > int(maiorreceita)):
                 maiorreceita = float(item[2])
             elif(int(item[2]) < int(menorReceita)):
@@ -122,7 +120,12 @@ class EntradaHomeView():
         self.MenorReceitaFrame.pack(side=LEFT,padx=5)
 
         #Fim painel
-
+    def casdastroEntradaButton(self):
+        statusEntrada = EntradasView.Entrada(self.janela,self.userAtual,self.tree ).cadastroEntrada()
+        print(statusEntrada)
+        if(statusEntrada):
+            pass
+        
     def editItem(self,event):
         selected_item = self.tree.focus()
         item_values = self.tree.item(selected_item, "values")
