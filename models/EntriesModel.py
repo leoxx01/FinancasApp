@@ -11,7 +11,7 @@ class Entries:
         self.valor = str(params['valor'])  
         self.id_user = str(params['id_user'])
         self.id_entries = str(params['id_entries'])
-
+        
  
     def createEntriesDB(self) -> str:
         retries = 5
@@ -114,6 +114,8 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
+
+    
 
 
 

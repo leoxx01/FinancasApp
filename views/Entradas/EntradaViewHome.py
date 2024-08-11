@@ -11,18 +11,22 @@ sys.path.append(module_path2)
 import controllerEntries
 import TelaPrincipal as TP
 import EntradasView
+from ttkbootstrap.widgets import DateEntry
 from ttkbootstrap.constants import *
 
 class EntradaHomeView():
 
     def __init__(self,root,user) -> None:
-        self.janela = root
-        print(user)
-        self.userAtual = user[0][0]
-        self.janela.title("Gerenciador de finanças")
-        self.janela.geometry("300x200")
         
-   
+        self.janela = root
+        self.userAtual = user[0][0]
+
+        print(user)
+        self.janela.title("Gerenciador de finanças")
+        self.janela.geometry("1200x900")
+        
+        self.DataEntradaText = ""
+        self.DataFimText = ""
 
     def loadInformations(self):
     
@@ -44,18 +48,18 @@ class EntradaHomeView():
 
         labelDataEntrada = tkk.Label(central_panel,text="Data Inicio :",bootstyle="info")
         labelDataEntrada.pack(pady=5,side=LEFT)
-        filterDataEntrada = tkk.DateEntry(central_panel,bootstyle="info")
-        filterDataEntrada.pack(pady= 1,padx=10,side=LEFT)
+        self.filterDataEntrada = tkk.DateEntry(central_panel,bootstyle="info",dateformat="%Y-%m-%d")
+        self.filterDataEntrada.pack(pady= 1,padx=10,side=LEFT)
 
-        labelDataFim = tkk.Label(central_panel,text="Data Inicio :",bootstyle="info")
+        labelDataFim = tkk.Label(central_panel,text="Data Fim :",bootstyle="info")
         labelDataFim.pack(pady=5,side=LEFT)
-        filterDataFim = tkk.DateEntry(central_panel,bootstyle="info")
-        filterDataFim.pack(pady= 1,padx=10,side=LEFT)
+        self.filterDataFim = tkk.DateEntry(central_panel,bootstyle="info", dateformat="%Y-%m-%d")
+        self.filterDataFim.pack(pady= 1,padx=10,side=LEFT)
 
-        tipoReceitaFilter = tkk.Menubutton(central_panel,text="Tipo de Receita",bootstyle="info")
+        tipoReceitaFilter = tkk.Menubutton(central_panel,text="Categoria",bootstyle="info")
         tipoReceitaFilter.pack(pady= 1,padx=10,side=LEFT)
 
-        buttonFiltrar = tkk.Button(central_panel,bootstyle="info",text="Filtrar")
+        buttonFiltrar = tkk.Button(central_panel,bootstyle="info",text="Filtrar",command = lambda: self.catchData())
         buttonFiltrar.pack(side=LEFT)
 
         #Fim panel filtros
@@ -121,17 +125,26 @@ class EntradaHomeView():
 
         #Fim painel
     def casdastroEntradaButton(self):
-        statusEntrada = EntradasView.Entrada(self.janela,self.userAtual,self.tree ).cadastroEntrada()
-        print(statusEntrada)
-        if(statusEntrada):
-            pass
+        EntradasView.Entrada(self.janela,self.userAtual,self.tree).cadastroEntrada()
+        
         
     def editItem(self,event):
         selected_item = self.tree.focus()
         item_values = self.tree.item(selected_item, "values")
 
-        EntradasView.Entrada(self.janela,"").EditEntrada(item_values)
-
+        EntradasView.Entrada(self.janela,"",self.tree).EditEntrada(item_values)
+    
+    def catchData(self):
+        
+        self.DataFimText = self.filterDataFim.entry.get()
+        
+        self.DataEntradaText = self.filterDataEntrada.entry.get()
+        
+        print(self.DataFimText,self.DataEntradaText)
+        
+        
+        
+        
 if __name__ == '__main__':
     root = tkk.Window()
     user = ''
