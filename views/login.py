@@ -155,6 +155,7 @@ class MinhaInterface:
         self.labelPassCadastro.pack(pady=(5))
         self.entryPassCadastro.pack(pady=(5))
         
+        
         userPassConfirm = tkk.StringVar()
         self.labelPassConfirm = tkk.Label(modal, text="🔑Cofirme a Senha")
         self.entryPassConfirm = tkk.Entry(modal,show='*', textvariable=userPassConfirm)
