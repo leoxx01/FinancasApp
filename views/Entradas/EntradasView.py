@@ -18,7 +18,7 @@ class Entrada:
         self.tree = tree
         self.userAtual = user
         self.cadastroEntradaFinsh = ""
-        print(tree)
+        
         
     def cadastroEntrada(self):
         self.modal = tkk.Toplevel()
@@ -79,8 +79,7 @@ class Entrada:
         close_button.pack(pady=5)
         
         
-        if(self.cadastroEntradaFinsh == "OK"):
-            print('ainnn')
+ 
             
 
     def EditEntrada(self,item_values):
@@ -102,8 +101,10 @@ class Entrada:
         labelReceita = tkk.Label(self.modal,text="Tipo de Receita").pack()
         self.tipoReceita = tkk.Entry(self.modal)
         self.tipoReceita.pack()
+
+        self.valorEdit = tkk.IntVar()
         labelValor = tkk.Label(self.modal,text="Valor").pack()
-        self.valorReceita = tkk.Entry(self.modal)
+        self.valorReceita = tkk.Entry(self.modal,textvariable=self.valorEdit)
         self.valorReceita.pack()
         
         self.tipoReceita.delete(0, tkk.END)  
@@ -115,7 +116,8 @@ class Entrada:
 
         # self.tipoReceita.configure(state="disabled")
 
-        editButton = tkk.Button(self.modal,text="Atualizar",bootstyle="info-outline").pack(pady=5)
+        editButton = tkk.Button(self.modal,text="Atualizar",bootstyle="info-outline",command=lambda:self.editItem(item_values)).pack(pady=5)
+
         deleteButton = tkk.Button(self.modal,text="Deletar",bootstyle="danger-outline",command= lambda:self.deleteItem({
             'id': item_values[0],
             'nome_entrada': "",
@@ -123,13 +125,23 @@ class Entrada:
             'id_user': ""
         })).pack(pady=5)
        
+    def editItem(self,values):
+        print(values,self.userAtual)
+        updateItem = controllerEntries.Entrie({
+            'id': values[0],
+            'nome_entrada': values[1],
+            'valor': str(self.valorEdit.get()),
+            'id_user': self.userAtual
+        }).updateEntries()
+
+        if(updateItem == "OK"):
+            self.modal.destroy()
+            self.popularTree()
 
     def deleteItem(self,params):
-        print(params)
         deleteItemOk = controllerEntries.Entrie(params).deleteEntries()
-        print(self.userAtual)
+        
         if(deleteItemOk == "OK"):
-            
             self.modal.destroy()
             self.popularTree()
            
@@ -167,7 +179,7 @@ class Entrada:
                 self.tree.delete(item)
 
         data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
-        print(self.userAtual)
+        
         for dado in data2[1]:
             self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
 

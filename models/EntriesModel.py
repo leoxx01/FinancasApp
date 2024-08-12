@@ -14,6 +14,7 @@ class Entries:
         self.id_user = str(params['id_user'])
         
         
+        
  
     def createEntriesDB(self) -> str:
         retries = 5
@@ -44,7 +45,7 @@ class Entries:
         while retries > 0:
             try:
                 sql = f" UPDATE entries SET nameEntries = ?, value = ? WHERE id = ?"
-                self.cursor.execute(sql,(self.nome_entrada, self.valor, self.id_entries))
+                self.cursor.execute(sql,(self.nome_entrada, self.valor, self.params['id']))
                 self.conn.commit()
                 return "OK"
             except sqlite3.OperationalError as err:
