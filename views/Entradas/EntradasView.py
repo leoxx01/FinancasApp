@@ -92,8 +92,7 @@ class Entrada:
         labelTitle.pack(pady=5)
         tkk.Separator(bootstyle="info",master=modal).pack(fill=X,padx=100,pady=2)
 
-        print(item_values)
-        
+             
         
 
         # Desabilita interação com a janela principal
@@ -112,11 +111,27 @@ class Entrada:
         self.valorReceita.delete(0, tkk.END)  
         self.valorReceita.insert(0,str(item_values[2])) 
 
+        self.tipoReceita.configure(state="readonly")
+
+        # self.tipoReceita.configure(state="disabled")
+
         editButton = tkk.Button(modal,text="Atualizar",bootstyle="info-outline").pack(pady=5)
-        deleteButton = tkk.Button(modal,text="Deletar",bootstyle="danger-outline").pack(pady=5)
-        
-   
+        deleteButton = tkk.Button(modal,text="Deletar",bootstyle="danger-outline",command= lambda:self.deleteItem({
+            'id': item_values[0],
+            'nome_entrada': "",
+            'valor': "",
+            'id_user': ""
+        })).pack(pady=5)
        
+
+    def deleteItem(self,params):
+        print(params)
+        deleteItemOk = controllerEntries.Entrie(params).deleteEntries()
+        
+        if(deleteItemOk == "OK"):
+            self.popularTree()
+            
+           
 
     def insertEntrace(self,params):
         cadastroEntradaOK = controllerEntries.Entrie(params).createEntries()
@@ -126,13 +141,7 @@ class Entrada:
             messagebox.showinfo("Ganhos" , "Entrada de ganhos criada com sucesso!!")
             self.modal.destroy()
         
-            
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-            
-            data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
-            for dado in data2[1]:
-                self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
+            self.popularTree()
         else:
             messagebox.showinfo("Ganhos" , "Algo deu Errado no cadastro!!")
 
@@ -151,6 +160,13 @@ class Entrada:
     def catchValue(self,value):
         self.entryValue.delete(0, tkk.END)  # Primeiro, limpa o conteúdo atual
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
+
+    def popularTree(self):
+        for item in self.tree.get_children():
+                self.tree.delete(item)
+        data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
+        for dado in data2[1]:
+            self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
 
 if __name__ == '__main__':
     root = tkk.Window()

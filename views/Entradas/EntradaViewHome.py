@@ -129,6 +129,7 @@ class EntradaHomeView():
         
         
     def editItem(self,event):
+        
         selected_item = self.tree.focus()
         item_values = self.tree.item(selected_item, "values")
 

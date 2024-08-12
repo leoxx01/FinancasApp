@@ -25,7 +25,7 @@ class Entrie():
     def deleteEntries(self) -> None:
         delete_Entrie = EntriesModel.Entries(self.params).deleteEntriesBD()
         if(delete_Entrie):
-            print("Entrada Deletada!!")
+            return 'OK'
 
     def getItemById(self)-> None:
         getItem = EntriesModel.Entries(self.params).getItemById()
