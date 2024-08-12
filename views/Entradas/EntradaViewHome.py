@@ -129,11 +129,11 @@ class EntradaHomeView():
         
         
     def editItem(self,event):
-        
+
         selected_item = self.tree.focus()
         item_values = self.tree.item(selected_item, "values")
 
-        EntradasView.Entrada(self.janela,"",self.tree).EditEntrada(item_values)
+        EntradasView.Entrada(self.janela,self.userAtual,self.tree).EditEntrada(item_values)
     
     def catchData(self):
         
