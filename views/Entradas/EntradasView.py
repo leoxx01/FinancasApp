@@ -9,6 +9,7 @@ sys.path.append(module_path)
 module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../views'))
 sys.path.append(module_path2)
 import controllerEntries
+import controllerTypeEntries
 import TelaPrincipal as TP
 
 class Entrada:
@@ -33,8 +34,13 @@ class Entrada:
         labelOpcaoEntrada = tkk.Label(self.modal, text="Tipo de Entrada:")
         labelOpcaoEntrada.pack(pady=2)
 
+        opcaoesNew = controllerTypeEntries.TypeEntriesController({"nameEntrie":""}).selectAllTypeEntries()
+
+        print(opcaoesNew[0][0])
+        opcaoes = []
+        for i in opcaoesNew:
+            opcaoes.append(i[0])
         
-        opcaoes = ["Salario","Salario","Aluguel","Outros"]
         self.optionmenu_var = tkk.StringVar()
         
         optionmenu = tkk.OptionMenu(

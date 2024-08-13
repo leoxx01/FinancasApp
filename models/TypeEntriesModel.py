@@ -15,7 +15,7 @@ class TypeEntries:
                 try:
                     sql = f'INSERT INTO typeEntries (type_name) VALUES ("{self.nameEntrie}")' 
                     querryExecute = self.cursor.execute(sql)
-                    self.conn.commit()
+                    
 
                     if querryExecute:
                         self.conn.commit()
@@ -44,11 +44,12 @@ class TypeEntries:
                 try:
                     sql = f'SELECT type_name FROM typeEntries' 
                     querryExecute = self.cursor.execute(sql)
-                    self.conn.commit()
+                    
 
                     if querryExecute:
+                        print('oi')
                         self.conn.commit()
-                        return "OK"
+                        return querryExecute.fetchall()
                     else:
                         return "NOK"
                     
