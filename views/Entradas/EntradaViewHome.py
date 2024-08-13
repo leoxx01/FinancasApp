@@ -28,6 +28,7 @@ class EntradaHomeView():
         
         self.DataEntradaText = ""
         self.DataFimText = ""
+        self.itemMenuFilterSelect = ""
 
     def loadInformations(self):
     
@@ -66,7 +67,7 @@ class EntradaHomeView():
         tipoReceitaFilter.config(menu=menu)
         
         for i in opcaoesNew:
-            menu.add_command(label=i[0], command=lambda: print("Opção 1 selecionada"))
+            menu.add_command(label=i[0], command=lambda opt=i[0]: self.catchTipoReceita(opt))
 
 
         buttonFiltrar = tkk.Button(central_panel,bootstyle="info",text="Filtrar",command = lambda: self.catchData())
@@ -152,8 +153,10 @@ class EntradaHomeView():
         
         self.DataEntradaText = self.filterDataEntrada.entry.get()
         
-        print(self.DataFimText,self.DataEntradaText)
+        print(self.DataFimText,self.DataEntradaText,self.itemMenuFilterSelect)
         
+    def catchTipoReceita(self,item):
+        self.itemMenuFilterSelect = item
         
         
         
