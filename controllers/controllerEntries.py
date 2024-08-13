@@ -20,12 +20,12 @@ class Entrie():
     def updateEntries(self) -> None:
         update_Entrie = EntriesModel.Entries(self.params).updateEntriesBD()
         if(update_Entrie):
-            print("Entrada Alterada!!")    
+            return 'OK'   
 
     def deleteEntries(self) -> None:
         delete_Entrie = EntriesModel.Entries(self.params).deleteEntriesBD()
         if(delete_Entrie):
-            print("Entrada Deletada!!")
+            return 'OK'
 
     def getItemById(self)-> None:
         getItem = EntriesModel.Entries(self.params).getItemById()

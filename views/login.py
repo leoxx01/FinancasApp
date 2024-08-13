@@ -33,7 +33,7 @@ class MinhaInterface:
         self.janela.geometry(f"{largura}x{altura}+{x_offset}+{y_offset}")
 
         
-        self.createLogin()
+        # self.createLogin()
 
     def foc_in(self, *args):
         self.delete('0', 'end')
@@ -123,7 +123,7 @@ class MinhaInterface:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
       
         
-
+    
     def RegisterButton(self):
         modal = tkk.Toplevel()
         modal.title("Registro de Usuário")

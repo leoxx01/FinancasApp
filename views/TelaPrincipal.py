@@ -5,6 +5,7 @@ import customtkinter
 import os
 import sys
 import ttkbootstrap as tkk
+
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
 sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Entradas'))

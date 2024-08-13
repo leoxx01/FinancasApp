@@ -18,7 +18,7 @@ class Entrada:
         self.tree = tree
         self.userAtual = user
         self.cadastroEntradaFinsh = ""
-        print(tree)
+        
         
     def cadastroEntrada(self):
         self.modal = tkk.Toplevel()
@@ -70,7 +70,7 @@ class Entrada:
         self.modal.grab_set()
         
 
-        add_button = tkk.Button(self.modal, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.valueSlider.get(),"id_user":self.userAtual,"id_entries":"0"}))
+        add_button = tkk.Button(self.modal, text="Inserir",bootstyle="success" ,command=lambda:self.insertEntrace({"nome_entrada":self.optionmenu_var.get(),"valor":self.entryValue.get(),"id_user":self.userAtual,"id_entries":"0"}))
         add_button.pack(pady=5)
         # Desabilita interação com a janela principal
     
@@ -79,32 +79,32 @@ class Entrada:
         close_button.pack(pady=5)
         
         
-        if(self.cadastroEntradaFinsh == "OK"):
-            print('ainnn')
+ 
             
 
     def EditEntrada(self,item_values):
-        modal = tkk.Toplevel()
-        modal.title("Edição de Entrada/Lucro")
-        modal.geometry("800x600")
+        self.modal = tkk.Toplevel()
+        self.modal.title("Edição de Entrada/Lucro")
+        self.modal.geometry("800x600")
 
-        labelTitle = tkk.Label(modal, text="Edição | Exclusão de Receita",font=("",23))
+        labelTitle = tkk.Label(self.modal, text="Edição | Exclusão de Receita",font=("",23))
         labelTitle.pack(pady=5)
-        tkk.Separator(bootstyle="info",master=modal).pack(fill=X,padx=100,pady=2)
+        tkk.Separator(bootstyle="info",master=self.modal).pack(fill=X,padx=100,pady=2)
 
-        print(item_values)
-        
+             
         
 
         # Desabilita interação com a janela principal
-        modal.transient()
-        modal.grab_set()
+        self.modal.transient()
+        self.modal.grab_set()
         
-        labelReceita = tkk.Label(modal,text="Tipo de Receita").pack()
-        self.tipoReceita = tkk.Entry(modal)
+        labelReceita = tkk.Label(self.modal,text="Tipo de Receita").pack()
+        self.tipoReceita = tkk.Entry(self.modal)
         self.tipoReceita.pack()
-        labelValor = tkk.Label(modal,text="Valor").pack()
-        self.valorReceita = tkk.Entry(modal)
+
+        self.valorEdit = tkk.IntVar()
+        labelValor = tkk.Label(self.modal,text="Valor").pack()
+        self.valorReceita = tkk.Entry(self.modal,textvariable=self.valorEdit)
         self.valorReceita.pack()
         
         self.tipoReceita.delete(0, tkk.END)  
@@ -112,11 +112,39 @@ class Entrada:
         self.valorReceita.delete(0, tkk.END)  
         self.valorReceita.insert(0,str(item_values[2])) 
 
-        editButton = tkk.Button(modal,text="Atualizar",bootstyle="info-outline").pack(pady=5)
-        deleteButton = tkk.Button(modal,text="Deletar",bootstyle="danger-outline").pack(pady=5)
-        
-   
+        self.tipoReceita.configure(state="readonly")
+
+        # self.tipoReceita.configure(state="disabled")
+
+        editButton = tkk.Button(self.modal,text="Atualizar",bootstyle="info-outline",command=lambda:self.editItem(item_values)).pack(pady=5)
+
+        deleteButton = tkk.Button(self.modal,text="Deletar",bootstyle="danger-outline",command= lambda:self.deleteItem({
+            'id': item_values[0],
+            'nome_entrada': "",
+            'valor': "",
+            'id_user': ""
+        })).pack(pady=5)
        
+    def editItem(self,values):
+        print(values,self.userAtual)
+        updateItem = controllerEntries.Entrie({
+            'id': values[0],
+            'nome_entrada': values[1],
+            'valor': str(self.valorEdit.get()),
+            'id_user': self.userAtual
+        }).updateEntries()
+
+        if(updateItem == "OK"):
+            self.modal.destroy()
+            self.popularTree()
+
+    def deleteItem(self,params):
+        deleteItemOk = controllerEntries.Entrie(params).deleteEntries()
+        
+        if(deleteItemOk == "OK"):
+            self.modal.destroy()
+            self.popularTree()
+           
 
     def insertEntrace(self,params):
         cadastroEntradaOK = controllerEntries.Entrie(params).createEntries()
@@ -126,13 +154,7 @@ class Entrada:
             messagebox.showinfo("Ganhos" , "Entrada de ganhos criada com sucesso!!")
             self.modal.destroy()
         
-            
-            for item in self.tree.get_children():
-                self.tree.delete(item)
-            
-            data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
-            for dado in data2[1]:
-                self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
+            self.popularTree()
         else:
             messagebox.showinfo("Ganhos" , "Algo deu Errado no cadastro!!")
 
@@ -151,6 +173,15 @@ class Entrada:
     def catchValue(self,value):
         self.entryValue.delete(0, tkk.END)  # Primeiro, limpa o conteúdo atual
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
+
+    def popularTree(self):
+        for item in self.tree.get_children():
+                self.tree.delete(item)
+
+        data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
+        
+        for dado in data2[1]:
+            self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
 
 if __name__ == '__main__':
     root = tkk.Window()
