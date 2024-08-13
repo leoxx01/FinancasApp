@@ -11,6 +11,7 @@ sys.path.append(module_path2)
 import controllerEntries
 import TelaPrincipal as TP
 import EntradasView
+import controllerTypeEntries
 import TypeEntradaView
 from ttkbootstrap.widgets import DateEntry
 from ttkbootstrap.constants import *
@@ -56,8 +57,17 @@ class EntradaHomeView():
         self.filterDataFim = tkk.DateEntry(central_panel,bootstyle="info", dateformat="%Y-%m-%d")
         self.filterDataFim.pack(pady= 1,padx=10,side=LEFT)
 
+        opcaoesNew = controllerTypeEntries.TypeEntriesController({"nameEntrie":""}).selectAllTypeEntries()
+
         tipoReceitaFilter = tkk.Menubutton(central_panel,text="Categoria",bootstyle="info")
         tipoReceitaFilter.pack(pady= 1,padx=10,side=LEFT)
+
+        menu = tkk.Menu(tipoReceitaFilter, tearoff=0)
+        tipoReceitaFilter.config(menu=menu)
+        
+        for i in opcaoesNew:
+            menu.add_command(label=i[0], command=lambda: print("Opção 1 selecionada"))
+
 
         buttonFiltrar = tkk.Button(central_panel,bootstyle="info",text="Filtrar",command = lambda: self.catchData())
         buttonFiltrar.pack(side=LEFT)

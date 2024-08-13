@@ -47,7 +47,8 @@ class Entrada:
                                     self.modal,
                                     self.optionmenu_var,
                                     *opcaoes,
-                                    bootstyle="primary"
+                                    bootstyle="primary",
+                                    direction="flush"
                                     
                                          )
         optionmenu.pack(pady=5)
