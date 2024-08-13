@@ -133,6 +133,7 @@ class EntradaHomeView():
         selfMenorReceita.pack()
         self.MenorReceitaFrame.pack(side=LEFT,padx=5)
 
+        return 'Entradas'
         #Fim painel
     def casdastroEntradaButton(self):
         EntradasView.Entrada(self.janela,self.userAtual,self.tree).cadastroEntrada()
