@@ -11,6 +11,7 @@ sys.path.append(module_path2)
 import controllerEntries
 import TelaPrincipal as TP
 import EntradasView
+import TypeEntradaView
 from ttkbootstrap.widgets import DateEntry
 from ttkbootstrap.constants import *
 
@@ -21,7 +22,6 @@ class EntradaHomeView():
         self.janela = root
         self.userAtual = user[0][0]
 
-        print(user)
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("1200x900")
         
@@ -37,7 +37,7 @@ class EntradaHomeView():
         selfAddReceita = tkk.Button(left_panel,bootstyle="info",text="Adcionar Receita",command= self.casdastroEntradaButton)
         selfAddReceita.pack(pady=5)
 
-        selfAddCategoria = tkk.Button(left_panel,bootstyle="info",text="Adcionar Categotia",command=EntradasView.Entrada(self.janela,"","").cadastroEntrada)
+        selfAddCategoria = tkk.Button(left_panel,bootstyle="info",text="Adcionar Categotia",command=TypeEntradaView.TypeEntrieView(self.janela).screenAddTypeEntrie)
         selfAddCategoria.pack(pady=5)
 
         #Fim Menu Lateral

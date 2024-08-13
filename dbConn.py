@@ -21,8 +21,8 @@ Connect()
 
 conn = sqlite3.connect('my_database.db')
 cursor = conn.cursor()
-# teste = cursor.execute("SELECT * FROM typeEntries  ").fetchall()
-teste = cursor.execute("SELECT * FROM Entries WHERE id_user = '17' ").fetchall()
+teste = cursor.execute("SELECT * FROM typeEntries  ").fetchall()
+# teste = cursor.execute("SELECT * FROM Entries WHERE id_user = '17' ").fetchall()
 # teste = cursor.execute('INSERT INTO typeEntries (type_name) VALUES ("Salario")')
 conn.commit()
 rows = teste

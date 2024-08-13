@@ -4,20 +4,22 @@ import time
 class TypeEntries:
     
     def __init__(self,params) -> None:
-        
+
+        self.conn =  sqlite3.connect('my_database.db')
+        self.cursor = self.conn.cursor()
         self.nameEntrie = params['nameEntrie']
 
     def createTypeEntrie(self)-> str:
             retries = 5
             while retries >0:
                 try:
-                    sql = f" INSERT INTO typeEntries (type_name) VALUES (?) " 
-                    querryExecute = self.cursor.execute(sql,)
+                    sql = f'INSERT INTO typeEntries (type_name) VALUES ("{self.nameEntrie}")' 
+                    querryExecute = self.cursor.execute(sql)
                     self.conn.commit()
 
                     if querryExecute:
                         self.conn.commit()
-                        return querryExecute.fetchall() 
+                        return "OK"
                     else:
                         return "NOK"
                     
