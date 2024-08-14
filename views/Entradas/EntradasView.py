@@ -9,6 +9,7 @@ sys.path.append(module_path)
 module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../views'))
 sys.path.append(module_path2)
 import controllerEntries
+import controllerTypeEntries
 import TelaPrincipal as TP
 
 class Entrada:
@@ -33,15 +34,21 @@ class Entrada:
         labelOpcaoEntrada = tkk.Label(self.modal, text="Tipo de Entrada:")
         labelOpcaoEntrada.pack(pady=2)
 
+        opcaoesNew = controllerTypeEntries.TypeEntriesController({"nameEntrie":""}).selectAllTypeEntries()
+
+        print(opcaoesNew[0][0])
+        opcaoes = []
+        for i in opcaoesNew:
+            opcaoes.append(i[0])
         
-        opcaoes = ["Salario","Salario","Aluguel","Outros"]
         self.optionmenu_var = tkk.StringVar()
         
         optionmenu = tkk.OptionMenu(
                                     self.modal,
                                     self.optionmenu_var,
                                     *opcaoes,
-                                    bootstyle="primary"
+                                    bootstyle="primary",
+                                    direction="flush"
                                     
                                          )
         optionmenu.pack(pady=5)
@@ -175,11 +182,12 @@ class Entrada:
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
 
     def popularTree(self):
+        
         for item in self.tree.get_children():
                 self.tree.delete(item)
 
         data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
-        
+
         for dado in data2[1]:
             self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
 

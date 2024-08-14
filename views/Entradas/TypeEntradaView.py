@@ -43,6 +43,7 @@ class TypeEntrieView():
 
         self.modal.transient()
         self.modal.grab_set()
+        
     def addTypeEntrie(self):
         addType = controllerTypeEntries.TypeEntriesController({"nameEntrie":self.entryNameEntrieVar.get()}).createTypeEntries()
         if(addType == "OK"):

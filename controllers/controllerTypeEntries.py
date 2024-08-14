@@ -15,4 +15,8 @@ class TypeEntriesController:
         createtype = TypeEntriesModel.TypeEntries(self.params).createTypeEntrie()
         if(createtype == "OK"):
             return "OK"
-            
+        
+    def selectAllTypeEntries(self)-> str:
+        selectAlltypes = TypeEntriesModel.TypeEntries(self.params).selectAllItens()
+        if(selectAlltypes != "[]"):
+            return selectAlltypes

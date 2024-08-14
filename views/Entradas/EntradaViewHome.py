@@ -11,6 +11,7 @@ sys.path.append(module_path2)
 import controllerEntries
 import TelaPrincipal as TP
 import EntradasView
+import controllerTypeEntries
 import TypeEntradaView
 from ttkbootstrap.widgets import DateEntry
 from ttkbootstrap.constants import *
@@ -27,6 +28,7 @@ class EntradaHomeView():
         
         self.DataEntradaText = ""
         self.DataFimText = ""
+        self.itemMenuFilterSelect = ""
 
     def loadInformations(self):
     
@@ -56,8 +58,17 @@ class EntradaHomeView():
         self.filterDataFim = tkk.DateEntry(central_panel,bootstyle="info", dateformat="%Y-%m-%d")
         self.filterDataFim.pack(pady= 1,padx=10,side=LEFT)
 
-        tipoReceitaFilter = tkk.Menubutton(central_panel,text="Categoria",bootstyle="info")
-        tipoReceitaFilter.pack(pady= 1,padx=10,side=LEFT)
+        opcaoesNew = controllerTypeEntries.TypeEntriesController({"nameEntrie":""}).selectAllTypeEntries()
+
+        self.tipoReceitaFilter = tkk.Menubutton(central_panel,text="Categoria",bootstyle="info")
+        self.tipoReceitaFilter.pack(pady= 1,padx=10,side=LEFT)
+
+        menu = tkk.Menu(self.tipoReceitaFilter, tearoff=0)
+        self.tipoReceitaFilter.config(menu=menu)
+        
+        for i in opcaoesNew:
+            menu.add_command(label=i[0], command=lambda opt=i[0]: self.catchTipoReceita(opt))
+
 
         buttonFiltrar = tkk.Button(central_panel,bootstyle="info",text="Filtrar",command = lambda: self.catchData())
         buttonFiltrar.pack(side=LEFT)
@@ -138,14 +149,30 @@ class EntradaHomeView():
     def catchData(self):
         
         self.DataFimText = self.filterDataFim.entry.get()
-        
         self.DataEntradaText = self.filterDataEntrada.entry.get()
+        params = {
+            "nome_entrada":self.itemMenuFilterSelect,
+            "valor":"",
+            "id_user":self.userAtual,
+        }
         
-        print(self.DataFimText,self.DataEntradaText)
+        data = controllerEntries.Entrie(params).getItemOnDateForFilter(self.DataEntradaText,self.DataFimText)
+        self.updateTree(data)   
+
+    def catchTipoReceita(self,item):
+
+        self.itemMenuFilterSelect = item
         
+        self.tipoReceitaFilter.config(text=item)
         
+    def updateTree(self,data):
         
-        
+        for item in self.tree.get_children():
+                self.tree.delete(item)
+
+        for dado in data[1]:
+            self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
+
 if __name__ == '__main__':
     root = tkk.Window()
     user = ''

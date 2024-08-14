@@ -122,8 +122,7 @@ class MinhaInterface:
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
       
-        
-    
+
     def RegisterButton(self):
         modal = tkk.Toplevel()
         modal.title("Registro de Usuário")
@@ -154,7 +153,6 @@ class MinhaInterface:
         ToolTip(self.entryPassCadastro,text = 'Insira sua senha')     
         self.labelPassCadastro.pack(pady=(5))
         self.entryPassCadastro.pack(pady=(5))
-        
         
         userPassConfirm = tkk.StringVar()
         self.labelPassConfirm = tkk.Label(modal, text="🔑Cofirme a Senha")

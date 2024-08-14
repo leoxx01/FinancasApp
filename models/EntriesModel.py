@@ -13,9 +13,6 @@ class Entries:
         self.valor = str(params['valor'])  
         self.id_user = str(params['id_user'])
         
-        
-        
- 
     def createEntriesDB(self) -> str:
         retries = 5
         while retries > 0:
@@ -90,11 +87,11 @@ class Entries:
             finally:
                 self.conn.close()
         
-    def getItemById(self)-> str:
+    def getItemById(self,dataInicio,dataFim)-> str:
         retries = 5
         while retries >0:
             try:
-                sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' " 
+                sql = f" SELECT *, SUBSTR(date_created,1,10) >= '{dataInicio}','2024-08-13' >= '{dataFim}' FROM entries WHERE id_user = '{str(self.id_user)}' AND  SUBSTR(date_created,1,10) >= '{dataInicio}'  AND SUBSTR(date_created,1,10) <= '{dataFim}'" 
                 querryExecute = self.cursor.execute(sql)
                 self.conn.commit()
 
@@ -119,8 +116,41 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
+    def getItemsOnDate(self,dataInicio,dataFim)->str:
+        retries = 5
+        while retries >0:
+            try:
+                sql = ""
+                
+                if(self.nome_entrada == ""):
+                    sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' and SUBSTR(date_created,1,10) >= '{dataInicio}' and SUBSTR(date_created,1,10) <= '{dataFim}'" 
+                else:
+                    sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' and SUBSTR(date_created,1,10) >= '{dataInicio}' and SUBSTR(date_created,1,10) <= '{dataFim}' and nameEntries = '{self.nome_entrada}'" 
+            
+                querryExecute = self.cursor.execute(sql)
+                self.conn.commit()
 
-    
+                if querryExecute:
+                    self.conn.commit()
+                    return querryExecute.fetchall() 
+                else:
+                    return "NOK"
+                
+            except sqlite3.OperationalError as err:
+                if 'database is locked' in str(err):
+                    print("Database is locked, retrying...")
+                    retries -= 1
+                    time.sleep(1)  
+                else:
+                    print(f"An operational error occurred: {err}")
+                    self.conn.rollback()
+                    return "Error" 
+            except sqlite3.Error as err:
+                print(f"An error occurred while inserting data: {err}")
+                self.conn.rollback()
+                return "Error"
+            finally:
+                self.conn.close()
 
 
 

@@ -19,7 +19,7 @@ class TelaPrincipal:
     def __init__(self,root,user) -> None:
         # criando janela
         
-        
+        self.tela = ""
         self.janela = root
         
         self.janela.title("Gerenciador de finanças")
@@ -44,7 +44,7 @@ class TelaPrincipal:
         buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
         buttonbar.pack(fill=X, pady=1, side=TOP)
 
-        btnReceita = tkk.Button(master=buttonbar, text='Receita' , command=EntradaViewHome.EntradaHomeView(self.janela,self.userAtual).loadInformations)
+        btnReceita = tkk.Button(master=buttonbar, text='Receita' , command=self.callEntries)
         btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
         btnGastos = tkk.Button(master=buttonbar, text='Gastos')
@@ -53,6 +53,13 @@ class TelaPrincipal:
         btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
         btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
        
+    def callEntries(self):
+        if(self.tela == "" or self.tela != 'Entrada'):
+            EntradaViewHome.EntradaHomeView(self.janela,self.userAtual).loadInformations()
+            self.tela = 'Entrada'
+        
+        
+        
 
     def cadastroInvestimentos(self):
         modal = tkk.Toplevel()
