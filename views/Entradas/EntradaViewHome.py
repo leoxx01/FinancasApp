@@ -155,6 +155,8 @@ class EntradaHomeView():
         
         print(self.DataFimText,self.DataEntradaText,self.itemMenuFilterSelect)
         
+        # (10, 'Frelancer', '2024-08-13 16:19:01')
+        
     def catchTipoReceita(self,item):
         self.itemMenuFilterSelect = item
         

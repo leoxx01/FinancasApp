@@ -1,5 +1,6 @@
 import sys
 import os
+from datetime import datetime
 
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models'))
 sys.path.append(module_path)
@@ -28,7 +29,14 @@ class Entrie():
             return 'OK'
 
     def getItemById(self)-> None:
-        getItem = EntriesModel.Entries(self.params).getItemById()
+
+        data = datetime.now()
+        data = str(data)
+        data = data.split('-')
+        dataInicio = f"{data[0]}-{data[1]}-01"
+        dataFim = f"{data[0]}-{data[1]}-01"
+                      
+        getItem = EntriesModel.Entries(self.params).getItemById(dataInicio,dataFim)
         
         if(getItem != '[]'):
             return ["Ok",getItem]
