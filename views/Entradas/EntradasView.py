@@ -36,7 +36,7 @@ class Entrada:
 
         opcaoesNew = controllerTypeEntries.TypeEntriesController({"nameEntrie":""}).selectAllTypeEntries()
 
-        print(opcaoesNew[0][0])
+        
         opcaoes = []
         for i in opcaoesNew:
             opcaoes.append(i[0])
@@ -133,7 +133,7 @@ class Entrada:
         })).pack(pady=5)
        
     def editItem(self,values):
-        print(values,self.userAtual)
+        
         updateItem = controllerEntries.Entrie({
             'id': values[0],
             'nome_entrada': values[1],

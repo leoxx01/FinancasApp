@@ -13,7 +13,7 @@ sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Saidas'))
 sys.path.append(module_path)
 import EntradaViewHome
-import SaidasView
+import SaidasViewHome
 
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
@@ -30,7 +30,8 @@ class TelaPrincipal:
         
         self.createMenu()
         self.createMain()
-        
+        self.varsDemontaEntrada = ''
+        self.varsDemontaGasto = ''
 
 
 
@@ -47,19 +48,35 @@ class TelaPrincipal:
         btnReceita = tkk.Button(master=buttonbar, text='Receita' , command=self.callEntries)
         btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnGastos = tkk.Button(master=buttonbar, text='Gastos')
+        btnGastos = tkk.Button(master=buttonbar, text='Gastos',command=self.callGastos)
         btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
         btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
         btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
        
     def callEntries(self):
+        
         if(self.tela == "" or self.tela != 'Entrada'):
-            EntradaViewHome.EntradaHomeView(self.janela,self.userAtual).loadInformations()
+            self.limpaTela()
+            self.varsDemontaEntrada = EntradaViewHome.EntradaHomeView(self.janela,self.userAtual).loadInformations()
             self.tela = 'Entrada'
-        
-        
-        
+            
+    def callGastos(self):
+
+        if(self.tela == "" or self.tela != 'Gastos'):
+            self.limpaTela()
+            self.varsDemontaGasto = SaidasViewHome.SaidaHomeView(self.janela,self.userAtual).loadInformations()
+            self.tela = 'Gastos'
+            
+     
+    def limpaTela(self):
+
+        if(len(self.varsDemontaEntrada) > 0):
+            for i in self.varsDemontaEntrada:
+                        i.destroy()
+        if(len(self.varsDemontaGasto) > 0):
+             for i in self.varsDemontaGasto:
+                        i.destroy()
 
     def cadastroInvestimentos(self):
         modal = tkk.Toplevel()
