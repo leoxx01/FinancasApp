@@ -91,7 +91,7 @@ class Entries:
         retries = 5
         while retries >0:
             try:
-                sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' AND SUBSTR(date_created,0,10) >= '{dataInicio}' AND SUBSTR(date_created,0,10) <= 'g'" 
+                sql = f" SELECT *, SUBSTR(date_created,1,10) >= '{dataInicio}','2024-08-13' >= '{dataFim}' FROM entries WHERE id_user = '{str(self.id_user)}' AND  SUBSTR(date_created,1,10) >= '{dataInicio}'  AND SUBSTR(date_created,1,10) <= '{dataFim}'" 
                 querryExecute = self.cursor.execute(sql)
                 self.conn.commit()
 
@@ -120,7 +120,13 @@ class Entries:
         retries = 5
         while retries >0:
             try:
-                sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' and date_created >= '{str(self.params['dataIncio'])}' and date_created <= '{str(self.params['dataFim'])}' and nameEntries = '{self.nome_entrada}'" 
+                sql = ""
+                
+                if(self.nome_entrada == ""):
+                    sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' and SUBSTR(date_created,1,10) >= '{dataInicio}' and SUBSTR(date_created,1,10) <= '{dataFim}'" 
+                else:
+                    sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' and SUBSTR(date_created,1,10) >= '{dataInicio}' and SUBSTR(date_created,1,10) <= '{dataFim}' and nameEntries = '{self.nome_entrada}'" 
+            
                 querryExecute = self.cursor.execute(sql)
                 self.conn.commit()
 

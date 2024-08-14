@@ -16,7 +16,8 @@ class Entrie():
         data = str(data)
         data = data.split('-')
         self.dataInicio = f"{data[0]}-{data[1]}-01"
-        self.dataFim = f"{data[0]}-{data[1]}-{data[2]}"  
+        self.dataFim = f"{data[0]}-{data[1]}-{int(str(data[2])[0:2])+1}" 
+       
     
     def createEntries(self) -> None:
         
@@ -36,19 +37,20 @@ class Entrie():
 
     def getItemById(self)-> None:
 
-                           
         getItem = EntriesModel.Entries(self.params).getItemById(self.dataInicio,self.dataFim)
-        
+                
         if(getItem != '[]'):
             return ["Ok",getItem]
     
-    def getItemOnDateForFilter(self)-> None:
+    def getItemOnDateForFilter(self,dtInicioProc,dtFimProc)-> None:
+        dtFimProcSplit = dtFimProc.split('-')
+        dtFimProc = f"{dtFimProcSplit[0]}-{dtFimProcSplit[1]}-{int(dtFimProcSplit[2])+1}"
 
-        getItem = EntriesModel.Entries(self.params).getItemsOnDate(self.dataInicio,self.dataFim)
+        getItem = EntriesModel.Entries(self.params).getItemsOnDate(dtInicioProc,dtFimProc)
         if(getItem != '[]'):
             return ["Ok",getItem]  
- 
-        
+
+
 # params = {
 #     "nome_entrada": "Salario",
 #     "valor": "1000",

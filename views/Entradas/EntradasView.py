@@ -182,11 +182,12 @@ class Entrada:
         self.entryValue.insert(0,str(self.valueSlider.get() )) 
 
     def popularTree(self):
+        
         for item in self.tree.get_children():
                 self.tree.delete(item)
 
         data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
-        
+
         for dado in data2[1]:
             self.tree.insert("", "end", values=(dado[0],dado[1],dado[2]))
 
