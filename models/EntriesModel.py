@@ -91,7 +91,7 @@ class Entries:
         retries = 5
         while retries >0:
             try:
-                sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' " 
+                sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' AND SUBSTR(date_created,0,10) >= '{dataInicio}' AND SUBSTR(date_created,0,10) <= 'g'" 
                 querryExecute = self.cursor.execute(sql)
                 self.conn.commit()
 
@@ -116,7 +116,7 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
-    def getItemsOnDate(self)->str:
+    def getItemsOnDate(self,dataInicio,dataFim)->str:
         retries = 5
         while retries >0:
             try:
