@@ -44,11 +44,25 @@ class MinhaInterface:
         
         self.frameLogin = tkk.Labelframe(master = self.janela, width=100, height=100 , bootstyle="dark", text="Login")
         self.frameLogin.pack(padx=120, pady=120, fill=tk.BOTH, expand=True)
+    
+        self.menuBarLingua = tkk.Frame(self.frameLogin)
+        self.menuBarLingua.pack(fill=X)
+
+        menuButtonLingua = tkk.Menubutton(self.menuBarLingua,text=f'🌎 Linguagem',bootstyle='outline')
+        menuButtonLingua.pack(pady= 1,padx=10,side=RIGHT)
+
+        menu2 = tkk.Menu(menuButtonLingua, tearoff=0)
+        
+        menuButtonLingua.config(menu=menu2)
+
+        menu2.add_command(label="PT-BR", command=print('oi'))
+        menu2.add_command(label="EN", command= print('oi'))
+        menu2.add_command(label="ES", command= print('oi'))
+
+        
 
         loginUserVar = tkk.StringVar()
-        
-        
-
+      
         self.labelUser = tkk.Label(self.frameLogin, text="👤 Usuario")
         self.entryUser = tkk.Entry(self.frameLogin,textvariable=loginUserVar)
         ToolTip(self.entryUser,text = 'Insira seu Usuário')        
@@ -60,7 +74,7 @@ class MinhaInterface:
         
         
         self.textLabel = tkk.Text(self.frameLogin, padx=10, pady=50)
-        self.labelUser.pack(pady=(75,3))
+        self.labelUser.pack(pady=(55,3))
         self.entryUser.pack(pady=1)
         self.labelPass.pack(pady=3)
         self.entryPass.pack(pady=1)

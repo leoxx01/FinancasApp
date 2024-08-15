@@ -47,27 +47,28 @@ class TelaPrincipal:
         buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
         buttonbar.pack(fill=X, pady=1, side=TOP)
 
-        btnReceita = tkk.Button(master=buttonbar, text='Receita' , command=self.callEntries)
+        btnReceita = tkk.Button(master=buttonbar, text='💲 Receita' , command=self.callEntries)
         btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnGastos = tkk.Button(master=buttonbar, text='Gastos',command=self.callGastos)
+        btnGastos = tkk.Button(master=buttonbar, text='💸 Gastos',command=self.callGastos)
         btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
+        btnInvestimentos = tkk.Button(master=buttonbar, text='📈 Investimentos')
         btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
         
-        menuButton = tkk.Menubutton(buttonbar,text=f'{self.userAtual[0][1]}')
+        menuButton = tkk.Menubutton(buttonbar,text=f'👤 {self.userAtual[0][1]}')
         menuButton.pack(pady= 1,padx=10,side=RIGHT)
 
         menu = tkk.Menu(menuButton, tearoff=0)
         
         menuButton.config(menu=menu)
 
+        menu.add_command(label="Perfil", command=print('oi'))
         menu.add_command(label="Logout", command=print('oi'))
         menu.add_command(label="Sair", command= print('oi'))
 
-        menuButtonLingua = tkk.Menubutton(buttonbar,text=f'Linguagem')
+        menuButtonLingua = tkk.Menubutton(buttonbar,text=f'🌎 Linguagem')
         menuButtonLingua.pack(pady= 1,padx=10,side=RIGHT)
 
         menu2 = tkk.Menu(menuButtonLingua, tearoff=0)

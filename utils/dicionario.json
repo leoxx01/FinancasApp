@@ -1,0 +1,19 @@
+{
+    "lingua":{
+        "pt-br":{
+            "LoginScreen":{
+                "user": "Usuario",
+                "passWord": "Senha"
+            }
+        },
+        "en":{
+            "LoginScreen":{
+                "user": "User",
+                "passWord": "Senha"
+            }
+        },
+        "es":{
+
+        }
+    }
+}
