@@ -66,6 +66,17 @@ class TelaPrincipal:
 
         menu.add_command(label="Logout", command=print('oi'))
         menu.add_command(label="Sair", command= print('oi'))
+
+        menuButtonLingua = tkk.Menubutton(buttonbar,text=f'Linguagem')
+        menuButtonLingua.pack(pady= 1,padx=10,side=RIGHT)
+
+        menu2 = tkk.Menu(menuButtonLingua, tearoff=0)
+        
+        menuButtonLingua.config(menu=menu2)
+
+        menu2.add_command(label="PT-BR", command=print('oi'))
+        menu2.add_command(label="EN", command= print('oi'))
+        menu2.add_command(label="ES", command= print('oi'))
        
     def callEntries(self):
         
