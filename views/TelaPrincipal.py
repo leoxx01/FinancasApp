@@ -26,10 +26,12 @@ class TelaPrincipal:
         self.janela.geometry("300x200")
 
         self.userAtual = user
-
+        
+        print(user)
         
         self.createMenu()
         self.createMain()
+        
         self.varsDemontaEntrada = ''
         self.varsDemontaGasto = ''
 
@@ -53,6 +55,17 @@ class TelaPrincipal:
 
         btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
         btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+
+        
+        menuButton = tkk.Menubutton(buttonbar,text=f'{self.userAtual[0][1]}')
+        menuButton.pack(pady= 1,padx=10,side=RIGHT)
+
+        menu = tkk.Menu(menuButton, tearoff=0)
+        
+        menuButton.config(menu=menu)
+
+        menu.add_command(label="Logout", command=print('oi'))
+        menu.add_command(label="Sair", command= print('oi'))
        
     def callEntries(self):
         
@@ -73,10 +86,10 @@ class TelaPrincipal:
 
         if(len(self.varsDemontaEntrada) > 0):
             for i in self.varsDemontaEntrada:
-                        i.destroy()
+                    i.destroy()
         if(len(self.varsDemontaGasto) > 0):
              for i in self.varsDemontaGasto:
-                        i.destroy()
+                    i.destroy()
 
     def cadastroInvestimentos(self):
         modal = tkk.Toplevel()
