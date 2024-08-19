@@ -7,6 +7,15 @@
                 "login": "Entrar",
                 "register": "Regsitrar",
                 "language": "Linguagem"
+            },
+            "registrationScreen":{
+                "user": "Usuário",
+                "email": "E-mail",
+                "passWord": "Senha",
+                "passWordConfirm": "Confirme a senha",
+                "termsOfUse":"Li e estou de acordo com os termos de uso !",
+                "register": "Cadastrar",
+                "close": "Fechar"
             }
         },
         "en":{
@@ -16,6 +25,15 @@
                 "login": "Login",
                 "register": "Register",
                 "language": "Language"
+            },
+            "registrationScreen":{
+                "user": "User",
+                "email": "E-mail",
+                "passWord": "Password",
+                "passWordConfirm": "Confirm password",
+                "termsOfUse":"I have read and agree to the terms of use!",
+                "register": "Register",
+                "close": "Close"
             }
         },
         "es":{
@@ -25,6 +43,15 @@
                 "login": "Acceso",
                 "register": "Registro",
                 "language": "Idioma"
+            }, 
+            "registrationScreen":{
+                "user": "Usuario",
+                "email": "E-mail",
+                "passWord": "Contraseña",
+                "passWordConfirm": "Confirmar Contraseña",
+                "termsOfUse": "¡He leído y acepto los términos de uso!",
+                "register": "Registro",
+                "close": "Para cerrar"
             }
         }
     }

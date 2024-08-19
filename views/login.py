@@ -40,6 +40,7 @@ class MinhaInterface:
             self.dicionario = json.load(file)
 
         self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen']    
+        self.linguaAtualRegistro = self.dicionario['language']['pt-br']['registrationScreen']    
 
     def foc_in(self, *args):
         self.delete('0', 'end')
@@ -141,16 +142,19 @@ class MinhaInterface:
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
     def choosePortuguesse(self):
-        self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen']   
+        self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen'] 
+        self.linguaAtualRegistro = self.dicionario['language']['pt-br']['registrationScreen']   
         self.resetLoginScreen()
         
         
     def chooseEnglish(self):
-        self.linguaAtual = self.dicionario['language']['en']['LoginScreen']    
+        self.linguaAtual = self.dicionario['language']['en']['LoginScreen']   
+        self.linguaAtualRegistro = self.dicionario['language']['en']['registrationScreen']  
         self.resetLoginScreen()
     def chooseSpanish(self):
         
-        self.linguaAtual = self.dicionario['language']['es']['LoginScreen']    
+        self.linguaAtual = self.dicionario['language']['es']['LoginScreen']  
+        self.linguaAtualRegistro = self.dicionario['language']['es']['registrationScreen']   
         self.resetLoginScreen()
 
     def resetLoginScreen(self):
@@ -170,41 +174,41 @@ class MinhaInterface:
         
         # Adiciona widgets ao modal
         userName = tkk.StringVar()        
-        self.labelUser = tkk.Label(modal, text="👤Usuário")
+        self.labelUser = tkk.Label(modal, text=f"👤{self.linguaAtualRegistro['user']}")
         self.entryUser = tkk.Entry(modal, textvariable=userName)
         ToolTip(self.entryUser,text = 'Insira o nome de usuário desejado')     
         self.labelUser.pack(pady=(5))
         self.entryUser.pack(pady=(5))
 
         userEmail = tkk.StringVar()
-        self.labelEmail = tkk.Label(modal,text="📧Email")
+        self.labelEmail = tkk.Label(modal,text=f"📧{self.linguaAtualRegistro['email']}")
         self.entryEmail = tkk.Entry(modal, textvariable=userEmail)
         ToolTip(self.entryEmail,text = 'Insira seu email')     
         self.labelEmail.pack(pady=(5))
         self.entryEmail.pack(pady=(5))
 
         userPassCadastro = tkk.StringVar()
-        self.labelPassCadastro = tkk.Label(modal, text="🔑Senha")
+        self.labelPassCadastro = tkk.Label(modal, text=f"🔑{self.linguaAtualRegistro['passWord']}")
         self.entryPassCadastro = tkk.Entry(modal,show='*', textvariable=userPassCadastro)
         ToolTip(self.entryPassCadastro,text = 'Insira sua senha')     
         self.labelPassCadastro.pack(pady=(5))
         self.entryPassCadastro.pack(pady=(5))
         
         userPassConfirm = tkk.StringVar()
-        self.labelPassConfirm = tkk.Label(modal, text="🔑Cofirme a Senha")
+        self.labelPassConfirm = tkk.Label(modal, text=f"🔑{self.linguaAtualRegistro['passWordConfirm']}")
         self.entryPassConfirm = tkk.Entry(modal,show='*', textvariable=userPassConfirm)
         ToolTip(self.entryPassConfirm,text = 'Insira sua senha novamente')  
         self.labelPassConfirm.pack(pady=(5))
         self.entryPassConfirm.pack(pady=(5))
 
         self.check_var = tkk.StringVar(value="on")
-        self.checkbox = tkk.Checkbutton(modal, text="Li e estou de acordo com os termos de uso!!",
+        self.checkbox = tkk.Checkbutton(modal, text=f"{self.linguaAtualRegistro['termsOfUse']}",
                                      variable=self.check_var, onvalue="on", offvalue="off")
         
         self.checkbox.pack(pady=5)
         userCreatedOk = ''
 
-        self.buttonRegister = tkk.Button(modal, text="💾 Cadastrar", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPassCadastro.get(),"id":""},modal,userPassConfirm.get()))
+        self.buttonRegister = tkk.Button(modal, text=f"💾 {self.linguaAtualRegistro['register']}", command=lambda : self.register({"nome": userName.get(),"email": userEmail.get(),"senha": userPassCadastro.get(),"id":""},modal,userPassConfirm.get()))
         
       
         
@@ -214,7 +218,7 @@ class MinhaInterface:
             messagebox.showinfo("Alerta", "Este é um alerta!")
 
         
-        close_button = tkk.Button(modal, text="Fechar", command=modal.destroy)
+        close_button = tkk.Button(modal, text=f"{self.linguaAtualRegistro['close']}", command=modal.destroy)
         close_button.pack(pady=10)
 
         
