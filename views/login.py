@@ -8,12 +8,17 @@ import sys
 import os
 from tkinter import messagebox
 from ttkbootstrap.tooltip import ToolTip
-import TelaPrincipal
+import json
+
+#Extends Files
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../controllers'))
 sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views'))
 sys.path.append(module_path)
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../utils'))
+sys.path.append(module_path)
 import controllerUser
+import TelaPrincipal
 
 
 
@@ -28,12 +33,13 @@ class MinhaInterface:
         altura = 600
         x_offset = 100  
         y_offset = 50  
-        # self.janela.geometry("400x440")
-
+        
         self.janela.geometry(f"{largura}x{altura}+{x_offset}+{y_offset}")
 
-        
-        # self.createLogin()
+        with open('./utils/dicionario.json','r',encoding='utf-8') as file:
+            self.dicionario = json.load(file)
+
+        self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen']    
 
     def foc_in(self, *args):
         self.delete('0', 'end')
@@ -41,32 +47,45 @@ class MinhaInterface:
     def createLogin(self):
         # Criar um rótulo
         
-        
         self.frameLogin = tkk.Labelframe(master = self.janela, width=100, height=100 , bootstyle="dark", text="Login")
         self.frameLogin.pack(padx=120, pady=120, fill=tk.BOTH, expand=True)
+    
+        self.menuBarLingua = tkk.Frame(self.frameLogin)
+        self.menuBarLingua.pack(fill=X)
+
+        menuButtonLingua = tkk.Menubutton(self.menuBarLingua,text=f'🌎 {self.linguaAtual['language']}',bootstyle='outline')
+        menuButtonLingua.pack(pady= 1,padx=10,side=RIGHT)
+
+        menu2 = tkk.Menu(menuButtonLingua, tearoff=0)
+        
+        menuButtonLingua.config(menu=menu2)
+
+        menu2.add_command(label="PT-BR", command=lambda:self.choosePortuguesse())
+        menu2.add_command(label="EN", command= lambda:self.chooseEnglish())
+        menu2.add_command(label="ES", command= self.chooseSpanish)
+
+        
 
         loginUserVar = tkk.StringVar()
-        
-        
-
-        self.labelUser = tkk.Label(self.frameLogin, text="👤 Usuario")
+      
+        self.labelUser = tkk.Label(self.frameLogin, text=f"👤 {self.linguaAtual['user']}")
         self.entryUser = tkk.Entry(self.frameLogin,textvariable=loginUserVar)
         ToolTip(self.entryUser,text = 'Insira seu Usuário')        
 
         loginPassVar = tkk.StringVar()
-        self.labelPass = tkk.Label(self.frameLogin, text="🔑 Senha")
+        self.labelPass = tkk.Label(self.frameLogin, text=f"🔑 {self.linguaAtual['passWord']}")
         self.entryPass = tkk.Entry(self.frameLogin,textvariable=loginPassVar , show='*')
         ToolTip(self.entryPass,text = 'Insira sua senha')     
         
         
         self.textLabel = tkk.Text(self.frameLogin, padx=10, pady=50)
-        self.labelUser.pack(pady=(75,3))
+        self.labelUser.pack(pady=(55,3))
         self.entryUser.pack(pady=1)
         self.labelPass.pack(pady=3)
         self.entryPass.pack(pady=1)
         # Criar um botão
-        self.buttonLogin = tkk.Button(self.frameLogin, text=   "   Login   ", command=lambda : self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
-        self.buttonRegister = tkk.Button(self.frameLogin, text="Cadastrar", command=self.RegisterButton)
+        self.buttonLogin = tkk.Button(self.frameLogin, text=   f"   {self.linguaAtual['login']}   ", command=lambda : self.loginButton({"nome":loginUserVar.get(),"senha":loginPassVar.get(),"email":"","id":""}))
+        self.buttonRegister = tkk.Button(self.frameLogin, text=f" {self.linguaAtual['register']}", command=self.RegisterButton)
 
         self.buttonLogin.pack(pady=5,padx=20,anchor="center")
         
@@ -121,7 +140,24 @@ class MinhaInterface:
 
         else:
             messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
-      
+    def choosePortuguesse(self):
+        self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen']   
+        self.resetLoginScreen()
+        
+        
+    def chooseEnglish(self):
+        self.linguaAtual = self.dicionario['language']['en']['LoginScreen']    
+        self.resetLoginScreen()
+    def chooseSpanish(self):
+        
+        self.linguaAtual = self.dicionario['language']['es']['LoginScreen']    
+        self.resetLoginScreen()
+
+    def resetLoginScreen(self):
+
+        self.frameLogin.destroy()
+        self.createLogin()
+
 
     def RegisterButton(self):
         modal = tkk.Toplevel()

@@ -10,7 +10,7 @@ module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../vi
 sys.path.append(module_path2)
 import controllerEntries
 import TelaPrincipal as TP
-import EntradasView
+import SaidasView
 import controllerTypeEntries
 import TypeEntradaView
 from ttkbootstrap.widgets import DateEntry
@@ -20,7 +20,7 @@ class SaidaHomeView():
     def __init__(self,root,user) -> None:
         
         self.janela = root
-
+        self.userAtual = user
         self.janela.title("Gerenciador de finanças")
         self.janela.geometry("1200x900")
 
@@ -126,7 +126,7 @@ class SaidaHomeView():
         return[self.left_panel_gasto,self.treeGastos,self.central_panel,self.infos_panel]
     
     def casdastroGastoButton(self):
-        pass
+        SaidasView.Saida(self.janela,self.userAtual,self.treeGastos).cadastroSaida()
 
     def editItem(self):
         pass
