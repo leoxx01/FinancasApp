@@ -66,8 +66,8 @@ class TelaPrincipal:
 
         menu.add_command(label="Perfil", command=print('oi'))
         menu.add_command(label="Logout", command=print('oi'))
-        menu.add_command(label="Sair", command= print('oi'))
-
+        menu.add_command(label="Sair", command= lambda: self.janela.quit())
+        
         menuButtonLingua = tkk.Menubutton(buttonbar,text=f'🌎 Linguagem')
         menuButtonLingua.pack(pady= 1,padx=10,side=RIGHT)
 

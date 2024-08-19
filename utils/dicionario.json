@@ -1,19 +1,31 @@
 {
-    "lingua":{
+    "language":{
         "pt-br":{
             "LoginScreen":{
-                "user": "Usuario",
-                "passWord": "Senha"
+                "user": "Usuário",
+                "passWord": "Senha",
+                "login": "Entrar",
+                "register": "Regsitrar",
+                "language": "Linguagem"
             }
         },
         "en":{
             "LoginScreen":{
                 "user": "User",
-                "passWord": "Senha"
+                "passWord": "Password",
+                "login": "Login",
+                "register": "Register",
+                "language": "Language"
             }
         },
         "es":{
-
+            "LoginScreen":{
+                "user": "Usuario",
+                "passWord": "Contraseña",
+                "login": "Acceso",
+                "register": "Registro",
+                "language": "Idioma"
+            }
         }
     }
 }
