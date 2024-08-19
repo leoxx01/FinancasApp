@@ -104,25 +104,25 @@ class MinhaInterface:
 
 
         if(registerOk == 'OK'):
-            messagebox.showinfo("Cadastro" , "Criado com sucesso!!")
+            messagebox.showinfo("Cadastro" , f"{self.linguaAtualRegistro['successMessage']['successRegistration']}")
             modal.destroy()
         else:
-            messagebox.showinfo("Cadastro" , "Email já cadastrado")
+            messagebox.showinfo("Cadastro" , f"{self.linguaAtualRegistro['ErrorMessage']['errorRegistration']}")
 
         
         
     def validation(self,params,senhaConfirm):
 
         if(params['senha'] != senhaConfirm):
-            return ["SE","Senha estão divergente"]
+            return ["SE",f"{self.linguaAtualRegistro['ErrorMessage']['differentPasswords']}"]
         elif( params['senha'] == "" or 
               params['email'] == "" or
               params['nome'] == "" or
               senhaConfirm == ""
             ):
-            return ["CZ","Verifique os Campos preenchidos"]
+            return ["CZ",f"{self.linguaAtualRegistro['ErrorMessage']['blankFields']}"]
         elif("@" not in params['email']):
-            return ["EI","Email Invalido"]
+            return ["EI",f"{self.linguaAtualRegistro['ErrorMessage']['invalidEmail']}"]
 
         return "OK"
 
@@ -131,7 +131,7 @@ class MinhaInterface:
         
         LoginOk = controllerUser.User(params).loginUser()
         if(LoginOk[0] == 'OK'):
-            messagebox.showinfo("Usuario" , "Login efetuado com sucesso!!!")
+            messagebox.showinfo("Usuario" ,f'{self.linguaAtual['successMessage']['loginsuccess']}')
             userAtual = LoginOk[1]
             
             self.frameLogin.destroy()
@@ -140,7 +140,7 @@ class MinhaInterface:
             TelaPrincipal.TelaPrincipal(self.janela,userAtual)
 
         else:
-            messagebox.showinfo("Usuario" , "Erro ao etuar o login!!!")
+            messagebox.showinfo("Usuario" ,f'{self.linguaAtual['ErrorMessage']['loginerror']}')
     def choosePortuguesse(self):
         self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen'] 
         self.linguaAtualRegistro = self.dicionario['language']['pt-br']['registrationScreen']   
@@ -176,28 +176,28 @@ class MinhaInterface:
         userName = tkk.StringVar()        
         self.labelUser = tkk.Label(modal, text=f"👤{self.linguaAtualRegistro['user']}")
         self.entryUser = tkk.Entry(modal, textvariable=userName)
-        ToolTip(self.entryUser,text = 'Insira o nome de usuário desejado')     
+        ToolTip(self.entryUser,text = f'{self.linguaAtualRegistro['desiredUserName']}')     
         self.labelUser.pack(pady=(5))
         self.entryUser.pack(pady=(5))
 
         userEmail = tkk.StringVar()
         self.labelEmail = tkk.Label(modal,text=f"📧{self.linguaAtualRegistro['email']}")
         self.entryEmail = tkk.Entry(modal, textvariable=userEmail)
-        ToolTip(self.entryEmail,text = 'Insira seu email')     
+        ToolTip(self.entryEmail,text = f'{self.linguaAtualRegistro['enterEmail']}')     
         self.labelEmail.pack(pady=(5))
         self.entryEmail.pack(pady=(5))
 
         userPassCadastro = tkk.StringVar()
         self.labelPassCadastro = tkk.Label(modal, text=f"🔑{self.linguaAtualRegistro['passWord']}")
         self.entryPassCadastro = tkk.Entry(modal,show='*', textvariable=userPassCadastro)
-        ToolTip(self.entryPassCadastro,text = 'Insira sua senha')     
+        ToolTip(self.entryPassCadastro,text = f'{self.linguaAtualRegistro['enterPassword']}')     
         self.labelPassCadastro.pack(pady=(5))
         self.entryPassCadastro.pack(pady=(5))
         
         userPassConfirm = tkk.StringVar()
         self.labelPassConfirm = tkk.Label(modal, text=f"🔑{self.linguaAtualRegistro['passWordConfirm']}")
         self.entryPassConfirm = tkk.Entry(modal,show='*', textvariable=userPassConfirm)
-        ToolTip(self.entryPassConfirm,text = 'Insira sua senha novamente')  
+        ToolTip(self.entryPassConfirm,text = f'{self.linguaAtualRegistro['enterPasswordAgain']}')  
         self.labelPassConfirm.pack(pady=(5))
         self.entryPassConfirm.pack(pady=(5))
 
@@ -218,7 +218,7 @@ class MinhaInterface:
             messagebox.showinfo("Alerta", "Este é um alerta!")
 
         
-        close_button = tkk.Button(modal, text=f"{self.linguaAtualRegistro['close']}", command=modal.destroy)
+        close_button = tkk.Button(modal, text=f"❌ {self.linguaAtualRegistro['close']}", command=modal.destroy)
         close_button.pack(pady=10)
 
         
