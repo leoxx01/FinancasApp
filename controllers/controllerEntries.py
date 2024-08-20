@@ -40,7 +40,7 @@ class Entrie():
         getItem = EntriesModel.Entries(self.params).getItemById()
         
         if(getItem != []):
-            print("Ok !",getItem[0][2])
+            print("Ok !", getItem[0][2])
             return getItem
             
         
@@ -48,7 +48,7 @@ params = {
     "nome_entrada": "Salario",
     "valor": 1000,
     "id_user": 14,
-    "id_entries":1
+    "id_entries": 1
 }
 
 

@@ -12,11 +12,17 @@ import LeavesModel
 class processosContabeis:
     def __init__(self, params) -> None:
         self.params = params
+        
+        # importar as entradas
+        self.receita = EntriesModel.Entries(self.params).getItemById()
+
+        # importar as saídas
+        #self.gastos = LeavesModel.Leaves(self.params).#getItemById()
+
 
     def desconto(self) -> None:
 
-        # importar as entradas
-        receita = EntriesModel.Entries(self.params).getItemById()
+        receita = self.receita
 
         rec = []
         for resultados in receita:

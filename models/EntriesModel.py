@@ -108,8 +108,7 @@ class Entries:
             finally:
                 self.conn.close()
 
-
-    def getItemById(self)-> str:
+    def getItemById(self) -> str:
         retries = 5
         while retries > 0:
             try:

@@ -5,8 +5,6 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models
 sys.path.append(module_path)
 import LeavesModel
 
-
-
 class Leave():
     
     def __init__(self,params) -> None:
@@ -37,18 +35,25 @@ class Leave():
         if(delete_Leaves):
             print("Saida Deletada!!")
         
+    def getItemById(self) -> dict:
+        getItem = LeavesModel.Leaves(self.params).getItemById()
+        
+        if(getItem != []):
+            print("Ok !", getItem[0][2])
+            return getItem
+        
 params = {
     "nameLeave": "carro",
-    "value": "10000",
-    "installments": "1",
-    "pays_installments": "1",
-    "pays_finish": "1",
-    "id_user": "1",
-    "id_leave": "2"
-    
+    "value": 10000,
+    "installments": 1,
+    "pays_installments": 1,
+    "pays_finish": 1,
+    "id_user": 14,
+    "id_leave": 2
 }
 
 # Leave(params).createLeaves()
 # Leave(params).readLeaves()
 # Leave(params).updateLeaves()
 # Leave(params).deleteLeaves()
+Leave(params).getItemById()
