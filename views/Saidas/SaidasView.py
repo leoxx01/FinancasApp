@@ -8,7 +8,7 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../con
 sys.path.append(module_path)
 module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../views'))
 sys.path.append(module_path2)
-import controllerEntries
+import controllerLeave
 import controllerTypeEntries
 import TelaPrincipal as TP
 
@@ -35,10 +35,13 @@ class Saida():
         #Tipo Gasto
         labelOpcaoSaida = tkk.Label(self.modal, text="Tipo de Gastos:")
         labelOpcaoSaida.pack(pady=2)
-        entrySaida = tkk.Entry(self.modal)
+
+        self.entrySaidaVar = tkk.StringVar()
+        entrySaida = tkk.Entry(self.modal,textvariable=self.entrySaidaVar)
         entrySaida.pack(pady=2)
         
         #Valor
+
         labelOpcaoGastos = tkk.Label(self.modal, text="Valor do Gasto:")
         labelOpcaoGastos.pack(pady=2)
 
@@ -46,7 +49,8 @@ class Saida():
         slider = tkk.Scale(self.modal,from_=0,to=50000,variable=self.valueSlider,command=self.catchValue)
         slider.pack(pady=5)
         
-        self.entryGastosIndicado = tkk.Entry(self.modal)
+        self.entryGastosIndicadoVar =  tkk.StringVar()
+        self.entryGastosIndicado = tkk.Entry(self.modal,textvariable=self.entryGastosIndicadoVar)
         self.entryGastosIndicado.pack(pady=2)
         
 
@@ -71,14 +75,14 @@ class Saida():
         
         
 
-        self.check_varPago = "Não"                             
-        self.check_varPago = tkk.Checkbutton(self.modal,bootstyle="square-toggle",text="Pago ?",variable=self.check_varPago , onvalue="Sim", offvalue="Não")
+        self.check_varPagoVar = tkk.StringVar()                         
+        self.check_varPago = tkk.Checkbutton(self.modal,bootstyle="square-toggle",text="Pago ?",variable=self.check_varPagoVar , onvalue="Sim", offvalue="Não")
         self.check_varPago.pack(pady=5)
 
         # Desabilita interação com a janela principal
         self.modal.transient()
         self.modal.grab_set()
-        add_button = tkk.Button(self.modal, text="Inserir" ,bootstyle = "success")
+        add_button = tkk.Button(self.modal, text="Inserir" ,bootstyle = "success",command=lambda:self.addGasto())
         add_button.pack(pady=5)
     
         close_button = tkk.Button(self.modal, text="Fechar",bootstyle="danger" ,command=self.modal.destroy )
@@ -88,6 +92,20 @@ class Saida():
         self.entryGastosIndicado.delete(0, tkk.END)  # Primeiro, limpa o conteúdo atual
         self.entryGastosIndicado.insert(0,str(self.valueSlider.get() )) 
 
+    def addGasto(self):
+        params = {
+            "id":"",
+            "nameLeave":self.entrySaidaVar.get(),
+            "value":self.entryGastosIndicadoVar.get(),
+            "installments":self.optionmenu_var.get() ,
+            "pays_installments":self.check_varPagoVar.get(),
+            "pays_finish": "",
+            "id_user":self.userAtual[0][0],
+            "id_leave":""
+        }
+
+        controllerLeave.Leave(params).createLeaves()
+        
 if __name__ == '__main__':
     root = tkk.Window()
     user = ''

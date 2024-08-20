@@ -13,7 +13,7 @@ sys.path.append(module_path)
 import login
 
 class MainApp:
-    def __init__(self,root) -> None:
+    def __init__(self,root) -> None: 
         login.MinhaInterface(root).createLogin()
         
 if __name__ == '__main__':
