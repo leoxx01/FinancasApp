@@ -1,31 +1,40 @@
 import sys
 import os
 
+# import path do modal
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models'))
+sys.path.append(module_path)
+
+import EntriesModel
+import LeavesModel
+
+
 class processosContabeis:
     def __init__(self, params) -> None:
         self.params = params
 
-    def desconto(self) -> int:
+    def desconto(self) -> None:
 
-        print("descontos:")
-        print("\tolá")
+        # importar as entradas
+        receita = EntriesModel.Entries(self.params).getItemById()
 
-        # desconto de receita
-        while True:
-            i = 0
-            receitas -= custos[i]
-            print(f"{custos[i]}")
+        rec = []
+        for resultados in receita:
+            rec.append(float(resultados[2]))
+            print(rec)
             
+        soma = sum(rec)
+
+        if (soma):
+            print(f"Receita Liquidada! \n valor líquido: {soma}")
 
 
 # dicionário com valores à serem descontados das receitas
 params = {
-    "name_Investiments": "arigato_gozarmais",
-    "type_investments":"BDR",
-    "value":"5400",
-    "profitability":"200",
-    "id_user":"5",
-    "id_investimentos":"4"
+    "nome_entrada": "Salario",
+    "valor": 1000,
+    "id_user": 14,
+    "id_entries": 1
 }
 
-processosContabeis.desconto()
+processosContabeis(params).desconto()

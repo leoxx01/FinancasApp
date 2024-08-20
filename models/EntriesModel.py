@@ -107,12 +107,11 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
-<<<<<<< HEAD
-=======
-        
+
+
     def getItemById(self)-> str:
         retries = 5
-        while retries >0:
+        while retries > 0:
             try:
                 sql = f" SELECT * FROM entries WHERE id_user = '{str(self.id_user)}' " 
                 querryExecute = self.cursor.execute(sql)
@@ -139,8 +138,3 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
-
-
-
-
->>>>>>> beta

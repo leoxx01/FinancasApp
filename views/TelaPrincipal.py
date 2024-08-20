@@ -14,12 +14,11 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/
 sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Saidas'))
 sys.path.append(module_path)
-<<<<<<< HEAD
+
 import controllerEntriesx
 import EntradasView
-=======
+
 import EntradaViewHome
->>>>>>> beta
 import SaidasView
 
 class TelaPrincipal:
@@ -33,10 +32,7 @@ class TelaPrincipal:
 
         self.userAtual = user
 
-<<<<<<< HEAD
-=======
-        
->>>>>>> beta
+
         self.createMenu()
         self.createMain()
         
