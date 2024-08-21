@@ -15,16 +15,21 @@ sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Saidas'))
 sys.path.append(module_path)
 
-import controllerEntriesx
+import controllerEntries
 import EntradasView
 
 import EntradaViewHome
-import SaidasView
+import SaidasViewHome
 
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
 
         # criando janela
+
+
+        
+        self.tela = ""
+
         self.janela = root
         
         self.janela.title("Gerenciador de finanças")
@@ -32,10 +37,15 @@ class TelaPrincipal:
 
         self.userAtual = user
 
+        
+        print(user)
+        
 
         self.createMenu()
         self.createMain()
         
+        self.varsDemontaEntrada = ''
+        self.varsDemontaGasto = ''
 
 
 
@@ -55,15 +65,61 @@ class TelaPrincipal:
         buttonbar = tkk.Frame(self.janela,style='primary.TFrame')
         buttonbar.pack(fill=X, pady=1, side=TOP)
 
-        btnReceita = tkk.Button(master=buttonbar, text='Receita' , command=EntradaViewHome.EntradaHomeView(self.janela,self.userAtual).loadInformations)
+        btnReceita = tkk.Button(master=buttonbar, text='💲 Receita' , command=self.callEntries)
         btnReceita.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnGastos = tkk.Button(master=buttonbar, text='Gastos')
+        btnGastos = tkk.Button(master=buttonbar, text='💸 Gastos',command=self.callGastos)
         btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnInvestimentos = tkk.Button(master=buttonbar, text='Investimentos')
+        btnInvestimentos = tkk.Button(master=buttonbar, text='📈 Investimentos')
         btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
+
+        
+        menuButton = tkk.Menubutton(buttonbar,text=f'👤 {self.userAtual[0][1]}')
+        menuButton.pack(pady= 1,padx=10,side=RIGHT)
+
+        menu = tkk.Menu(menuButton, tearoff=0)
+        
+        menuButton.config(menu=menu)
+
+        menu.add_command(label="Perfil", command=print('oi'))
+        menu.add_command(label="Logout", command=print('oi'))
+        menu.add_command(label="Sair", command= lambda: self.janela.quit())
+        
+        menuButtonLingua = tkk.Menubutton(buttonbar,text=f'🌎 Linguagem')
+        menuButtonLingua.pack(pady= 1,padx=10,side=RIGHT)
+
+        menu2 = tkk.Menu(menuButtonLingua, tearoff=0)
+        
+        menuButtonLingua.config(menu=menu2)
+
+        menu2.add_command(label="PT-BR", command=print('oi'))
+        menu2.add_command(label="EN", command= print('oi'))
+        menu2.add_command(label="ES", command= print('oi'))
        
+    def callEntries(self):
+        
+        if(self.tela == "" or self.tela != 'Entrada'):
+            self.limpaTela()
+            self.varsDemontaEntrada = EntradaViewHome.EntradaHomeView(self.janela,self.userAtual).loadInformations()
+            self.tela = 'Entrada'
+            
+    def callGastos(self):
+
+        if(self.tela == "" or self.tela != 'Gastos'):
+            self.limpaTela()
+            self.varsDemontaGasto = SaidasViewHome.SaidaHomeView(self.janela,self.userAtual).loadInformations()
+            self.tela = 'Gastos'
+            
+     
+    def limpaTela(self):
+
+        if(len(self.varsDemontaEntrada) > 0):
+            for i in self.varsDemontaEntrada:
+                    i.destroy()
+        if(len(self.varsDemontaGasto) > 0):
+             for i in self.varsDemontaGasto:
+                    i.destroy()
 
     def cadastroInvestimentos(self):
         modal = tkk.Toplevel()

@@ -110,18 +110,20 @@ class Leaves:
                 return "Error"
             finally:
                 self.conn.close()
-    
-    def getItemById(self) -> str:
+
+    def getItemById(self,dataInicio,dataFim)-> str:
         retries = 5
-        while retries > 0:
+        while retries >0:
             try:
-                sql = f" SELECT * FROM leaves WHERE id_user = '{str(self.id_user)}' " 
+                sql = f" SELECT *, SUBSTR(date_created,1,10) >= '{dataInicio}','2024-08-13' >= '{dataFim}' FROM leaves WHERE id_user = '{str(self.id_user)}' AND  SUBSTR(date_created,1,10) >= '{dataInicio}'  AND SUBSTR(date_created,1,10) <= '{dataFim}'" 
+
                 querryExecute = self.cursor.execute(sql)
                 self.conn.commit()
 
                 if querryExecute:
                     self.conn.commit()
-                    return querryExecute.fetchall()
+                    return querryExecute.fetchall() 
+
                 else:
                     return "NOK"
                 
@@ -139,4 +141,6 @@ class Leaves:
                 self.conn.rollback()
                 return "Error"
             finally:
+
                 self.conn.close()
+

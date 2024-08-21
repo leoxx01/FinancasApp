@@ -1,5 +1,6 @@
 import sys
 import os
+from datetime import datetime
 
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models'))
 sys.path.append(module_path)
@@ -8,8 +9,15 @@ import EntriesModel
 class Entrie():
     
     def __init__(self,params) -> None:
-        
-       self.params = params
+        self.params = params
+
+        data = datetime.now()
+        data = str(data)
+        data = data.split('-')
+        self.dataInicio = f"{data[0]}-{data[1]}-01"
+        self.dataFim = f"{data[0]}-{data[1]}-{int(str(data[2])[0:2])+1}" 
+       
+    
 
     def createEntries(self) -> None:
         
@@ -29,31 +37,39 @@ class Entrie():
     def updateEntries(self) -> None:
         update_Entrie = EntriesModel.Entries(self.params).updateEntriesBD()
         if(update_Entrie):
-            print("Entrada Alterada!!")    
+            return 'OK'   
 
     def deleteEntries(self) -> None:
         delete_Entrie = EntriesModel.Entries(self.params).deleteEntriesBD()
         if(delete_Entrie):
-            print("Entrada Deletada!!")
+            return 'OK'
 
-    def getItemById(self) -> dict:
-        getItem = EntriesModel.Entries(self.params).getItemById()
-        
-        if(getItem != []):
-            print("Ok !", getItem[0][2])
-            return getItem
-            
-        
-params = {
-    "nome_entrada": "Salario",
-    "valor": 1000,
-    "id_user": 14,
-    "id_entries": 1
-}
+    def getItemById(self)-> None:
+
+        getItem = EntriesModel.Entries(self.params).getItemById(self.dataInicio,self.dataFim)
+                
+        if(getItem != '[]'):
+            return ["Ok",getItem]
+    
+    def getItemOnDateForFilter(self,dtInicioProc,dtFimProc)-> None:
+        dtFimProcSplit = dtFimProc.split('-')
+        dtFimProc = f"{dtFimProcSplit[0]}-{dtFimProcSplit[1]}-{int(dtFimProcSplit[2])+1}"
+
+        getItem = EntriesModel.Entries(self.params).getItemsOnDate(dtInicioProc,dtFimProc)
+        if(getItem != '[]'):
+            return ["Ok",getItem]  
+
+
+# params = {
+#     "nome_entrada": "Salario",
+#     "valor": "1000",
+#     "id_user": "17",
+#     "id_entries":"1"
+# }
 
 
 # Entrie(params).createEntries()
 # Entrie(params).readEntries()
 # Entrie(params).updateEntries()
 # Entrie(params).deleteEntries()
-Entrie(params).getItemById()
+# Entrie(params).getItemById()
