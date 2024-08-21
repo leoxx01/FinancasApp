@@ -12,12 +12,12 @@ import LeavesModel
 class processosContabeis:
     def __init__(self, params) -> None:
         self.params = params
-        
+
         # importar as entradas
         self.receita = EntriesModel.Entries(self.params).getItemById()
 
         # importar as saídas
-        #self.gastos = LeavesModel.Leaves(self.params).#getItemById()
+        self.gastos = LeavesModel.Leaves(self.params).getItemById()
 
 
     def desconto(self) -> None:
@@ -28,7 +28,7 @@ class processosContabeis:
         for resultados in receita:
             rec.append(float(resultados[2]))
             print(rec)
-            
+
         soma = sum(rec)
 
         if (soma):

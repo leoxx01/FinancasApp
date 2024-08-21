@@ -41,7 +41,7 @@ class Leave():
         if(getItem != []):
             print("Ok !", getItem[0][2])
             return getItem
-        
+
 params = {
     "nameLeave": "carro",
     "value": 10000,
