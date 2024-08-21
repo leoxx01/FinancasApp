@@ -36,10 +36,10 @@ class EntradaHomeView():
         self.left_panel = tkk.Frame(self.janela, style='info.TFrame')
         self.left_panel.pack(side=LEFT, fill=Y)
         
-        selfAddReceita = tkk.Button(self.left_panel,bootstyle="info",text="Adcionar Receita",command= self.casdastroEntradaButton)
+        selfAddReceita = tkk.Button(self.left_panel,bootstyle="info",text="➕Adcionar Receita",command= self.casdastroEntradaButton)
         selfAddReceita.pack(pady=5)
 
-        selfAddCategoria = tkk.Button(self.left_panel,bootstyle="info",text="Adcionar Categotia",command=TypeEntradaView.TypeEntrieView(self.janela).screenAddTypeEntrie)
+        selfAddCategoria = tkk.Button(self.left_panel,bootstyle="info",text="➕Adcionar Categotia",command=TypeEntradaView.TypeEntrieView(self.janela).screenAddTypeEntrie)
         selfAddCategoria.pack(pady=5)
 
         #Fim Menu Lateral
@@ -70,7 +70,7 @@ class EntradaHomeView():
             menu.add_command(label=i[0], command=lambda opt=i[0]: self.catchTipoReceita(opt))
 
 
-        buttonFiltrar = tkk.Button(self.central_panel,bootstyle="info",text="Filtrar",command = lambda: self.catchData())
+        buttonFiltrar = tkk.Button(self.central_panel,bootstyle="info",text="🔍Filtrar",command = lambda: self.catchData())
         buttonFiltrar.pack(side=LEFT)
 
         #Fim panel filtros

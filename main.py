@@ -13,10 +13,10 @@ sys.path.append(module_path)
 import login
 
 class MainApp:
-    def __init__(self,root) -> None:
+    def __init__(self,root) -> None: 
         login.MinhaInterface(root).createLogin()
         
 if __name__ == '__main__':
     root = tkk.Window()
     app = MainApp(root)
-    loginWindown = root.mainloop() 
+    loginWindown = root.mainloop()  

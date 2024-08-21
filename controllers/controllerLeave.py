@@ -1,6 +1,6 @@
 import sys
 import os
-
+from datetime import datetime
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../models'))
 sys.path.append(module_path)
 import LeavesModel
@@ -11,7 +11,13 @@ class Leave():
     
     def __init__(self,params) -> None:
         
-       self.params = params
+        self.params = params
+
+        data = datetime.now()
+        data = str(data)
+        data = data.split('-')
+        self.dataInicio = f"{data[0]}-{data[1]}-01"
+        self.dataFim = f"{data[0]}-{data[1]}-{int(str(data[2])[0:2])+1}" 
     
     def createLeaves(self) -> None:
 
@@ -25,10 +31,15 @@ class Leave():
             print("Saida Alterada!!")    
 
     def deleteLeaves(self) -> None:
-        delete_Leaves = LeavesModel.Leaves(self.params).deleteLeavesBD()
+        delete_Leaves = LeavesModel.Leaves(self.params).deleteLeavesBD(self.dataInicio,self.dataFim)
         if(delete_Leaves):
             print("Saida Deletada!!")
-        
+    def getItemById(self) -> None:
+        getItem = LeavesModel.Leaves(self.params).getItemById(self.dataInicio,self.dataFim)
+        if(getItem != '[]'):
+            return ["Ok",getItem]
+    
+
 params = {
     "nameLeave": "carro",
     "value": "10000",

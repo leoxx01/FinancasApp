@@ -1,0 +1,118 @@
+{
+    "language":{
+        "pt-br":{
+            "LoginScreen":{
+                "user": "Usuário",
+                "passWord": "Senha",
+                "login": "Entrar",
+                "register": "Regsitrar",
+                "language": "Linguagem",
+                "ErrorMessage":{
+                    "loginerror":"Erro ao etuar o login!!!"
+                },
+                "successMessage":{
+                    "loginsuccess":"Login Efetuado com Sucesso!!"
+                }
+              
+            },
+            "registrationScreen":{
+                "user": "Usuário",
+                "desiredUserName":"Insira o nome de usuário desejado",
+                "email": "E-mail",
+                "enterEmail":"Insira seu email",
+                "passWord": "Senha",
+                "enterPassword":"Insira sua senha",
+                "passWordConfirm": "Confirme a senha",
+                "enterPasswordAgain":"Insira sua senha novamente",
+                "termsOfUse":"Li e estou de acordo com os termos de uso !",
+                "register": "Cadastrar",
+                "close": "Fechar",
+                "ErrorMessage":{
+                    "differentPasswords":"Senha estão divergente",
+                    "blankFields":"Verifique os Campos preenchidos",
+                    "invalidEmail":"Email Invalido",
+                    "errorRegistration":"Erro ao criar usuário"
+                },
+                "successMessage":{
+                    "successRegistration":"Criado com sucesso!!"
+                }
+            }
+        },
+        "en":{
+            "LoginScreen":{
+                "user": "User",
+                "passWord": "Password",
+                "login": "Login",
+                "register": "Register",
+                "language": "Language",
+                "ErrorMessage":{ 
+                    "loginerror":"Error etuar o login!!!"
+                }, 
+                "successMessage":{ 
+                    "loginsuccess":"Login Completed with Success!!"
+                }
+              
+            },
+            "registrationScreen":{
+                "user": "User",
+                "desiredUserName":"Enter your desired username",
+                "email": "E-mail",
+                "enterEmail":"Enter your email",
+                "passWord": "Password",
+                "enterPassword":"Enter your password",
+                "passWordConfirm": "Confirm password",
+                "enterPasswordAgain":"Enter your password again",
+                "termsOfUse":"I have read and agree to the terms of use!",
+                "register": "Register",
+                "close": "Close",
+                "ErrorMessage":{
+                    "differentPasswords":"Passwords are different",
+                    "blankFields":"Check Filled Fields",
+                    "invalidEmail":"Invalid Email",
+                    "errorRegistration":"Error creating user"
+                },
+                "successMessage":{
+                    "successRegistration":"Successfully created!!"
+                }
+            }
+        },
+        "es":{
+            "LoginScreen":{
+                "user": "Usuario",
+                "passWord": "Contraseña",
+                "login": "Acceso",
+                "register": "Registro",
+                "language": "Idioma",
+                "ErrorMessage":{
+                    "loginerror":"¡Error al iniciar sesión!"
+                },
+                "successMessage":{
+                    "loginsuccess":"¡Inicio de sesión completado con éxito!"
+                }
+               
+            }, 
+            "registrationScreen":{
+                "user": "Usuario",
+                "desiredUserName":"Introduzca el nombre de usuario deseado",
+                "email": "E-mail",
+                "enterEmail":"Ingresa tu correo electrónico",
+                "passWord": "Contraseña",
+                "enterPassword":"Ingresa tu contraseña",
+                "passWordConfirm": "Confirmar Contraseña",
+                "enterPasswordAgain":"Ingrese su contraseña nuevamente",
+                "termsOfUse": "¡He leído y acepto los términos de uso!",
+                "register": "Registro",
+                "close": "Para cerrar",
+                "ErrorMessage":{
+                    "differentPasswords": "Las contraseñas son diferentes",
+                    "blankFields": "Verificar campos completos",
+                    "invalidEmail": "Correo electrónico no válido",
+                    "errorRegistration": "Error al crear el usuario"
+                },
+                "successMessage":{
+                    "successRegistration": "Creado correctamente"
+                }
+            }
+        }
+    }
+}

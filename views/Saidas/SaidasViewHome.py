@@ -8,7 +8,7 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../con
 sys.path.append(module_path)
 module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../views'))
 sys.path.append(module_path2)
-import controllerEntries
+import controllerLeave
 import TelaPrincipal as TP
 import SaidasView
 import controllerTypeEntries
@@ -67,7 +67,18 @@ class SaidaHomeView():
         #Termina Filtros
 
         #Carrega Dados
-        # data2  = controllerEntries.Entrie({"nome_entrada":"","valor":"","id_user":str(self.userAtual),"id_entries":""}).getItemById()
+        data2  = controllerLeave.Leave({
+            "nameLeave":"",
+            "value":"",
+            "installments":"",
+            "pays_installments":"",
+            "pays_finish":"",
+            "id_user":self.userAtual[0][0],
+            "id_leave":""
+
+        }).getItemById()
+
+        print(data2)
 
         #Monta Schema Tree
         self.treeGastos = tkk.Treeview(self.janela, columns=("ID", "Tipo de Gasto", "Valor"), show="headings", height=10,bootstyle='info')
@@ -84,17 +95,17 @@ class SaidaHomeView():
         maiorreceita = 0
         menorReceita = -1
 
-        #Monta tree com dados pegos do banco de dados
-        # for item in data2[1]:
-        #     self.treeGastos.insert("", "end", values=(item[0],item[1],item[2]))
-        #     mediaReceita += int(item[2])
-        #     if(menorReceita == -1):
-        #         menorReceita = int(item[2])
+        # Monta tree com dados pegos do banco de dados
+        for item in data2[1]:
+            self.treeGastos.insert("", "end", values=(item[0],item[1],item[2]))
+            mediaReceita += int(item[2])
+            if(menorReceita == -1):
+                menorReceita = int(item[2])
 
-        #     if(int(item[2]) > int(maiorreceita)):
-        #         maiorreceita = float(item[2])
-        #     elif(int(item[2]) < int(menorReceita)):
-        #         menorReceita = float(item[2])
+            if(int(item[2]) > int(maiorreceita)):
+                maiorreceita = float(item[2])
+            elif(int(item[2]) < int(menorReceita)):
+                menorReceita = float(item[2])
             
 
         self.treeGastos.pack(fill=tk.BOTH,padx=10,pady=5)
