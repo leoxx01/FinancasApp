@@ -40,21 +40,12 @@ class Leave():
         delete_Leaves = LeavesModel.Leaves(self.params).deleteLeavesBD(self.dataInicio,self.dataFim)
         if(delete_Leaves):
             print("Saida Deletada!!")
-<<<<<<< HEAD
-        
-    def getItemById(self) -> dict:
-        getItem = LeavesModel.Leaves(self.params).getItemById()
-        
-        if(getItem != []):
-            print("Ok !", getItem[0][2])
-            return getItem
-=======
+
     def getItemById(self) -> None:
         getItem = LeavesModel.Leaves(self.params).getItemById(self.dataInicio,self.dataFim)
         if(getItem != '[]'):
             return ["Ok",getItem]
     
->>>>>>> developer2.0
 
 params = {
     "nameLeave": "carro",

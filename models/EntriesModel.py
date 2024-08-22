@@ -108,7 +108,8 @@ class Entries:
                 self.conn.rollback()
                 return "Error"
             finally:
-                self.conn.close()        
+                self.conn.close()   
+                     
     def getItemById(self,dataInicio,dataFim)-> str:
         retries = 5
         while retries > 0:
@@ -138,6 +139,7 @@ class Entries:
                 return "Error"
             finally:
                 self.conn.close()
+                
     def getItemsOnDate(self,dataInicio,dataFim)->str:
         retries = 5
         while retries >0:

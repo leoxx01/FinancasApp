@@ -20,10 +20,6 @@ sys.path.append(module_path)
 import controllerUser
 import TelaPrincipal
 
-
-
-
-
 class MinhaInterface:
     def __init__(self, root):
         # criando janela

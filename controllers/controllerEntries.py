@@ -16,8 +16,7 @@ class Entrie():
         data = data.split('-')
         self.dataInicio = f"{data[0]}-{data[1]}-01"
         self.dataFim = f"{data[0]}-{data[1]}-{int(str(data[2])[0:2])+1}" 
-       
-    
+
 
     def createEntries(self) -> None:
         
@@ -49,6 +48,7 @@ class Entrie():
         getItem = EntriesModel.Entries(self.params).getItemById(self.dataInicio,self.dataFim)
                 
         if(getItem != '[]'):
+            print(getItem)
             return ["Ok",getItem]
     
     def getItemOnDateForFilter(self,dtInicioProc,dtFimProc)-> None:
@@ -60,16 +60,16 @@ class Entrie():
             return ["Ok",getItem]  
 
 
-# params = {
-#     "nome_entrada": "Salario",
-#     "valor": "1000",
-#     "id_user": "17",
-#     "id_entries":"1"
-# }
+params = {
+    "nome_entrada": "Salario",
+    "valor": 1000,
+    "id_user": 17,
+    "id_entries":1
+}
 
 
 # Entrie(params).createEntries()
 # Entrie(params).readEntries()
 # Entrie(params).updateEntries()
 # Entrie(params).deleteEntries()
-# Entrie(params).getItemById()
+Entrie(params).getItemById()
