@@ -15,7 +15,7 @@ class Entrie():
         data = str(data)
         data = data.split('-')
         self.dataInicio = f"{data[0]}-{data[1]}-01"
-        self.dataFim = f"{data[0]}-{data[1]}-{int(str(data[2])[0:2])+1}" 
+        self.dataFim = f"{data[0]}-{data[1]}-{int(str(data[2])[0:2])+1}"
 
 
     def createEntries(self) -> None:
