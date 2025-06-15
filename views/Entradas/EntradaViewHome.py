@@ -8,11 +8,14 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../con
 sys.path.append(module_path)
 module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../views'))
 sys.path.append(module_path2)
+module_path3 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../utils'))
+sys.path.append(module_path3)
 import controllerEntries
 import TelaPrincipal as TP
 import EntradasView
 import controllerTypeEntries
 import TypeEntradaView
+import json
 from ttkbootstrap.widgets import DateEntry
 from ttkbootstrap.constants import *
 
@@ -30,13 +33,14 @@ class EntradaHomeView():
         self.DataFimText = ""
         self.itemMenuFilterSelect = ""
 
+
     def loadInformations(self):
     
         #Menu Lateral
         self.left_panel = tkk.Frame(self.janela, style='info.TFrame')
         self.left_panel.pack(side=LEFT, fill=Y)
         
-        selfAddReceita = tkk.Button(self.left_panel,bootstyle="info",text="➕Adcionar Receita",command= self.casdastroEntradaButton)
+        selfAddReceita = tkk.Button(self.left_panel,bootstyle="info",text=f"➕Adicionar Entrada",command= self.casdastroEntradaButton)
         selfAddReceita.pack(pady=5)
 
         selfAddCategoria = tkk.Button(self.left_panel,bootstyle="info",text="➕Adcionar Categotia",command=TypeEntradaView.TypeEntrieView(self.janela).screenAddTypeEntrie)

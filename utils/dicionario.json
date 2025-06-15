@@ -1,117 +1,141 @@
 {
-    "language":{
-        "pt-br":{
-            "LoginScreen":{
+    "language": {
+        "pt-br": {
+            "LoginScreen": {
                 "user": "Usuário",
                 "passWord": "Senha",
                 "login": "Entrar",
                 "register": "Regsitrar",
                 "language": "Linguagem",
-                "ErrorMessage":{
-                    "loginerror":"Erro ao etuar o login!!!"
+                "ErrorMessage": {
+                    "loginerror": "Erro ao etuar o login!!!"
                 },
-                "successMessage":{
-                    "loginsuccess":"Login Efetuado com Sucesso!!"
+                "successMessage": {
+                    "loginsuccess": "Login Efetuado com Sucesso!!"
                 }
-              
             },
-            "registrationScreen":{
+            "registrationScreen": {
                 "user": "Usuário",
-                "desiredUserName":"Insira o nome de usuário desejado",
+                "desiredUserName": "Insira o nome de usuário desejado",
                 "email": "E-mail",
-                "enterEmail":"Insira seu email",
+                "enterEmail": "Insira seu email",
                 "passWord": "Senha",
-                "enterPassword":"Insira sua senha",
+                "enterPassword": "Insira sua senha",
                 "passWordConfirm": "Confirme a senha",
-                "enterPasswordAgain":"Insira sua senha novamente",
-                "termsOfUse":"Li e estou de acordo com os termos de uso !",
+                "enterPasswordAgain": "Insira sua senha novamente",
+                "termsOfUse": "Li e estou de acordo com os termos de uso !",
                 "register": "Cadastrar",
                 "close": "Fechar",
-                "ErrorMessage":{
-                    "differentPasswords":"Senha estão divergente",
-                    "blankFields":"Verifique os Campos preenchidos",
-                    "invalidEmail":"Email Invalido",
-                    "errorRegistration":"Erro ao criar usuário"
+                "ErrorMessage": {
+                    "differentPasswords": "Senha estão divergente",
+                    "blankFields": "Verifique os Campos preenchidos",
+                    "invalidEmail": "Email Invalido",
+                    "errorRegistration": "Erro ao criar usuário"
                 },
-                "successMessage":{
-                    "successRegistration":"Criado com sucesso!!"
+                "successMessage": {
+                    "successRegistration": "Criado com sucesso!!"
                 }
+            },
+            "recipeScreen": {
+                "title": "Inserção de Entrada ou Lucros",
+                "TypeRecipe": "Tipo de Entrada",
+                "ValueRecipe": "Valor da Receita",
+                "recurringButton": "Recorrent",
+                "TitleValueOfEntrace": "Valor da Entrada",
+                "InsetRecipe": "Inserir",
+                "CloseButton": "Fechar"
             }
         },
-        "en":{
-            "LoginScreen":{
+        "en": {
+            "LoginScreen": {
                 "user": "User",
                 "passWord": "Password",
                 "login": "Login",
                 "register": "Register",
                 "language": "Language",
-                "ErrorMessage":{ 
-                    "loginerror":"Error etuar o login!!!"
-                }, 
-                "successMessage":{ 
-                    "loginsuccess":"Login Completed with Success!!"
+                "ErrorMessage": {
+                    "loginerror": "Error etuar o login!!!"
+                },
+                "successMessage": {
+                    "loginsuccess": "Login Completed with Success!!"
                 }
-              
             },
-            "registrationScreen":{
+            "registrationScreen": {
                 "user": "User",
-                "desiredUserName":"Enter your desired username",
+                "desiredUserName": "Enter your desired username",
                 "email": "E-mail",
-                "enterEmail":"Enter your email",
+                "enterEmail": "Enter your email",
                 "passWord": "Password",
-                "enterPassword":"Enter your password",
+                "enterPassword": "Enter your password",
                 "passWordConfirm": "Confirm password",
-                "enterPasswordAgain":"Enter your password again",
-                "termsOfUse":"I have read and agree to the terms of use!",
+                "enterPasswordAgain": "Enter your password again",
+                "termsOfUse": "I have read and agree to the terms of use!",
                 "register": "Register",
                 "close": "Close",
-                "ErrorMessage":{
-                    "differentPasswords":"Passwords are different",
-                    "blankFields":"Check Filled Fields",
-                    "invalidEmail":"Invalid Email",
-                    "errorRegistration":"Error creating user"
+                "ErrorMessage": {
+                    "differentPasswords": "Passwords are different",
+                    "blankFields": "Check Filled Fields",
+                    "invalidEmail": "Invalid Email",
+                    "errorRegistration": "Error creating user"
                 },
-                "successMessage":{
-                    "successRegistration":"Successfully created!!"
+                "successMessage": {
+                    "successRegistration": "Successfully created!!"
                 }
+            },
+            "recipeScreen": {
+                "title": "Income or Earnings Entry",
+                "TypeRecipe": "Type of Income",
+                "ValueRecipe": "Income Amount",
+                "recurringButton": "Recurring",
+                "TitleValueOfEntrace": "Entry Amount",
+                "InsetRecipe": "Insert",
+                "CloseButton": "Close"
             }
         },
-        "es":{
-            "LoginScreen":{
+        "es": {
+            "LoginScreen": {
                 "user": "Usuario",
                 "passWord": "Contraseña",
                 "login": "Acceso",
                 "register": "Registro",
                 "language": "Idioma",
-                "ErrorMessage":{
-                    "loginerror":"¡Error al iniciar sesión!"
+                "ErrorMessage": {
+                    "loginerror": "¡Error al iniciar sesión!"
                 },
-                "successMessage":{
-                    "loginsuccess":"¡Inicio de sesión completado con éxito!"
+                "successMessage": {
+                    "loginsuccess": "¡Inicio de sesión completado con éxito!"
                 }
-               
-            }, 
-            "registrationScreen":{
+            },
+            "registrationScreen": {
                 "user": "Usuario",
-                "desiredUserName":"Introduzca el nombre de usuario deseado",
+                "desiredUserName": "Introduzca el nombre de usuario deseado",
                 "email": "E-mail",
-                "enterEmail":"Ingresa tu correo electrónico",
+                "enterEmail": "Ingresa tu correo electrónico",
                 "passWord": "Contraseña",
-                "enterPassword":"Ingresa tu contraseña",
+                "enterPassword": "Ingresa tu contraseña",
                 "passWordConfirm": "Confirmar Contraseña",
-                "enterPasswordAgain":"Ingrese su contraseña nuevamente",
+                "enterPasswordAgain": "Ingrese su contraseña nuevamente",
                 "termsOfUse": "¡He leído y acepto los términos de uso!",
                 "register": "Registro",
                 "close": "Para cerrar",
-                "ErrorMessage":{
+                "ErrorMessage": {
                     "differentPasswords": "Las contraseñas son diferentes",
                     "blankFields": "Verificar campos completos",
                     "invalidEmail": "Correo electrónico no válido",
                     "errorRegistration": "Error al crear el usuario"
                 },
-                "successMessage":{
+                "successMessage": {
                     "successRegistration": "Creado correctamente"
                 }
+            },
+            "recipeScreen": {
+                "title": "Ingreso o Ganancias",
+                "TypeRecipe": "Tipo de Ingreso",
+                "ValueRecipe": "Monto del Ingreso",
+                "recurringButton": "Recurrente",
+                "TitleValueOfEntrace": "Monto del Ingreso",
+                "InsetRecipe": "Insertar",
+                "CloseButton": "Cerrar"
             }
         }
     }

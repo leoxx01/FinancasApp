@@ -8,7 +8,10 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../con
 sys.path.append(module_path)
 module_path2 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../views'))
 sys.path.append(module_path2)
+module_path3 = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../utils'))
+sys.path.append(module_path3)
 import controllerTypeEntries
+import json
 from ttkbootstrap.widgets import DateEntry
 from ttkbootstrap.constants import *
 
@@ -17,6 +20,11 @@ class TypeEntrieView():
     def __init__(self,root) -> None:
         
         self.janela = root
+        with open('./utils/dicionario.json','r',encoding='utf-8') as file:
+            self.dicionario = json.load(file)
+
+        self.linguaAtual = self.dicionario['language']['pt-br']['LoginScreen']    
+        self.linguaAtualRegistro = self.dicionario['language']['pt-br']['recipeScreen']    
         
 
     def screenAddTypeEntrie(self):
@@ -24,7 +32,7 @@ class TypeEntrieView():
         self.modal =  tkk.Toplevel()
         self.modal.geometry("800x600")
 
-        labelTitle = tkk.Label(self.modal, text="Inserção de Tipos de Receita",font=("",23))
+        labelTitle = tkk.Label(self.modal, text=self.linguaAtualRegistro['title'],font=("",23))
         labelTitle.pack(pady=5)
 
         tkk.Separator(bootstyle="info",master=self.modal).pack(fill=X,padx=100,pady=2)

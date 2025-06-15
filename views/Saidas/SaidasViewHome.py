@@ -31,10 +31,10 @@ class SaidaHomeView():
         self.left_panel_gasto = tkk.Frame(self.janela, style='info.TFrame')
         self.left_panel_gasto.pack(side=LEFT, fill=Y)
         
-        selfAddGasto = tkk.Button(self.left_panel_gasto,bootstyle="info",text="Adcionar Gasto",command= self.casdastroGastoButton)
+        selfAddGasto = tkk.Button(self.left_panel_gasto,bootstyle="info",text="➕Adcionar Gasto",command= self.casdastroGastoButton)
         selfAddGasto.pack(pady=5)
 
-        selfAddCategoria = tkk.Button(self.left_panel_gasto,bootstyle="info",text="Adcionar Categotia",command=print(''))
+        selfAddCategoria = tkk.Button(self.left_panel_gasto,bootstyle="info",text="➕Adcionar Categotia",command=print(''))
         selfAddCategoria.pack(pady=5)
 
         #Painel Inicio com filtros
