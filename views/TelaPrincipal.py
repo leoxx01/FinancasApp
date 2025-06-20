@@ -12,8 +12,11 @@ module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/
 sys.path.append(module_path)
 module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Saidas'))
 sys.path.append(module_path)
+module_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../views/Investiments'))
+sys.path.append(module_path)
 import EntradaViewHome
 import SaidasViewHome
+import InvestmentsViewHome
 
 class TelaPrincipal:
     def __init__(self,root,user) -> None:
@@ -34,6 +37,7 @@ class TelaPrincipal:
         
         self.varsDemontaEntrada = ''
         self.varsDemontaGasto = ''
+        self.varsDemontaInvestimentos = ''
 
 
 
@@ -53,7 +57,7 @@ class TelaPrincipal:
         btnGastos = tkk.Button(master=buttonbar, text='💸 Gastos',command=self.callGastos)
         btnGastos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
-        btnInvestimentos = tkk.Button(master=buttonbar, text='📈 Investimentos')
+        btnInvestimentos = tkk.Button(master=buttonbar, text='📈 Investimentos' , command=self.callInvestiments )
         btnInvestimentos.pack(side=LEFT, ipadx=5, ipady=5, padx=0, pady=1)
 
         
@@ -92,7 +96,15 @@ class TelaPrincipal:
             self.limpaTela()
             self.varsDemontaGasto = SaidasViewHome.SaidaHomeView(self.janela,self.userAtual).loadInformations()
             self.tela = 'Gastos'
-            
+
+    def callInvestiments(self):
+        if(self.tela == "" or self.tela != "Investimentos"):
+            self.limpaTela()
+            self.varsDemontaInvestimentos = InvestmentsViewHome.InvestimentsHomeView(self.janela,self.userAtual).loadInformations()
+            self.tela = 'Investimentos'
+
+        
+
      
     def limpaTela(self):
 
@@ -101,6 +113,9 @@ class TelaPrincipal:
                     i.destroy()
         if(len(self.varsDemontaGasto) > 0):
              for i in self.varsDemontaGasto:
+                    i.destroy()
+        if(len(self.varsDemontaInvestimentos) > 0):
+             for i in self.varsDemontaInvestimentos:
                     i.destroy()
 
     def cadastroInvestimentos(self):

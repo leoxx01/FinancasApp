@@ -130,7 +130,7 @@ class MinhaInterface:
     def loginButton(self,params):
         
         LoginOk = controllerUser.User(params).loginUser()
-        if(LoginOk[0] == 'OK'):
+        if(LoginOk[0] == 'OK'): 
             messagebox.showinfo("Usuario" ,f'{self.linguaAtual['successMessage']['loginsuccess']}')
             userAtual = LoginOk[1]
             
@@ -150,15 +150,15 @@ class MinhaInterface:
     def chooseEnglish(self):
         self.linguaAtual = self.dicionario['language']['en']['LoginScreen']   
         self.linguaAtualRegistro = self.dicionario['language']['en']['registrationScreen']  
+        print('teste')
         self.resetLoginScreen()
-    def chooseSpanish(self):
         
+    def chooseSpanish(self):
         self.linguaAtual = self.dicionario['language']['es']['LoginScreen']  
         self.linguaAtualRegistro = self.dicionario['language']['es']['registrationScreen']   
         self.resetLoginScreen()
 
     def resetLoginScreen(self):
-
         self.frameLogin.destroy()
         self.createLogin()
 
