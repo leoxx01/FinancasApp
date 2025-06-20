@@ -137,7 +137,7 @@ class InvestimentsHomeView():
 
         #Fim painel
     def casdastroInvestimentoButton(self):
-        InvestimentsHomeView.Entrada(self.janela,self.userAtual,self.tree).cadastroEntrada()
+        InvestimentsHomeView.Investimento(self.janela,self.userAtual,self.tree).cadastroEntrada()
         
         
     # def editItem(self,event):
@@ -145,7 +145,7 @@ class InvestimentsHomeView():
     #     selected_item = self.tree.focus()
     #     item_values = self.tree.item(selected_item, "values")
 
-    #     InvestimentsHomeView.Entrada(self.janela,self.userAtual,self.tree).EditEntrada(item_values)
+    #     InvestimentsHomeView.Investimento(self.janela,self.userAtual,self.tree).EditEntrada(item_values)
     
     # def catchData(self):
         
